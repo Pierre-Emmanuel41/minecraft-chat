@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
+import fr.pederobien.minecraftchat.persistence.loaders.ChatLoaderV10;
 import fr.pederobien.minecraftgameplateform.impl.element.persistence.AbstractMinecraftPersistence;
 import fr.pederobien.minecraftgameplateform.interfaces.element.persistence.IMinecraftPersistence;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
@@ -15,6 +16,7 @@ public class ChatPersistence extends AbstractMinecraftPersistence<IChatConfigura
 
 	private ChatPersistence() {
 		super(Plateform.ROOT.resolve("chats"), "DefaultChatConfiguration");
+		register(new ChatLoaderV10());
 	}
 
 	public static IMinecraftPersistence<IChatConfiguration> getInstance() {

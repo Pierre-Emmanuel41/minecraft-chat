@@ -13,7 +13,7 @@ import fr.pederobien.persistence.interfaces.xml.IXmlPersistenceLoader;
 
 public class ChatLoaderV10 extends AbstractChatLoader {
 
-	protected ChatLoaderV10() {
+	public ChatLoaderV10() {
 		super(1.0);
 	}
 
