@@ -48,19 +48,24 @@ public class ChatPersistence extends AbstractMinecraftPersistence<IChatConfigura
 		name.appendChild(doc.createTextNode(get().getName()));
 		root.appendChild(name);
 
+		Element isSynchronized = createElement(doc, ChatXmlTag.IS_SYNCHRONIZED);
+		isSynchronized.appendChild(doc.createTextNode("" + get().isSynchronized()));
+		root.appendChild(isSynchronized);
+
 		Element chats = createElement(doc, ChatXmlTag.CHATS);
-		for (IChat c : get().getChats()) {
-			Element chat = createElement(doc, ChatXmlTag.CHAT);
-			setAttribute(chat, ChatXmlTag.NAME, c.getName());
-			setAttribute(chat, ChatXmlTag.COLOR, c.getColor().getName());
-			Element players = createElement(doc, ChatXmlTag.PLAYERS);
-			for (Player p : c.getPlayers()) {
-				Element player = createElement(doc, ChatXmlTag.PLAYER);
-				setAttribute(player, ChatXmlTag.NAME, p.getName());
-				players.appendChild(player);
+		if (!get().isSynchronized())
+			for (IChat c : get().getChats()) {
+				Element chat = createElement(doc, ChatXmlTag.CHAT);
+				setAttribute(chat, ChatXmlTag.NAME, c.getName());
+				setAttribute(chat, ChatXmlTag.COLOR, c.getColor().getName());
+				Element players = createElement(doc, ChatXmlTag.PLAYERS);
+				for (Player p : c.getPlayers()) {
+					Element player = createElement(doc, ChatXmlTag.PLAYER);
+					setAttribute(player, ChatXmlTag.NAME, p.getName());
+					players.appendChild(player);
+				}
+				chats.appendChild(chat);
 			}
-			chats.appendChild(chat);
-		}
 		root.appendChild(chats);
 
 		saveDocument(doc, get().getName());

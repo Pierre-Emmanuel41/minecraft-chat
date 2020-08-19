@@ -15,14 +15,19 @@ import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
 
 public class ChatConfiguration extends AbstractNominable implements IChatConfiguration {
 	private Map<String, IChat> chats;
+	private boolean isSynchronized;
 
 	public ChatConfiguration(String name) {
 		super(name);
 		chats = new HashMap<String, IChat>();
+		isSynchronized = false;
 	}
 
 	@Override
 	public IChat register(String name) {
+		if (isSynchronized)
+			return null;
+
 		IChat chat = chats.get(name);
 		if (chat != null)
 			throw new ChatAlreadyRegisteredException(this, chat);
@@ -33,6 +38,9 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 
 	@Override
 	public IChat unRegister(String name) {
+		if (isSynchronized)
+			return null;
+
 		IChat chat = chats.remove(name);
 		if (chat == null)
 			throw new ChatNotRegisteredException(this, name);
@@ -48,5 +56,16 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 	@Override
 	public List<IChat> getChats() {
 		return Collections.unmodifiableList(new ArrayList<IChat>(chats.values()));
+	}
+
+	@Override
+	public boolean isSynchronized() {
+		return isSynchronized;
+	}
+
+	@Override
+	public void setIsSynchronized(boolean isSynchronized) {
+		this.isSynchronized = isSynchronized;
+		chats.clear();
 	}
 }

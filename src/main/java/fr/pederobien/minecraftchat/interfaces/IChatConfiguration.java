@@ -42,4 +42,20 @@ public interface IChatConfiguration extends INominable {
 	 * @return The list of registered chats. This list is unmodifiable.
 	 */
 	List<IChat> getChats();
+
+	/**
+	 * @return True if this configuration is synchronized with the current running game.
+	 */
+	boolean isSynchronized();
+
+	/**
+	 * Set if this configuration is synchronized with the configuration that will be run by the plateform. If set to true, this
+	 * configuration is registered as observer for the running game configuration when it will be run (using command /startgame). It
+	 * will not be possible to add/remove any chat until the configuration is no more synchronized. If set to false, the configuration
+	 * is unregistered from the running game configuration as observer and all registered chats are removed. Chats can be added or
+	 * removed.
+	 * 
+	 * @param isSynchronized True if this configuration is synchronized with the current running game.
+	 */
+	void setIsSynchronized(boolean isSynchronized);
 }

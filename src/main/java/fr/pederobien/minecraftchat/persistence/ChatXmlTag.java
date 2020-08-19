@@ -1,7 +1,7 @@
 package fr.pederobien.minecraftchat.persistence;
 
 public enum ChatXmlTag {
-	NAME("name"), CHATS("chats"), CHAT("chat"), COLOR("color"), PLAYERS("players"), PLAYER("player");
+	NAME("name"), CHATS("chats"), CHAT("chat"), COLOR("color"), PLAYERS("players"), PLAYER("player"), IS_SYNCHRONIZED("isSynchronized");
 
 	private String name;
 
