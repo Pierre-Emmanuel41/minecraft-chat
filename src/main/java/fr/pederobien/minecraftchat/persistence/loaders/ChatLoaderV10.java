@@ -29,8 +29,7 @@ public class ChatLoaderV10 extends AbstractChatLoader {
 		NodeList chats = getElementsByTagName(root, ChatXmlTag.CHAT);
 		for (int i = 0; i < chats.getLength(); i++) {
 			Element c = (Element) chats.item(i);
-			IChat chat = get().register(getStringAttribute(c, ChatXmlTag.NAME));
-			chat.setColor(EColor.getByColorName(getStringAttribute(c, ChatXmlTag.COLOR)));
+			IChat chat = get().register(getStringAttribute(c, ChatXmlTag.NAME), EColor.getByColorName(getStringAttribute(c, ChatXmlTag.COLOR)));
 			NodeList players = getElementsByTagName(c, ChatXmlTag.PLAYER);
 			for (int j = 0; j < players.getLength(); j++)
 				chat.add(PlayerManager.getPlayer(getStringAttribute((Element) players.item(j), ChatXmlTag.NAME)));

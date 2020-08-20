@@ -3,21 +3,27 @@ package fr.pederobien.minecraftchat.interfaces;
 import java.util.List;
 import java.util.Optional;
 
-import fr.pederobien.minecraftchat.exception.ChatAlreadyRegisteredException;
+import fr.pederobien.minecraftchat.exception.ChatNameForbiddenException;
 import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
+import fr.pederobien.minecraftchat.exception.ChatWithSameColorAlreadyExistsException;
+import fr.pederobien.minecraftchat.exception.ChatWithSameNameAlreadyExistsException;
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
+import fr.pederobien.minecraftgameplateform.utils.EColor;
 
 public interface IChatConfiguration extends INominable {
 
 	/**
 	 * Creates a new chat with the given name.
 	 * 
-	 * @param name The name of the chat to create.
+	 * @param name  The name of the chat to create.
+	 * @param color the color of the chat.
 	 * @return The created chat.
 	 * 
-	 * @throws ChatAlreadyRegisteredException if a chat with the given name is already registered in this configuration.
+	 * @throws ChatWithSameNameAlreadyExistsException  if a chat with the given name is already registered in this configuration.
+	 * @throws ChatWithSameColorAlreadyExistsException if a chat with the given color is already registered in this configuration.
+	 * @throws ChatNameForbiddenException              if the name equals "all".
 	 */
-	IChat register(String name);
+	IChat register(String name, EColor color);
 
 	/**
 	 * Unregisters the chat associated to the given name.

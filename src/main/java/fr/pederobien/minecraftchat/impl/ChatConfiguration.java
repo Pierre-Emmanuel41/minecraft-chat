@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import fr.pederobien.minecraftchat.exception.ChatAlreadyRegisteredException;
+import fr.pederobien.minecraftchat.exception.ChatNameForbiddenException;
 import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
+import fr.pederobien.minecraftchat.exception.ChatWithSameColorAlreadyExistsException;
+import fr.pederobien.minecraftchat.exception.ChatWithSameNameAlreadyExistsException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
+import fr.pederobien.minecraftgameplateform.utils.EColor;
 
 public class ChatConfiguration extends AbstractNominable implements IChatConfiguration {
 	private Map<String, IChat> chats;
@@ -24,13 +27,19 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 	}
 
 	@Override
-	public IChat register(String name) {
+	public IChat register(String name, EColor color) {
 		if (isSynchronized)
 			return null;
 
 		IChat chat = chats.get(name);
 		if (chat != null)
-			throw new ChatAlreadyRegisteredException(this, chat);
+			throw new ChatWithSameNameAlreadyExistsException(this, chat);
+		if (name.equals("all"))
+			throw new ChatNameForbiddenException(this, "all");
+
+		for (IChat c : getChats())
+			if (c.getColor().equals(color))
+				throw new ChatWithSameColorAlreadyExistsException(this, c);
 
 		chats.put(name, new Chat(name));
 		return null;
