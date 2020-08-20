@@ -5,14 +5,15 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
+import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
 
-public interface IChat {
+public interface IChat extends INominable {
 
 	/**
-	 * @return The name of this chat.
+	 * @return The name of this chat using {@link EColor#getInColor(String)} with parameters String equals {@link #getName()}.
 	 */
-	String getName();
+	String getColoredName();
 
 	/**
 	 * Set the name of this chat.

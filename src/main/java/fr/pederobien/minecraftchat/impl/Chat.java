@@ -22,6 +22,11 @@ public class Chat extends AbstractNominable implements IChat {
 	}
 
 	@Override
+	public String getColoredName() {
+		return getColor().getInColor(getName());
+	}
+
+	@Override
 	public void add(Player player) {
 		players.add(player);
 	}
