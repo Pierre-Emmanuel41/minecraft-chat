@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import fr.pederobien.minecraftchat.impl.ChatConfiguration;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftchat.persistence.loaders.ChatLoaderV10;
@@ -29,7 +30,8 @@ public class ChatPersistence extends AbstractMinecraftPersistence<IChatConfigura
 
 	@Override
 	public void saveDefault() {
-
+		set(new ChatConfiguration("DefaultChatConfiguration"));
+		save();
 	}
 
 	@Override
