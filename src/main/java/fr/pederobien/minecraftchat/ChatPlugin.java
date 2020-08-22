@@ -14,6 +14,7 @@ public class ChatPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
+		new ChatConfigCommand(this);
 		registerDictionaries();
 	}
 
