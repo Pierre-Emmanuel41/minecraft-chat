@@ -7,7 +7,6 @@ import fr.pederobien.minecraftchat.impl.ChatConfiguration;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.commands.common.CommonNew;
 import fr.pederobien.minecraftgameplateform.commands.common.ECommonLabel;
-import fr.pederobien.minecraftgameplateform.commands.configurations.EGameConfigurationLabel;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ILabel;
 
 public class NewChatConfig extends CommonNew<IChatConfiguration> {
@@ -40,7 +39,7 @@ public class NewChatConfig extends CommonNew<IChatConfiguration> {
 	private void setAllAvailable() {
 		for (ILabel label : ECommonLabel.values())
 			setAvailableLabelEdition(label);
-		for (ILabel label : EGameConfigurationLabel.values())
+		for (ILabel label : EChatConfigLabel.values())
 			setAvailableLabelEdition(label);
 	}
 }
