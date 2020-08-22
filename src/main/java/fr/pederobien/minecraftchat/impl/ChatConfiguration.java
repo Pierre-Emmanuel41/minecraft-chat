@@ -41,8 +41,10 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 			if (c.getColor().equals(color))
 				throw new ChatWithSameColorAlreadyExistsException(this, c);
 
-		chats.put(name, new Chat(name));
-		return null;
+		IChat registeredChat = new Chat(name);
+		registeredChat.setColor(color);
+		chats.put(name, registeredChat);
+		return registeredChat;
 	}
 
 	@Override
