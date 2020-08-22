@@ -3,6 +3,7 @@ package fr.pederobien.minecraftchat.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
 
@@ -57,5 +58,13 @@ public class Chat extends AbstractNominable implements IChat {
 			throw new PlayerNotRegisteredInChatException(sender, this);
 		for (Player player : players)
 			MessageManager.sendMessage(player, "[" + color.getInColor(player.equals(sender) ? "me" : player.getName()) + " -> " + getName() + "] " + message);
+	}
+
+	@Override
+	public String toString() {
+		StringJoiner players = new StringJoiner(" ", "[", "]");
+		for (Player player : getPlayers())
+			players.add(player.getName());
+		return getColor().getInColor(getName() + " " + players.toString());
 	}
 }

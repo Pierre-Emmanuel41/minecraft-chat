@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.StringJoiner;
 
 import fr.pederobien.minecraftchat.exception.ChatNameForbiddenException;
 import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
@@ -78,5 +79,19 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 	public void setIsSynchronized(boolean isSynchronized) {
 		this.isSynchronized = isSynchronized;
 		chats.clear();
+	}
+
+	@Override
+	public String toString() {
+		StringJoiner joiner = new StringJoiner("\n");
+		joiner.add("Name : " + getName());
+		joiner.add("Synchronized : " + isSynchronized());
+		if (isSynchronized())
+			return joiner.toString();
+
+		joiner.add("Chats :" + (getChats().isEmpty() ? " none" : ""));
+		for (IChat chat : getChats())
+			joiner.add(chat.toString());
+		return joiner.toString();
 	}
 }
