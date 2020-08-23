@@ -60,7 +60,7 @@ public class Chat extends AbstractNominable implements IChat {
 		if (!players.contains(sender))
 			throw new PlayerNotRegisteredInChatException(this, sender);
 		for (Player player : players)
-			MessageManager.sendMessage(player, "[" + color.getInColor(player.equals(sender) ? "me" : player.getName()) + " -> " + getName() + "] " + message);
+			MessageManager.sendMessage(player, color.getInColor("[" + (player.equals(sender) ? "me" : player.getName()) + " -> " + getName() + "] ") + message);
 	}
 
 	@Override
