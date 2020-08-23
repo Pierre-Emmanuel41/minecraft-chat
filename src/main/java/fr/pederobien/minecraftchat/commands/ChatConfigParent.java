@@ -12,40 +12,41 @@ public class ChatConfigParent extends AbstractConfigurationParentPersistenceEdit
 
 	public ChatConfigParent(Plugin plugin) {
 		super("chatconfig", EChatMessageCode.CHAT_CONFIG__EXPLANATION, plugin, ChatPersistence.getInstance());
+		addEdition(ChatConfigEditionFactory.commonAdd());
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getNewEdition() {
-		return new NewChatConfig();
+		return ChatConfigEditionFactory.newChatConfig().setModifiable(false);
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getRenameEdition() {
-		return new RenameChatConfig();
+		return ChatConfigEditionFactory.renameChatConfig();
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getSaveEdition() {
-		return new SaveChatConfig();
+		return ChatConfigEditionFactory.saveChatConfig();
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getListEdition() {
-		return new ListChatConfig();
+		return ChatConfigEditionFactory.listChatConfig().setModifiable(false);
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getDeleteEdition() {
-		return new DeleteChatConfig();
+		return ChatConfigEditionFactory.deleteChatConfig().setModifiable(false);
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getDetailsEdition() {
-		return new DetailsChatConfig();
+		return ChatConfigEditionFactory.detailsChatConfig();
 	}
 
 	@Override
 	protected IMapPersistenceEdition<IChatConfiguration> getLoadEdition() {
-		return new LoadChatConfig();
+		return ChatConfigEditionFactory.loadChatConfig().setModifiable(false);
 	}
 }

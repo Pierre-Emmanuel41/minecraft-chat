@@ -107,5 +107,61 @@
 			<code>LOAD_CHAT_CONFIG__CONFIGURATION_LOADED</code>
 			<value>The chat configuration %s has been loaded</value>
 		</message>
+		<message>
+			<code>ADD__EXPLANATION</code>
+			<value>To add a chat to this configuration or a player to a chat</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__EXPLANATION</code>
+			<value>To add a chat to this configuration</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__CHAT_NAME_IS_MISSING</code>
+			<value>Cannot add a chat to configuration %s, the name is missing</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__COLOR_NAME_IS_MISSING</code>
+			<value>Cannot add chat "%s" to configuration %s, the color is missing</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__COLOR_DOES_NOT_EXIST</code>
+			<value>Cannot add chat "%s" to configuration %s, "%s" is not a color</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__CHAT_NAME_FORBIDDEN</code>
+			<value>Cannot add chat %s to configuration %s, this name is forbidden for a chat</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__CHAT_NAME_ALREADY_USED</code>
+			<value>Cannot add chat %s to configuration %s, this chat already exists</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__COLOR_ALREADY_USED</code>
+			<value>Cannot add chat %s to configuration %s, the color %s is already used by chat %s</value>
+		</message>
+		<message>
+			<code>ADD_CHAT__CHAT_ADDED</code>
+			<value>Chat %s has been added to configuration %s</value>
+		</message>
+		<message>
+			<code>ADD_PLAYER__CHAT_NAME_IS_MISSING</code>
+			<value>Cannot add players to a chat, the chat's name is missing</value>
+		</message>
+		<message>
+			<code>ADD_PLAYER__CHAT_DOES_NOT_EXIST</code>
+			<value>Cannot add players to chat "%s", it does not exist in configuration %s</value>
+		</message>
+		<message>
+			<code>ADD_PLAYER__ANY_PLAYER_ADDED</code>
+			<value>Any player has been added</value>
+		</message>
+		<message>
+			<code>ADD_PLAYER__ONE_PLAYER_ADDED</code>
+			<value>The player %s has been added to chat %s</value>
+		</message>
+		<message>
+			<code>ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
+			<value>Players %s have been added to chat %s</value>
+		</message>
 	</messages>
 </dictionary>
