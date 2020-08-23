@@ -179,5 +179,57 @@
 			<code>IS_CHAT_CONFIG_SYNCHRONIZED__FALSE</code>
 			<value>The chat configuration %s is not synchronized</value>
 		</message>
+		<message>
+			<code>REMOVE__EXPLANATION</code>
+			<value>To remove a chat from the configuration or a player from a chat</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__EXPLANATION</code>
+			<value>To remove a chat from a chat configuration</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ALL_CHATS_REMOVED</code>
+			<value>All chats from configuration %s have been removed : %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__CHAT_DOES_NOT_EXIST</code>
+			<value>Cannot remove chat "%s" from configuration %s, this chat does not exist</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ANY_CHAT_REMOVED</code>
+			<value>Any chat has been removed from configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ONE_CHAT_REMOVED</code>
+			<value>Le chat %s a été supprimé de la configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__SEVERAL_CHATS_REMOVED</code>
+			<value>Chats %s have been removed from configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__EXPLANATION</code>
+			<value>To remove players from a chat</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<value>All players have been removed from their chats</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<value>Cannot remove player "%s" from a chat, he is not registered for configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED</code>
+			<value>Any player has been removed</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<value>Player %s has been removed from chat %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<value>Players %s have been removed from chats %s</value>
+		</message>
 	</messages>
 </dictionary>

@@ -176,5 +176,57 @@
 			<code>IS_CHAT_CONFIG_SYNCHRONIZED__FALSE</code>
 			<value>La configuration de chat %s n'est pas synchronisée</value>
 		</message>
+		<message>
+			<code>REMOVE__EXPLANATION</code>
+			<value>Pour supprimer un chat de la configuration ou un joueur d'un chat</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__EXPLANATION</code>
+			<value>Pour supprimer un chat d'une configuration de chat</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ALL_CHATS_REMOVED</code>
+			<value>Tous les chats de la configuration %s ont été supprimés : %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__CHAT_DOES_NOT_EXIST</code>
+			<value>Impossible de supprimer le chat "%s" de la configuration %s, cee chat n'existe pas</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ANY_CHAT_REMOVED</code>
+			<value>Aucun chat n'a été supprimé de la configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__ONE_CHAT_REMOVED</code>
+			<value>le chat %s a été supprimé de la configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_CHAT__SEVERAL_CHATS_REMOVED</code>
+			<value>Les chats %s ont été supprimé de la configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__EXPLANATION</code>
+			<value>Pour supprimer des joueurs d'un chat</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<value>Tous les joueurs ont été enlevé de leurs chats</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<value>Impossible d'enlever le joueur "%s" d'un chat, il n'est pas enregistré pour configuration %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED</code>
+			<value>Aucun joueur n'a été enlevé</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<value>Le joueur %s a été enlevé du chat %s</value>
+		</message>
+		<message>
+			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<value>Les joueurs %s ont été enlevé de leurs chats %s</value>
+		</message>
 	</messages>
 </dictionary>

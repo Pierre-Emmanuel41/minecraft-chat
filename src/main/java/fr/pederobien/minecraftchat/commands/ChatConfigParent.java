@@ -14,6 +14,7 @@ public class ChatConfigParent extends AbstractConfigurationParentPersistenceEdit
 		super("chatconfig", EChatMessageCode.CHAT_CONFIG__EXPLANATION, plugin, ChatPersistence.getInstance());
 		addEdition(ChatConfigEditionFactory.commonAdd());
 		addEdition(ChatConfigEditionFactory.synchronizedChatConfig());
+		addEdition(ChatConfigEditionFactory.commonRemove());
 	}
 
 	@Override

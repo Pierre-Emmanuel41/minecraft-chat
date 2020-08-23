@@ -65,6 +65,13 @@ public class ChatConfigEditionFactory {
 	 * @return An edition to define if the chat configuration should be synchronized with the game to run.
 	 */
 	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> synchronizedChatConfig() {
-		return new SynchronizedChatConfig<>();
+		return new SynchronizedChatConfig<T>();
+	}
+
+	/**
+	 * @return An edition to remove a chat from a chat configuration or a player from a chat.
+	 */
+	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> commonRemove() {
+		return new CommonRemove<T>();
 	}
 }

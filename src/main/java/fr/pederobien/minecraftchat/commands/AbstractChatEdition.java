@@ -3,17 +3,20 @@ package fr.pederobien.minecraftchat.commands;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;
 import fr.pederobien.minecraftgameplateform.exceptions.ColorNotFoundException;
 import fr.pederobien.minecraftgameplateform.exceptions.PlayerNotFoundException;
 import fr.pederobien.minecraftgameplateform.impl.editions.AbstractLabelEdition;
+import fr.pederobien.minecraftgameplateform.interfaces.element.IGameConfiguration;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ILabel;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
 import fr.pederobien.minecraftmanagers.PlayerManager;
@@ -30,6 +33,48 @@ public class AbstractChatEdition<T extends IChatConfiguration> extends AbstractL
 	}
 
 	/**
+	 * Get a list of chats associated to each chat name in array <code>chatNames</code>
+	 * 
+	 * @param chatNames The array that contains chat names.
+	 * @return The list of chats.
+	 * 
+	 * @throws ChatNotRegisteredException If there no chat is registered for one chat name in the given string array.
+	 * @see {@link IChatConfiguration#getChat(String)}
+	 */
+	protected List<IChat> getChats(String[] chatNames) {
+		List<IChat> chats = new ArrayList<IChat>();
+		for (String chatName : chatNames) {
+			Optional<IChat> optChat = get().getChat(chatName);
+			if (!optChat.isPresent())
+				throw new ChatNotRegisteredException(get(), chatName);
+			else
+				chats.add(optChat.get());
+		}
+		return chats;
+	}
+
+	/**
+	 * Get a list of string that correspond to the name of each chat in the given list <code>chats</code>
+	 * 
+	 * @param chats    The list of chat used to get their name.
+	 * @param coloured True if each chat's name is colored, false otherwise.
+	 * @return The list of chat's name.
+	 */
+	protected List<String> getChatNames(List<IChat> chats, boolean colored) {
+		return chats.stream().map(chat -> colored ? chat.getColoredName() : chat.getName()).collect(Collectors.toList());
+	}
+
+	/**
+	 * Remove teams already mentioned from the list returned by {@link IGameConfiguration#getTeams()}.
+	 * 
+	 * @param alreadyMentionedTeams A list that contains already mentioned teams.
+	 * @return A stream that contains not mentioned teams.
+	 */
+	protected Stream<IChat> getFreeChats(List<String> alreadyMentionedTeams) {
+		return get().getChats().stream().filter(team -> !alreadyMentionedTeams.contains(team.getName()));
+	}
+
+	/**
 	 * Get a list of string that correspond to the name of each {@link EColor} not used by the registered chats for this
 	 * configuration.
 	 * 
@@ -43,6 +88,19 @@ public class AbstractChatEdition<T extends IChatConfiguration> extends AbstractL
 			alreadyUsedColors.add(chat.getColor());
 		return Arrays.asList(EColor.values()).stream().filter(color -> !alreadyUsedColors.contains(color))
 				.map(color -> colored ? color.getColoredColorName() : color.getName()).collect(Collectors.toList());
+	}
+
+	/**
+	 * Remove players already mentioned from the list that contains all players registered in chats.
+	 * 
+	 * @param alreadyMentionedPlayers A list that contains already mentioned players.
+	 * @return A stream that contains not free and not mentioned players.
+	 */
+	protected Stream<Player> getNotFreePlayers(List<String> alreadyMentionedPlayers) {
+		List<Player> registeredPlayers = new ArrayList<Player>();
+		for (IChat chat : get().getChats())
+			registeredPlayers.addAll(chat.getPlayers());
+		return registeredPlayers.stream().filter(player -> !alreadyMentionedPlayers.contains(player.getName()));
 	}
 
 	/**
