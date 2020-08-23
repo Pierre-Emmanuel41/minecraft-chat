@@ -163,5 +163,21 @@
 			<code>ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
 			<value>Players %s have been added to chat %s</value>
 		</message>
+		<message>
+			<code>IS_SYNCHRONIZED__EXPLANATION</code>
+			<value>To set wether the chat configuration is synchronized with the game configuration to run</value>
+		</message>
+		<message>
+			<code>IS_SYNCHRONIZED__VALUE_IS_MISSING</code>
+			<value>Cannot set if the chat configuration is synchronized, the value is missing</value>
+		</message>
+		<message>
+			<code>IS_CHAT_CONFIG_SYNCHRONIZED__TRUE</code>
+			<value>The chat configuration %s is synchronized</value>
+		</message>
+		<message>
+			<code>IS_CHAT_CONFIG_SYNCHRONIZED__FALSE</code>
+			<value>The chat configuration %s is not synchronized</value>
+		</message>
 	</messages>
 </dictionary>

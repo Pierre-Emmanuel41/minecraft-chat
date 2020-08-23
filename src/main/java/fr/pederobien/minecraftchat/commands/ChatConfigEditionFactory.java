@@ -60,4 +60,8 @@ public class ChatConfigEditionFactory {
 	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> commonAdd() {
 		return new CommonAdd<T>();
 	}
+
+	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> synchronizedChatConfig() {
+		return new SynchronizedChatConfig<>();
+	}
 }
