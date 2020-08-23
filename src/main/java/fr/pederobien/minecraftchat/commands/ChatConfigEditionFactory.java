@@ -61,6 +61,9 @@ public class ChatConfigEditionFactory {
 		return new CommonAdd<T>();
 	}
 
+	/**
+	 * @return An edition to define if the chat configuration should be synchronized with the game to run.
+	 */
 	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> synchronizedChatConfig() {
 		return new SynchronizedChatConfig<>();
 	}
