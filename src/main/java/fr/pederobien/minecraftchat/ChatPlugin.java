@@ -10,6 +10,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.interfaces.IDictionaryParser;
+import fr.pederobien.minecraftchat.commands.chat.ChatCommand;
 import fr.pederobien.minecraftchat.commands.chatconfig.ChatConfigCommand;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
@@ -20,7 +21,7 @@ public class ChatPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
-		new ChatConfigCommand(this);
+		new ChatCommand(this, new ChatConfigCommand(this));
 
 		getServer().getPluginManager().registerEvents(new Listener() {
 			@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

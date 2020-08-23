@@ -235,5 +235,17 @@
 			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
 			<value>Players %s have been removed from chats %s</value>
 		</message>
+		<message>
+			<code>CHAT__NO_EXISTING_CONFIGURATION</code>
+			<value>There is no chat configuration defined to use this command</value>
+		</message>
+		<message>
+			<code>CHAT__CHAT_NOT_REGISTERED</code>
+			<value>You cannot send a message to chat %s, this chat does not exist for configuration %s</value>
+		</message>
+		<message>
+			<code>CHAT__PLAYER_NOT_REGISTERED</code>
+			<value>You are not registered in %s</value>
+		</message>
 	</messages>
 </dictionary>
