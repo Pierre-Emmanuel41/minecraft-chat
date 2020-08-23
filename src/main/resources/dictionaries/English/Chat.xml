@@ -152,6 +152,10 @@
 			<value>Cannot add players to chat "%s", it does not exist in configuration %s</value>
 		</message>
 		<message>
+			<code>ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT</code>
+			<value>Cannot add player %s to chat %s, this player is already registered in this chat</value>
+		</message>
+		<message>
 			<code>ADD_PLAYER__ANY_PLAYER_ADDED</code>
 			<value>Any player has been added</value>
 		</message>

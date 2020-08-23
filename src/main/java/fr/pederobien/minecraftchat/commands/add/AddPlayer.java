@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftchat.commands.AbstractChatEdition;
+import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.dictionary.ECommonMessageCode;
@@ -49,6 +50,9 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 				chat.add(player);
 		} catch (PlayerNotFoundException e) {
 			sendMessageToSender(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName());
+			return false;
+		} catch (PlayerAlreadyRegisteredInChatException e) {
+			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT, e.getPlayer().getName(), e.getChat().getColoredName());
 			return false;
 		}
 

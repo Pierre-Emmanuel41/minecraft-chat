@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
@@ -29,6 +30,8 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void add(Player player) {
+		if (players.contains(player))
+			throw new PlayerAlreadyRegisteredInChatException(this, player);
 		players.add(player);
 	}
 
@@ -55,7 +58,7 @@ public class Chat extends AbstractNominable implements IChat {
 	@Override
 	public void sendMessage(Player sender, String message) {
 		if (!players.contains(sender))
-			throw new PlayerNotRegisteredInChatException(sender, this);
+			throw new PlayerNotRegisteredInChatException(this, sender);
 		for (Player player : players)
 			MessageManager.sendMessage(player, "[" + color.getInColor(player.equals(sender) ? "me" : player.getName()) + " -> " + getName() + "] " + message);
 	}

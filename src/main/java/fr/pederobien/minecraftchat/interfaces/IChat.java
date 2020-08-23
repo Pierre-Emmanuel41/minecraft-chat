@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
@@ -26,6 +27,8 @@ public interface IChat extends INominable {
 	 * Appends the given player to this room.
 	 * 
 	 * @param player The player to append.
+	 * 
+	 * @throws PlayerAlreadyRegisteredInChatException If the given player is already registered in this chat.
 	 */
 	void add(Player player);
 

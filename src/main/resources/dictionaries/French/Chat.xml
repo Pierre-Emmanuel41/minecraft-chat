@@ -149,6 +149,10 @@
 			<value>Impossible d'ajouter des joueurs au chat "%s", il n'existe pas pour la configuration %s</value>
 		</message>
 		<message>
+			<code>ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT</code>
+			<value>Impossible d'ajouter le joueur %s au chat %s, ce joueur est déjà enregistré dans ce chat</value>
+		</message>
+		<message>
 			<code>ADD_PLAYER__ANY_PLAYER_ADDED</code>
 			<value>Aucun joueurs n'a été ajouté</value>
 		</message>
