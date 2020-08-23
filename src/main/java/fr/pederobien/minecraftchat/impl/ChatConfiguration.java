@@ -61,6 +61,13 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 	}
 
 	@Override
+	public List<IChat> clearChats() {
+		List<IChat> removedChats = new ArrayList<>(chats.values());
+		chats.clear();
+		return removedChats;
+	}
+
+	@Override
 	public Optional<IChat> getChat(String name) {
 		return Optional.ofNullable(chats.get(name));
 	}

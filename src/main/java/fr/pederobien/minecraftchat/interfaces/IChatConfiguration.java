@@ -36,6 +36,13 @@ public interface IChatConfiguration extends INominable {
 	IChat unRegister(String name);
 
 	/**
+	 * Remove all registered chats.
+	 * 
+	 * @return All removed chats.
+	 */
+	List<IChat> clearChats();
+
+	/**
 	 * Get the chat associated to the given name.
 	 * 
 	 * @param name The name of the chat to retrieve.
