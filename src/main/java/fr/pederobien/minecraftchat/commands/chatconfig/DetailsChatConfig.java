@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftchat.commands;
+package fr.pederobien.minecraftchat.commands.chatconfig;
 
 import fr.pederobien.minecraftchat.EChatMessageCode;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;

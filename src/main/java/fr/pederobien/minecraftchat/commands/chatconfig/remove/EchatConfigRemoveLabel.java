@@ -1,13 +1,13 @@
-package fr.pederobien.minecraftchat.commands.add;
+package fr.pederobien.minecraftchat.commands.chatconfig.remove;
 
 import fr.pederobien.minecraftgameplateform.interfaces.element.ILabel;
 
-public enum EChatConfigAddLabel implements ILabel {
+public enum EchatConfigRemoveLabel implements ILabel {
 	CHAT("chat"), PLAYER("player");
 
 	private String label;
 
-	private EChatConfigAddLabel(String label) {
+	private EchatConfigRemoveLabel(String label) {
 		this.label = label;
 	}
 

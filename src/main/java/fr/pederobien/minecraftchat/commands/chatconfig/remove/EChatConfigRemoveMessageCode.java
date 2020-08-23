@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftchat.commands.remove;
+package fr.pederobien.minecraftchat.commands.chatconfig.remove;
 
 import fr.pederobien.minecraftdictionary.impl.Permission;
 import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;

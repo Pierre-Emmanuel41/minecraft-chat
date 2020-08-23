@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftchat.commands.add;
+package fr.pederobien.minecraftchat.commands.chatconfig.add;
 
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.interfaces.editions.IMapPersistenceEdition;

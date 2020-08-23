@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftchat.commands.add;
+package fr.pederobien.minecraftchat.commands.chatconfig.add;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftchat.commands.AbstractChatEdition;
+import fr.pederobien.minecraftchat.commands.chatconfig.AbstractChatEdition;
 import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;

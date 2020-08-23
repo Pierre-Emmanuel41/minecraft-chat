@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftchat.commands.remove;
+package fr.pederobien.minecraftchat.commands.chatconfig.remove;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import fr.pederobien.minecraftchat.commands.AbstractChatEdition;
+import fr.pederobien.minecraftchat.commands.chatconfig.AbstractChatEdition;
 import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
