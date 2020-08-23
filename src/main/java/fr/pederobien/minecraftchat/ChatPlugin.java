@@ -3,9 +3,14 @@ package fr.pederobien.minecraftchat;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.interfaces.IDictionaryParser;
+import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
 
 public class ChatPlugin extends JavaPlugin {
@@ -15,6 +20,18 @@ public class ChatPlugin extends JavaPlugin {
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
 		new ChatConfigCommand(this);
+
+		getServer().getPluginManager().registerEvents(new Listener() {
+			@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+			public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+				if (Plateform.getGameConfigurationContext().getGameConfiguration() == null)
+					return;
+
+				for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
+					if (team.getPlayers().contains(event.getPlayer()))
+						event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
+			}
+		}, this);
 		registerDictionaries();
 	}
 
