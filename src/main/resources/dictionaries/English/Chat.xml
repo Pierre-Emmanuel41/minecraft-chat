@@ -216,23 +216,23 @@
 			<value>To remove players from a chat</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED_FROM_CHATS</code>
 			<value>All players have been removed from their chats</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED_IN_CHATS</code>
 			<value>Cannot remove player "%s" from a chat, he is not registered for configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED</code>
+			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED_FROM_CHAT</code>
 			<value>Any player has been removed</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED_FROM_CHAT</code>
 			<value>Player %s has been removed from chat %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED_FROM_CHATS</code>
 			<value>Players %s have been removed from chats %s</value>
 		</message>
 		<message>

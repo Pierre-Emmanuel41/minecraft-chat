@@ -213,23 +213,23 @@
 			<value>Pour supprimer des joueurs d'un chat</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED_FROM_CHATS</code>
 			<value>Tous les joueurs ont été enlevé de leurs chats</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED_IN_CHATS</code>
 			<value>Impossible d'enlever le joueur "%s" d'un chat, il n'est pas enregistré pour configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED</code>
+			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED_FROM_CHAT</code>
 			<value>Aucun joueur n'a été enlevé</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED_FROM_CHAT</code>
 			<value>Le joueur %s a été enlevé du chat %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED_FROM_CHATS</code>
 			<value>Les joueurs %s ont été enlevé de leurs chats %s</value>
 		</message>
 	</messages>
