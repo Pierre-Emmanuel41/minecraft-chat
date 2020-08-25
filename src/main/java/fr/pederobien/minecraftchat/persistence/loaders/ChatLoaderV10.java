@@ -25,6 +25,14 @@ public class ChatLoaderV10 extends AbstractChatLoader {
 		Node name = getElementsByTagName(root, ChatXmlTag.NAME).item(0);
 		get().setName(name.getChildNodes().item(0).getNodeValue());
 
+		// Getting configuration's synchronization state
+		Node isSynchronized = getElementsByTagName(root, ChatXmlTag.IS_SYNCHRONIZED).item(0);
+		get().setIsSynchronized(getBooleanNodeValue(isSynchronized.getChildNodes().item(0)));
+
+		// Do nothing if synchronized
+		if (get().isSynchronized())
+			return this;
+
 		// Getting configuration's chats
 		NodeList chats = getElementsByTagName(root, ChatXmlTag.CHAT);
 		for (int i = 0; i < chats.getLength(); i++) {
