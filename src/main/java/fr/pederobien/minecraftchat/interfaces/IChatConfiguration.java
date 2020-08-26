@@ -8,9 +8,11 @@ import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
 import fr.pederobien.minecraftchat.exception.ChatWithSameColorAlreadyExistsException;
 import fr.pederobien.minecraftchat.exception.ChatWithSameNameAlreadyExistsException;
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
+import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsGameConfiguration;
+import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsGameConfigurationContext;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
 
-public interface IChatConfiguration extends INominable {
+public interface IChatConfiguration extends INominable, IObsGameConfiguration, IObsGameConfigurationContext {
 
 	/**
 	 * Creates a new chat with the given name.

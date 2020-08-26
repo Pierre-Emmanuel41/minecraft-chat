@@ -10,17 +10,42 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
+import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
+import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
 import fr.pederobien.minecraftmanagers.MessageManager;
 
 public class Chat extends AbstractNominable implements IChat {
 	private List<Player> players;
 	private EColor color;
+	private IChatConfiguration configuration;
 
-	public Chat(String name) {
+	public Chat(String name, IChatConfiguration configuration) {
 		super(name);
+		this.configuration = configuration;
 		players = new ArrayList<>();
+		color = EColor.RESET;
+	}
+
+	@Override
+	public void onColorChanged(ITeam team, EColor oldColor, EColor newColor) {
+		color = newColor;
+	}
+
+	@Override
+	public void onPlayerAdded(ITeam team, Player player) {
+		internalAdd(player);
+	}
+
+	@Override
+	public void onPlayerRemoved(ITeam team, Player player) {
+		players.remove(player);
+	}
+
+	@Override
+	public void onClone(ITeam team) {
+
 	}
 
 	@Override
@@ -30,14 +55,14 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void add(Player player) {
-		if (players.contains(player))
-			throw new PlayerAlreadyRegisteredInChatException(this, player);
-		players.add(player);
+		if (!isSynchronized())
+			internalAdd(player);
 	}
 
 	@Override
 	public void remove(Player player) {
-		players.remove(player);
+		if (!isSynchronized())
+			players.remove(player);
 	}
 
 	@Override
@@ -52,7 +77,8 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void setColor(EColor color) {
-		this.color = color;
+		if (!isSynchronized())
+			this.color = color;
 	}
 
 	@Override
@@ -69,5 +95,15 @@ public class Chat extends AbstractNominable implements IChat {
 		for (Player player : getPlayers())
 			players.add(player.getName());
 		return getColor().getInColor(getName() + " " + players.toString());
+	}
+
+	private void internalAdd(Player player) {
+		if (players.contains(player))
+			throw new PlayerAlreadyRegisteredInChatException(this, player);
+		players.add(player);
+	}
+
+	private boolean isSynchronized() {
+		return configuration.isSynchronized();
 	}
 }

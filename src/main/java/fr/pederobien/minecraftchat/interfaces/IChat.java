@@ -7,9 +7,10 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
+import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsTeam;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
 
-public interface IChat extends INominable {
+public interface IChat extends INominable, IObsTeam {
 
 	/**
 	 * @return The name of this chat using {@link EColor#getInColor(String)} with parameters String equals {@link #getName()}.
