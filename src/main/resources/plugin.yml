@@ -16,4 +16,4 @@ commands:
 permissions:
   chat.permission:
     description: give access to command chat.
-    default: not op
+    default: true
