@@ -11,4 +11,9 @@ commands:
     permission: ChatPlugin.permission
   chat:
     description: Command to send a message in a chat room.
-    permission: ChatPlugin.permission
+    permission: chat.permission
+
+permissions:
+  chat.permission:
+    description: give access to command chat.
+    default: not op
