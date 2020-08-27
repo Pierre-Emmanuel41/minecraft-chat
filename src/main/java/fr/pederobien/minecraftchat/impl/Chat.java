@@ -29,6 +29,11 @@ public class Chat extends AbstractNominable implements IChat {
 	}
 
 	@Override
+	public void onNameChanged(ITeam team, String oldName, String newName) {
+		setName(newName);
+	}
+
+	@Override
 	public void onColorChanged(ITeam team, EColor oldColor, EColor newColor) {
 		color = newColor;
 	}
