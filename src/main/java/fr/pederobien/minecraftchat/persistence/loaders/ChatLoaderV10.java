@@ -8,7 +8,6 @@ import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftchat.persistence.ChatXmlTag;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
-import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.persistence.interfaces.xml.IXmlPersistenceLoader;
 
 public class ChatLoaderV10 extends AbstractChatLoader {
@@ -40,7 +39,7 @@ public class ChatLoaderV10 extends AbstractChatLoader {
 			IChat chat = get().register(getStringAttribute(c, ChatXmlTag.NAME), EColor.getByColorName(getStringAttribute(c, ChatXmlTag.COLOR)));
 			NodeList players = getElementsByTagName(c, ChatXmlTag.PLAYER);
 			for (int j = 0; j < players.getLength(); j++)
-				chat.add(PlayerManager.getPlayer(getStringAttribute((Element) players.item(j), ChatXmlTag.NAME)));
+				addPlayer(chat, getStringAttribute((Element) players.item(j), ChatXmlTag.NAME));
 		}
 		return this;
 	}
