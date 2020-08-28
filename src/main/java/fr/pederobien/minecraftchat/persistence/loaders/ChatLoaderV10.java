@@ -18,6 +18,7 @@ public class ChatLoaderV10 extends AbstractChatLoader {
 
 	@Override
 	public IXmlPersistenceLoader<IChatConfiguration> load(Element root) {
+		super.load(root);
 		createNewElement();
 
 		// Getting configuration's name
