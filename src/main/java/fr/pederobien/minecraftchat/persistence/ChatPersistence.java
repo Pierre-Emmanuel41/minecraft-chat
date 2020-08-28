@@ -68,6 +68,7 @@ public class ChatPersistence extends AbstractMinecraftPersistence<IChatConfigura
 					setAttribute(player, ChatXmlTag.NAME, p.getName());
 					players.appendChild(player);
 				}
+				chat.appendChild(players);
 				chats.appendChild(chat);
 			}
 		root.appendChild(chats);
