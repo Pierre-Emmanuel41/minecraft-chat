@@ -35,6 +35,11 @@ public abstract class AbstractChatLoader extends AbstractXmlPersistenceLoader<IC
 		// At each load, the list of offline player should be reset in order to get the offline players associated to
 		// the current configuration.
 		offlinePlayers.clear();
+
+		// When a new configuration is loaded, all chat of the old configuration are no more interested by players
+		if (get() != null && !get().isSynchronized())
+			for (IChat chat : get().getChats())
+				Plateform.getPlayerQuitOrJoinEventListener().removeObserver(chat);
 		return this;
 	}
 

@@ -2,10 +2,13 @@ package fr.pederobien.minecraftchat.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
@@ -14,18 +17,21 @@ import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.EColor;
+import fr.pederobien.minecraftgameplateform.utils.Plateform;
 import fr.pederobien.minecraftmanagers.MessageManager;
 
 public class Chat extends AbstractNominable implements IChat {
-	private List<Player> players;
+	private List<Player> players, quitPlayers;
 	private EColor color;
 	private IChatConfiguration configuration;
 
 	public Chat(String name, IChatConfiguration configuration) {
 		super(name);
 		this.configuration = configuration;
-		players = new ArrayList<>();
+		players = new ArrayList<Player>();
+		quitPlayers = new ArrayList<Player>();
 		color = EColor.RESET;
+		Plateform.getPlayerQuitOrJoinEventListener().addObserver(this);
 	}
 
 	@Override
@@ -51,6 +57,30 @@ public class Chat extends AbstractNominable implements IChat {
 	@Override
 	public void onClone(ITeam team) {
 
+	}
+
+	@Override
+	public void onPlayerJoinEvent(PlayerJoinEvent event) {
+		if (!isSynchronized()) {
+			Iterator<Player> iterator = quitPlayers.iterator();
+			while (iterator.hasNext()) {
+				Player player = iterator.next();
+				if (player.getName().equals(event.getPlayer().getName())) {
+					remove(player);
+					iterator.remove();
+					add(event.getPlayer());
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onPlayerQuitEvent(PlayerQuitEvent event) {
+		if (!isSynchronized()) {
+			for (Player player : players)
+				if (player.getName().equals(event.getPlayer().getName()))
+					quitPlayers.add(event.getPlayer());
+		}
 	}
 
 	@Override
