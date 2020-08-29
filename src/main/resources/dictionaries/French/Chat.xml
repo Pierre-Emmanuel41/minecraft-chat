@@ -278,11 +278,11 @@
 		</message>
 		<message>
 			<code>CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST</code>
-			<value>Impossible de modifier la couleur du chat "%"", il n'existe pas pour la configuration %s</value>
+			<value>Impossible de modifier la couleur du chat "%s", il n'existe pas pour la configuration %s</value>
 		</message>
 		<message>
 			<code>CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST</code>
-			<value>Impossible de modifier la couleur du chat %, la couleur "%s" n'existe pas</value>
+			<value>Impossible de modifier la couleur du chat %s, la couleur "%s" n'existe pas</value>
 		</message>
 		<message>
 			<code>CHAT_MODIFY_COLOR__COLOR_ALREADY_USED</code>

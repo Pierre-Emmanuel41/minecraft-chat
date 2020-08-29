@@ -293,7 +293,7 @@
 		</message>
 		<message>
 			<code>CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST</code>
-			<value>Cannot modify the color of chat %, it does not exist for configuration %s</value>
+			<value>Cannot modify the color of chat %s, it does not exist for configuration %s</value>
 		</message>
 		<message>
 			<code>CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST</code>
