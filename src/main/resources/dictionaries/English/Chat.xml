@@ -168,11 +168,11 @@
 			<value>Players %s have been added to chat %s</value>
 		</message>
 		<message>
-			<code>IS_SYNCHRONIZED__EXPLANATION</code>
+			<code>IS_CHAT_CONFIG_SYNCHRONIZED__EXPLANATION</code>
 			<value>To set wether the chat configuration is synchronized with the game configuration to run</value>
 		</message>
 		<message>
-			<code>IS_SYNCHRONIZED__VALUE_IS_MISSING</code>
+			<code>IS_CHAT_CONFIG_SYNCHRONIZED__VALUE_IS_MISSING</code>
 			<value>Cannot set if the chat configuration is synchronized, the value is missing</value>
 		</message>
 		<message>
@@ -246,6 +246,66 @@
 		<message>
 			<code>CHAT__PLAYER_NOT_REGISTERED</code>
 			<value>You are not registered in %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY__EXPLANATION</code>
+			<value>To modify the name or the color of a chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__EXPLANATION</code>
+			<value>To modify the name of a chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__OLD_NAME_IS_MISSING</code>
+			<value>Cannot rename a chat, chat's name to rename is missing</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__NEW_NAME_IS_MISSING</code>
+			<value>Cannot rename chat %s, the new chat's name is missing</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_DOES_NOT_EXIST</code>
+			<value>Cannot rename chat "%s", this chat does not exists in configuration %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_NAME_FORBIDDEN</code>
+			<value>Cannot rename chat %s as %s, this name is forbidden for a chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_NAME_ALREADY_USED</code>
+			<value>Cannot rename chat %s as %s, this name is already used</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_RENAMED</code>
+			<value>The chat %s has been renamed as %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__EXPLANATION</code>
+			<value>To modify the color of a chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__CHAT_NAME_IS_MISSING</code>
+			<value>Cannot modify chat's color, the chat's name is missing</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_NAME_IS_MISSING</code>
+			<value>Cannot modify the color of chat %s, the new color's name is missing</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST</code>
+			<value>Cannot modify the color of chat %, it does not exist for configuration %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST</code>
+			<value>Cannot modify the color of chat %s, the color "%s" does not exist</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_ALREADY_USED</code>
+			<value>Cannot modify the color of chat %s, the color %s is already used by chat %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_UPDATED</code>
+			<value>The color of chat %s has been updated for configuration %s</value>
 		</message>
 	</messages>
 </dictionary>

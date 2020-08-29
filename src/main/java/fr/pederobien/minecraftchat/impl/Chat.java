@@ -36,7 +36,7 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void onNameChanged(ITeam team, String oldName, String newName) {
-		setName(newName);
+		super.setName(newName);
 	}
 
 	@Override
@@ -81,6 +81,12 @@ public class Chat extends AbstractNominable implements IChat {
 				if (player.getName().equals(event.getPlayer().getName()))
 					quitPlayers.add(event.getPlayer());
 		}
+	}
+
+	@Override
+	public void setName(String name) {
+		if (!isSynchronized())
+			super.setName(name);
 	}
 
 	@Override

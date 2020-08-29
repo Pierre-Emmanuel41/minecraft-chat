@@ -232,5 +232,65 @@
 			<code>CHAT_REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
 			<value>Les joueurs %s ont été enlevé de leurs chats %s</value>
 		</message>
+		<message>
+			<code>CHAT_MODIFY__EXPLANATION</code>
+			<value>Pour modifier le nom ou la couleur d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__EXPLANATION</code>
+			<value>Pour modifier le nom d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__OLD_NAME_IS_MISSING</code>
+			<value>Impossible de renommer un chat, le nom du chat à renommer est manquant</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__NEW_NAME_IS_MISSING</code>
+			<value>Impossible de renommer le chat %s, le nouveau nom du chat est manquant</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_DOES_NOT_EXIST</code>
+			<value>Impossible de renommer le chat "%s", ce chat n'existe pas dans la configuration %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_NAME_FORBIDDEN</code>
+			<value>Impossible de renommer le chat %s en %s, ce nom est interdit pour un chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_NAME_ALREADY_USED</code>
+			<value>Impossible de renommer le chat %s as %s, ce nom est déjà utilisé</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_NAME__CHAT_RENAMED</code>
+			<value>Le chat %s a été renommé en %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__EXPLANATION</code>
+			<value>Pour modifier la couleur d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__CHAT_NAME_IS_MISSING</code>
+			<value>Impossible de modifier la couleur d'un chat, le nom du chat est manquant</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_NAME_IS_MISSING</code>
+			<value>Impossible de modifier la couleur du chat %s, le nom de la nouvelle couleur est manquant</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST</code>
+			<value>Impossible de modifier la couleur du chat "%"", il n'existe pas pour la configuration %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST</code>
+			<value>Impossible de modifier la couleur du chat %, la couleur "%s" n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_ALREADY_USED</code>
+			<value>Impossible de modifier la couleur du chat %s, la couleur %s est déjà utilisé par le chat %s</value>
+		</message>
+		<message>
+			<code>CHAT_MODIFY_COLOR__COLOR_UPDATED</code>
+			<value>La couleur du chat %s a été mise à jour pour la configuration %s</value>
+		</message>
 	</messages>
 </dictionary>

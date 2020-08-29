@@ -3,7 +3,7 @@ package fr.pederobien.minecraftchat.commands.chatconfig;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ILabel;
 
 public enum EChatConfigLabel implements ILabel {
-	ADD("add"), IS_SYNCHRONIZED("isSynchronized"), REMOVE("remove");
+	ADD("add"), IS_SYNCHRONIZED("isSynchronized"), REMOVE("remove"), MODIFY("modify");
 
 	private String label;
 

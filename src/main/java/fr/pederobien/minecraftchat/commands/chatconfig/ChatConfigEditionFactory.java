@@ -74,4 +74,11 @@ public class ChatConfigEditionFactory {
 	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> commonRemove() {
 		return new CommonRemove<T>();
 	}
+
+	/**
+	 * @return An edition to modify the name or the color of a chat.
+	 */
+	public static <T extends IChatConfiguration> IMapPersistenceEdition<T> commonModify() {
+		return new CommonModify<T>();
+	}
 }

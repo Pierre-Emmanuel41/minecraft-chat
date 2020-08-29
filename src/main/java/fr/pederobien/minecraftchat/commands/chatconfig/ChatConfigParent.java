@@ -15,6 +15,7 @@ public class ChatConfigParent extends AbstractConfigurationParentPersistenceEdit
 		addEdition(ChatConfigEditionFactory.commonAdd());
 		addEdition(ChatConfigEditionFactory.synchronizedChatConfig());
 		addEdition(ChatConfigEditionFactory.commonRemove());
+		addEdition(ChatConfigEditionFactory.commonModify());
 	}
 
 	@Override
