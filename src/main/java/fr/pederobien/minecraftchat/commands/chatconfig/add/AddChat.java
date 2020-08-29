@@ -93,11 +93,14 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
+		case 0:
+			return emptyList();
 		case 1:
 			return Arrays.asList(getMessageFromDictionary(sender, ECommonMessageCode.COMMON_NEW_TAB_COMPLETE));
 		case 2:
 			return filter(getFreeColorNames(false).stream(), args[1]);
+		default:
+			return filter(getPlayers(Arrays.asList(extract(args, 2))).map(player -> player.getName()), args);
 		}
-		return filter(getPlayers(Arrays.asList(extract(args, 2))).map(player -> player.getName()), args);
 	}
 }

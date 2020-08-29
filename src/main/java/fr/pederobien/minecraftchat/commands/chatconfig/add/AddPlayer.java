@@ -73,8 +73,13 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if (args.length == 1)
+		switch (args.length) {
+		case 0:
+			return emptyList();
+		case 1:
 			return filter(get().getChats().stream().map(chat -> chat.getName()), args[0]);
-		return filter(getPlayers(Arrays.asList(extract(args, 1))).map(player -> player.getName()), args[args.length - 1]);
+		default:
+			return filter(getPlayers(Arrays.asList(extract(args, 1))).map(player -> player.getName()), args[args.length - 1]);
+		}
 	}
 }
