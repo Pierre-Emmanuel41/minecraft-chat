@@ -7,7 +7,7 @@ import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 public class CommonRemove<T extends IChatConfiguration> extends AbstractChatEdition<T> {
 
 	protected CommonRemove() {
-		super(EChatConfigLabel.REMOVE, EChatConfigRemoveMessageCode.REMOVE__EXPLANATION);
+		super(EChatConfigLabel.REMOVE, EChatConfigRemoveMessageCode.CHAT_REMOVE__EXPLANATION);
 		addEdition(RemoveFactory.removeChat());
 		addEdition(RemoveFactory.removePlayer());
 	}

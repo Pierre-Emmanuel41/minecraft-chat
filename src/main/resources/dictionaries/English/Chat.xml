@@ -108,63 +108,63 @@
 			<value>The chat configuration %s has been loaded</value>
 		</message>
 		<message>
-			<code>ADD__EXPLANATION</code>
+			<code>CHAT_ADD__EXPLANATION</code>
 			<value>To add a chat to this configuration or a player to a chat</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__EXPLANATION</code>
+			<code>CHAT_ADD_CHAT__EXPLANATION</code>
 			<value>To add a chat to this configuration</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__CHAT_NAME_IS_MISSING</code>
+			<code>CHAT_ADD_CHAT__CHAT_NAME_IS_MISSING</code>
 			<value>Cannot add a chat to configuration %s, the name is missing</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__COLOR_NAME_IS_MISSING</code>
+			<code>CHAT_ADD_CHAT__COLOR_NAME_IS_MISSING</code>
 			<value>Cannot add chat "%s" to configuration %s, the color is missing</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__COLOR_DOES_NOT_EXIST</code>
+			<code>CHAT_ADD_CHAT__COLOR_DOES_NOT_EXIST</code>
 			<value>Cannot add chat "%s" to configuration %s, "%s" is not a color</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__CHAT_NAME_FORBIDDEN</code>
+			<code>CHAT_ADD_CHAT__CHAT_NAME_FORBIDDEN</code>
 			<value>Cannot add chat %s to configuration %s, this name is forbidden for a chat</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__CHAT_NAME_ALREADY_USED</code>
+			<code>CHAT_ADD_CHAT__CHAT_NAME_ALREADY_USED</code>
 			<value>Cannot add chat %s to configuration %s, this chat already exists</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__COLOR_ALREADY_USED</code>
+			<code>CHAT_ADD_CHAT__COLOR_ALREADY_USED</code>
 			<value>Cannot add chat %s to configuration %s, the color %s is already used by chat %s</value>
 		</message>
 		<message>
-			<code>ADD_CHAT__CHAT_ADDED</code>
+			<code>CHAT_ADD_CHAT__CHAT_ADDED</code>
 			<value>Chat %s has been added to configuration %s</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__CHAT_NAME_IS_MISSING</code>
+			<code>CHAT_ADD_PLAYER__CHAT_NAME_IS_MISSING</code>
 			<value>Cannot add players to a chat, the chat's name is missing</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__CHAT_DOES_NOT_EXIST</code>
+			<code>CHAT_ADD_PLAYER__CHAT_DOES_NOT_EXIST</code>
 			<value>Cannot add players to chat "%s", it does not exist in configuration %s</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT</code>
+			<code>CHAT_ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT</code>
 			<value>Cannot add player %s to chat %s, this player is already registered in this chat</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__ANY_PLAYER_ADDED</code>
+			<code>CHAT_ADD_PLAYER__ANY_PLAYER_ADDED</code>
 			<value>Any player has been added</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__ONE_PLAYER_ADDED</code>
+			<code>CHAT_ADD_PLAYER__ONE_PLAYER_ADDED</code>
 			<value>The player %s has been added to chat %s</value>
 		</message>
 		<message>
-			<code>ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
+			<code>CHAT_ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
 			<value>Players %s have been added to chat %s</value>
 		</message>
 		<message>
@@ -184,55 +184,55 @@
 			<value>The chat configuration %s is not synchronized</value>
 		</message>
 		<message>
-			<code>REMOVE__EXPLANATION</code>
+			<code>CHAT_REMOVE__EXPLANATION</code>
 			<value>To remove a chat from the configuration or a player from a chat</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__EXPLANATION</code>
+			<code>CHAT_REMOVE_CHAT__EXPLANATION</code>
 			<value>To remove a chat from a chat configuration</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__ALL_CHATS_REMOVED</code>
+			<code>CHAT_REMOVE_CHAT__ALL_CHATS_REMOVED</code>
 			<value>All chats from configuration %s have been removed : %s</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__CHAT_DOES_NOT_EXIST</code>
+			<code>CHAT_REMOVE_CHAT__CHAT_DOES_NOT_EXIST</code>
 			<value>Cannot remove chat "%s" from configuration %s, this chat does not exist</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__ANY_CHAT_REMOVED</code>
+			<code>CHAT_REMOVE_CHAT__ANY_CHAT_REMOVED</code>
 			<value>Any chat has been removed from configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__ONE_CHAT_REMOVED</code>
+			<code>CHAT_REMOVE_CHAT__ONE_CHAT_REMOVED</code>
 			<value>Le chat %s a été supprimé de la configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_CHAT__SEVERAL_CHATS_REMOVED</code>
+			<code>CHAT_REMOVE_CHAT__SEVERAL_CHATS_REMOVED</code>
 			<value>Chats %s have been removed from configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__EXPLANATION</code>
+			<code>CHAT_REMOVE_PLAYER__EXPLANATION</code>
 			<value>To remove players from a chat</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ALL_PLAYERS_REMOVED_FROM_CHATS</code>
+			<code>CHAT_REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
 			<value>All players have been removed from their chats</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__PLAYER_NOT_REGISTERED_IN_CHATS</code>
+			<code>CHAT_REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
 			<value>Cannot remove player "%s" from a chat, he is not registered for configuration %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ANY_PLAYER_REMOVED_FROM_CHAT</code>
+			<code>CHAT_REMOVE_PLAYER__ANY_PLAYER_REMOVED</code>
 			<value>Any player has been removed</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__ONE_PLAYER_REMOVED_FROM_CHAT</code>
+			<code>CHAT_REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
 			<value>Player %s has been removed from chat %s</value>
 		</message>
 		<message>
-			<code>REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED_FROM_CHATS</code>
+			<code>CHAT_REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
 			<value>Players %s have been removed from chats %s</value>
 		</message>
 		<message>

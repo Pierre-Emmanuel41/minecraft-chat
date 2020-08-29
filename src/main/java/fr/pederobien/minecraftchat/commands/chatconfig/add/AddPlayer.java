@@ -19,7 +19,7 @@ import fr.pederobien.minecraftgameplateform.exceptions.PlayerNotFoundException;
 public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition<T> {
 
 	protected AddPlayer() {
-		super(EChatConfigAddLabel.PLAYER, EChatConfigAddMessageCode.ADD_PLAYER__EXPLANATION);
+		super(EChatConfigAddLabel.PLAYER, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__EXPLANATION);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 		try {
 			name = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__CHAT_NAME_IS_MISSING);
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__CHAT_NAME_IS_MISSING);
 			return false;
 		}
 
@@ -42,7 +42,7 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 			playerNamesConcatenated = concat(getPlayerNames(players));
 			Optional<IChat> optChat = get().getChat(name);
 			if (!optChat.isPresent()) {
-				sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__CHAT_DOES_NOT_EXIST, name, get().getName());
+				sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__CHAT_DOES_NOT_EXIST, name, get().getName());
 				return false;
 			}
 			chat = optChat.get();
@@ -52,19 +52,20 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 			sendMessageToSender(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName());
 			return false;
 		} catch (PlayerAlreadyRegisteredInChatException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT, e.getPlayer().getName(), e.getChat().getColoredName());
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT, e.getPlayer().getName(),
+					e.getChat().getColoredName());
 			return false;
 		}
 
 		switch (playerNames.length) {
 		case 0:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__ANY_PLAYER_ADDED);
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ANY_PLAYER_ADDED);
 			break;
 		case 1:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__ONE_PLAYER_ADDED, playerNamesConcatenated, chat.getColoredName());
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ONE_PLAYER_ADDED, playerNamesConcatenated, chat.getColoredName());
 			break;
 		default:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNamesConcatenated, chat.getColoredName());
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNamesConcatenated, chat.getColoredName());
 			break;
 		}
 		return true;

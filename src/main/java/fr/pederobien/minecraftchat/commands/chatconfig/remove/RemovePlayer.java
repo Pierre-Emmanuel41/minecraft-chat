@@ -19,7 +19,7 @@ import fr.pederobien.minecraftgameplateform.interfaces.helpers.IGameConfiguratio
 public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdition<T> {
 
 	protected RemovePlayer() {
-		super(EchatConfigRemoveLabel.PLAYER, EChatConfigRemoveMessageCode.REMOVE_PLAYER__EXPLANATION);
+		super(EchatConfigRemoveLabel.PLAYER, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__EXPLANATION);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 		List<Player> players = new ArrayList<Player>();
 
 		if (args[0].equals(IGameConfigurationHelper.ALL)) {
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.REMOVE_PLAYER__ALL_PLAYERS_REMOVED_FROM_CHATS);
+			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ALL_PLAYERS_REMOVED);
 			return true;
 		}
 
@@ -46,7 +46,7 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 					}
 				}
 				if (!chatFound) {
-					sendMessageToSender(sender, EChatConfigRemoveMessageCode.REMOVE_PLAYER__PLAYER_NOT_REGISTERED_IN_CHATS, player.getName(), get().getName());
+					sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__PLAYER_NOT_REGISTERED, player.getName(), get().getName());
 					return false;
 				}
 				chats.get(chats.size() - 1).remove(player);
@@ -58,14 +58,13 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 
 		switch (players.size()) {
 		case 0:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.REMOVE_PLAYER__ANY_PLAYER_REMOVED_FROM_CHAT);
+			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ANY_PLAYER_REMOVED);
 			break;
 		case 1:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.REMOVE_PLAYER__ONE_PLAYER_REMOVED_FROM_CHAT, playerNamesConcatenated,
-					concat(getChatNames(chats, true)));
+			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNamesConcatenated, concat(getChatNames(chats, true)));
 			break;
 		default:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED_FROM_CHATS, playerNamesConcatenated,
+			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNamesConcatenated,
 					concat(getChatNames(chats, true)));
 			break;
 		}
