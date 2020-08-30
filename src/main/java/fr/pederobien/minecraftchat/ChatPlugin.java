@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import fr.pederobien.dictionary.interfaces.IDictionaryParser;
 import fr.pederobien.minecraftchat.commands.chat.ChatCommand;
 import fr.pederobien.minecraftchat.commands.chatconfig.ChatConfigCommand;
+import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
 
@@ -21,17 +22,25 @@ public class ChatPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
-		new ChatCommand(this, new ChatConfigCommand(this));
+		ChatConfigCommand command = new ChatConfigCommand(this);
+		new ChatCommand(this, command);
 
 		getServer().getPluginManager().registerEvents(new Listener() {
 			@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 			public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-				if (Plateform.getGameConfigurationContext().getGameConfiguration() == null)
-					return;
+				if (command.getParent().get() != null) {
+					for (IChat chat : command.getParent().get().getChats())
+						if (chat.getPlayers().contains(event.getPlayer())) {
+							event.setFormat("<" + chat.getColor().getInColor("%s") + "> %2$s");
+							return;
+						}
+				}
 
-				for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
-					if (team.getPlayers().contains(event.getPlayer()))
-						event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
+				if (Plateform.getGameConfigurationContext() != null) {
+					for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
+						if (team.getPlayers().contains(event.getPlayer()))
+							event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
+				}
 			}
 		}, this);
 		registerDictionaries();
