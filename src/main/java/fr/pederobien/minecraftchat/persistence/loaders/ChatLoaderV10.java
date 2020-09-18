@@ -7,7 +7,7 @@ import org.w3c.dom.NodeList;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftchat.persistence.ChatXmlTag;
-import fr.pederobien.minecraftgameplateform.utils.EColor;
+import fr.pederobien.minecraftmanagers.EColor;
 import fr.pederobien.persistence.interfaces.xml.IXmlPersistenceLoader;
 
 public class ChatLoaderV10 extends AbstractChatLoader {

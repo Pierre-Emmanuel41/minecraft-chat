@@ -10,7 +10,7 @@ import fr.pederobien.minecraftchat.exception.ChatWithSameNameAlreadyExistsExcept
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
 import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsGameConfiguration;
 import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsGameConfigurationContext;
-import fr.pederobien.minecraftgameplateform.utils.EColor;
+import fr.pederobien.minecraftmanagers.EColor;
 
 public interface IChatConfiguration extends INominable, IObsGameConfiguration, IObsGameConfigurationContext {
 

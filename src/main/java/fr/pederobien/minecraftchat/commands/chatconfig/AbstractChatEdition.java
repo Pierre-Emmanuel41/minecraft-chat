@@ -18,7 +18,7 @@ import fr.pederobien.minecraftgameplateform.exceptions.PlayerNotFoundException;
 import fr.pederobien.minecraftgameplateform.impl.editions.AbstractLabelEdition;
 import fr.pederobien.minecraftgameplateform.interfaces.element.IGameConfiguration;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ILabel;
-import fr.pederobien.minecraftgameplateform.utils.EColor;
+import fr.pederobien.minecraftmanagers.EColor;
 import fr.pederobien.minecraftmanagers.PlayerManager;
 
 public class AbstractChatEdition<T extends IChatConfiguration> extends AbstractLabelEdition<T> {

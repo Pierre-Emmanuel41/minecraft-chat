@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import fr.pederobien.minecraftchat.commands.chatconfig.AbstractChatEdition;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
-import fr.pederobien.minecraftgameplateform.utils.EColor;
+import fr.pederobien.minecraftmanagers.EColor;
 
 public class ModifyColor<T extends IChatConfiguration> extends AbstractChatEdition<T> {
 
