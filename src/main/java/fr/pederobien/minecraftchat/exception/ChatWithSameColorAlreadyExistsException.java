@@ -16,7 +16,7 @@ public class ChatWithSameColorAlreadyExistsException extends ChatAlreadyExistsEx
 	protected String getInternalMessage() {
 		StringJoiner joiner = new StringJoiner(" ");
 		joiner.add("The chat \"" + getAlreadyExistingChat().getName() + "\"");
-		joiner.add("already has the color \"" + getAlreadyExistingChat().getColor().getName() + "\"");
+		joiner.add("already has the color \"" + getAlreadyExistingChat().getColor() + "\"");
 		joiner.add("in configuration " + getConfiguration().getName());
 		return joiner.toString();
 	}

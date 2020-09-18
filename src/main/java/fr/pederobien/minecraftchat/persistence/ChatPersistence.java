@@ -61,7 +61,7 @@ public class ChatPersistence extends AbstractMinecraftPersistence<IChatConfigura
 			for (IChat c : get().getChats()) {
 				Element chat = createElement(doc, ChatXmlTag.CHAT);
 				setAttribute(chat, ChatXmlTag.NAME, c.getName());
-				setAttribute(chat, ChatXmlTag.COLOR, c.getColor().getName());
+				setAttribute(chat, ChatXmlTag.COLOR, c.getColor());
 				Element players = createElement(doc, ChatXmlTag.PLAYERS);
 				for (Player p : c.getPlayers()) {
 					Element player = createElement(doc, ChatXmlTag.PLAYER);

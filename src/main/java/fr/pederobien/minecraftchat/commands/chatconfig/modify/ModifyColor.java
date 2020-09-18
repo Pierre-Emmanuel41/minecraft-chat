@@ -51,7 +51,7 @@ public class ModifyColor<T extends IChatConfiguration> extends AbstractChatEditi
 
 		for (IChat c : get().getChats())
 			if (c.getColor().equals(color)) {
-				sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_ALREADY_USED, chatName, c.getColor().getName(), c.getColoredName());
+				sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_ALREADY_USED, chatName, c.getColor(), c.getColoredName());
 				return false;
 			}
 

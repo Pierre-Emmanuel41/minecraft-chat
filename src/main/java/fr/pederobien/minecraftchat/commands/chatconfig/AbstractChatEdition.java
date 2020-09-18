@@ -87,7 +87,7 @@ public class AbstractChatEdition<T extends IChatConfiguration> extends AbstractL
 		for (IChat chat : get().getChats())
 			alreadyUsedColors.add(chat.getColor());
 		return Arrays.asList(EColor.values()).stream().filter(color -> !alreadyUsedColors.contains(color))
-				.map(color -> colored ? color.getColoredColorName() : color.getName()).collect(Collectors.toList());
+				.map(color -> colored ? color.getColoredColorName() : color.toString()).collect(Collectors.toList());
 	}
 
 	/**

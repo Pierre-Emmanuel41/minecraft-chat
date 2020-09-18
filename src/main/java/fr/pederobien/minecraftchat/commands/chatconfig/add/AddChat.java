@@ -58,7 +58,7 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 			return false;
 		} catch (ChatWithSameColorAlreadyExistsException e) {
 			IChat alreadyExistingChat = e.getAlreadyExistingChat();
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_ALREADY_USED, chatName, get().getName(), alreadyExistingChat.getColor().getName(),
+			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_ALREADY_USED, chatName, get().getName(), alreadyExistingChat.getColor(),
 					alreadyExistingChat.getColoredName());
 			return false;
 		}
