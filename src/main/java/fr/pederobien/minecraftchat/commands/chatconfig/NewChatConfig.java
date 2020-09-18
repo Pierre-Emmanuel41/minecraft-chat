@@ -17,12 +17,12 @@ public class NewChatConfig extends CommonNew<IChatConfiguration> {
 
 	@Override
 	protected void onNameAlreadyTaken(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.NEW_CHAT_CONFIG__NAME_ALREADY_TAKEN, name);
+		sendSynchro(sender, EChatMessageCode.NEW_CHAT_CONFIG__NAME_ALREADY_TAKEN, name);
 	}
 
 	@Override
 	protected void onNameIsMissing(CommandSender sender) {
-		sendMessageToSender(sender, EChatMessageCode.NEW_CHAT_CONFIG__NAME_IS_MISSING);
+		sendSynchro(sender, EChatMessageCode.NEW_CHAT_CONFIG__NAME_IS_MISSING);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class NewChatConfig extends CommonNew<IChatConfiguration> {
 
 	@Override
 	protected void onCreated(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.NEW_CHAT_CONFIG__CONFIGURATION_CREATED, name);
+		sendSynchro(sender, EChatMessageCode.NEW_CHAT_CONFIG__CONFIGURATION_CREATED, name);
 		setAllAvailable();
 	}
 

@@ -14,16 +14,16 @@ public class ListChatConfig extends CommonList<IChatConfiguration> {
 
 	@Override
 	protected void onNoElement(CommandSender sender) {
-		sendMessageToSender(sender, EChatMessageCode.LIST_CHAT_CONFIG__NO_REGISTERED_CONFIGURATION);
+		sendSynchro(sender, EChatMessageCode.LIST_CHAT_CONFIG__NO_REGISTERED_CONFIGURATION);
 	}
 
 	@Override
 	protected void onOneElement(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.LIST_CHAT_CONFIG__ONE_REGISTERED_CONFIGURATION, name);
+		sendSynchro(sender, EChatMessageCode.LIST_CHAT_CONFIG__ONE_REGISTERED_CONFIGURATION, name);
 	}
 
 	@Override
 	protected void onSeveralElement(CommandSender sender, String names) {
-		sendMessageToSender(sender, EChatMessageCode.LIST_CHAT_CONFIG__SEVERAL_ELEMENTS, names);
+		sendSynchro(sender, EChatMessageCode.LIST_CHAT_CONFIG__SEVERAL_ELEMENTS, names);
 	}
 }

@@ -14,16 +14,16 @@ public class DeleteChatConfig extends CommonDelete<IChatConfiguration> {
 
 	@Override
 	protected void onDidNotDelete(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.DELETE_CHAT_CONFIG__DID_NOT_DELETE, name);
+		sendSynchro(sender, EChatMessageCode.DELETE_CHAT_CONFIG__DID_NOT_DELETE, name);
 	}
 
 	@Override
 	protected void onDeleted(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.DELETE_CHAT_CONFIG__CONFIGURATION_DELETED, name);
+		sendSynchro(sender, EChatMessageCode.DELETE_CHAT_CONFIG__CONFIGURATION_DELETED, name);
 	}
 
 	@Override
 	protected void onNameIsMissing(CommandSender sender) {
-		sendMessageToSender(sender, EChatMessageCode.DELETE_CHAT_CONFIG__NAME_IS_MISSING);
+		sendSynchro(sender, EChatMessageCode.DELETE_CHAT_CONFIG__NAME_IS_MISSING);
 	}
 }

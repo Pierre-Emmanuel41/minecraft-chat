@@ -24,20 +24,20 @@ public class ModifyColor<T extends IChatConfiguration> extends AbstractChatEditi
 		try {
 			chatName = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__CHAT_NAME_IS_MISSING);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__CHAT_NAME_IS_MISSING);
 			return false;
 		}
 
 		try {
 			colorName = args[1];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_NAME_IS_MISSING, chatName);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_NAME_IS_MISSING, chatName);
 			return false;
 		}
 
 		Optional<IChat> optChat = get().getChat(chatName);
 		if (!optChat.isPresent()) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST, chatName);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__CHAT_DOES_NOT_EXIST, chatName);
 			return false;
 		}
 
@@ -45,18 +45,18 @@ public class ModifyColor<T extends IChatConfiguration> extends AbstractChatEditi
 
 		EColor color = EColor.getByColorName(colorName);
 		if (color == null) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST, chatName, colorName);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_DOES_NOT_EXIST, chatName, colorName);
 			return false;
 		}
 
 		for (IChat c : get().getChats())
 			if (c.getColor().equals(color)) {
-				sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_ALREADY_USED, chatName, c.getColor(), c.getColoredName());
+				sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_ALREADY_USED, chatName, c.getColor(), c.getColoredName());
 				return false;
 			}
 
 		chat.setColor(color);
-		sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_UPDATED, chat.getColoredName(), get().getName());
+		sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_COLOR__COLOR_UPDATED, chat.getColoredName(), get().getName());
 		return true;
 	}
 

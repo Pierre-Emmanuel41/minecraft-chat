@@ -23,16 +23,16 @@ public class SynchronizedChatConfig<T extends IChatConfiguration> extends Abstra
 			String value = args[0];
 			if (value.equals("true")) {
 				get().setIsSynchronized(true);
-				sendMessageToSender(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__TRUE, get().getName());
+				sendSynchro(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__TRUE, get().getName());
 			} else if (value.equals("false")) {
 				get().setIsSynchronized(false);
-				sendMessageToSender(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__FALSE, get().getName());
+				sendSynchro(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__FALSE, get().getName());
 			} else {
-				sendMessageToSender(sender, ECommonMessageCode.COMMON_BAD_BOOLEAN_FORMAT);
+				sendSynchro(sender, ECommonMessageCode.COMMON_BAD_BOOLEAN_FORMAT);
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__VALUE_IS_MISSING);
+			sendSynchro(sender, EChatMessageCode.IS_CHAT_CONFIG_SYNCHRONIZED__VALUE_IS_MISSING);
 			return false;
 		}
 		return true;

@@ -31,7 +31,7 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 		try {
 			chatName = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_IS_MISSING, get().getName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_IS_MISSING, get().getName());
 			return false;
 		}
 
@@ -39,26 +39,26 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 		try {
 			chatColor = getColor(args[1]);
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_NAME_IS_MISSING, chatName, get().getName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_NAME_IS_MISSING, chatName, get().getName());
 			return false;
 		} catch (ColorNotFoundException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_DOES_NOT_EXIST, chatName, get().getName(), e.getColorName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_DOES_NOT_EXIST, chatName, get().getName(), e.getColorName());
 			return false;
 		}
 
 		IChat chat = null;
 		try {
 			chat = get().register(chatName, chatColor);
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_ADDED, chat.getColoredName(), get().getName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_ADDED, chat.getColoredName(), get().getName());
 		} catch (ChatNameForbiddenException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_FORBIDDEN, e.getForbiddenName(), get().getName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_FORBIDDEN, e.getForbiddenName(), get().getName());
 			return false;
 		} catch (ChatWithSameNameAlreadyExistsException e) {
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_ALREADY_USED, e.getAlreadyExistingChat().getColoredName(), get().getName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__CHAT_NAME_ALREADY_USED, e.getAlreadyExistingChat().getColoredName(), get().getName());
 			return false;
 		} catch (ChatWithSameColorAlreadyExistsException e) {
 			IChat alreadyExistingChat = e.getAlreadyExistingChat();
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_ALREADY_USED, chatName, get().getName(), alreadyExistingChat.getColor(),
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_CHAT__COLOR_ALREADY_USED, chatName, get().getName(), alreadyExistingChat.getColor(),
 					alreadyExistingChat.getColoredName());
 			return false;
 		}
@@ -72,19 +72,19 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 			for (Player player : players)
 				chat.add(player);
 		} catch (PlayerNotFoundException e) {
-			sendMessageToSender(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName());
+			sendSynchro(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName());
 			return false;
 		}
 
 		switch (playerNames.length) {
 		case 0:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ANY_PLAYER_ADDED);
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ANY_PLAYER_ADDED);
 			break;
 		case 1:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ONE_PLAYER_ADDED, playerNamesConcatenated, chat.getColoredName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__ONE_PLAYER_ADDED, playerNamesConcatenated, chat.getColoredName());
 			break;
 		default:
-			sendMessageToSender(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNamesConcatenated, chat.getColoredName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__SEVERAL_PLAYERS_ADDED, playerNamesConcatenated, chat.getColoredName());
 			break;
 		}
 		return true;
@@ -96,7 +96,7 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 		case 0:
 			return emptyList();
 		case 1:
-			return Arrays.asList(getMessageFromDictionary(sender, ECommonMessageCode.COMMON_NEW_TAB_COMPLETE));
+			return Arrays.asList(getMessage(sender, ECommonMessageCode.COMMON_NEW_TAB_COMPLETE));
 		case 2:
 			return filter(getFreeColorNames(false).stream(), args[1]);
 		default:

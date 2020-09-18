@@ -27,7 +27,7 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 		List<Player> players = new ArrayList<Player>();
 
 		if (args[0].equals(IGameConfigurationHelper.ALL)) {
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ALL_PLAYERS_REMOVED);
+			sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ALL_PLAYERS_REMOVED);
 			return true;
 		}
 
@@ -46,25 +46,25 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 					}
 				}
 				if (!chatFound) {
-					sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__PLAYER_NOT_REGISTERED, player.getName(), get().getName());
+					sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__PLAYER_NOT_REGISTERED, player.getName(), get().getName());
 					return false;
 				}
 				chats.get(chats.size() - 1).remove(player);
 			}
 		} catch (PlayerNotFoundException e) {
-			sendMessageToSender(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName(), get().getName());
+			sendSynchro(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName(), get().getName());
 			return false;
 		}
 
 		switch (players.size()) {
 		case 0:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ANY_PLAYER_REMOVED);
+			sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ANY_PLAYER_REMOVED);
 			break;
 		case 1:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNamesConcatenated, concat(getChatNames(chats, true)));
+			sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ONE_PLAYER_REMOVED, playerNamesConcatenated, concat(getChatNames(chats, true)));
 			break;
 		default:
-			sendMessageToSender(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNamesConcatenated,
+			sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED, playerNamesConcatenated,
 					concat(getChatNames(chats, true)));
 			break;
 		}

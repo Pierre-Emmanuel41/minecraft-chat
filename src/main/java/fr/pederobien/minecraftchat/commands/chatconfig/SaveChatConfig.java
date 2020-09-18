@@ -14,6 +14,6 @@ public class SaveChatConfig extends CommonSave<IChatConfiguration> {
 
 	@Override
 	protected void onSave(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.SAVE_CHAT_CONFIG__CONFIGURATION_SAVED, name);
+		sendSynchro(sender, EChatMessageCode.SAVE_CHAT_CONFIG__CONFIGURATION_SAVED, name);
 	}
 }

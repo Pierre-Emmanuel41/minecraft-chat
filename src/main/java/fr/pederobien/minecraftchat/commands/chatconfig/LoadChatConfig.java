@@ -16,13 +16,13 @@ public class LoadChatConfig extends CommonLoad<IChatConfiguration> {
 
 	@Override
 	protected void onStyleLoaded(CommandSender sender, String name) {
-		sendMessageToSender(sender, EChatMessageCode.LOAD_CHAT_CONFIG__CONFIGURATION_LOADED, name);
+		sendSynchro(sender, EChatMessageCode.LOAD_CHAT_CONFIG__CONFIGURATION_LOADED, name);
 		setAllAvailable();
 	}
 
 	@Override
 	protected void onNameIsMissing(CommandSender sender) {
-		sendMessageToSender(sender, EChatMessageCode.LOAD_CHAT_CONFIG__NAME_IS_MISSING);
+		sendSynchro(sender, EChatMessageCode.LOAD_CHAT_CONFIG__NAME_IS_MISSING);
 	}
 
 	private void setAllAvailable() {

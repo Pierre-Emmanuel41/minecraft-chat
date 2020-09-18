@@ -25,36 +25,36 @@ public class ModifyName<T extends IChatConfiguration> extends AbstractChatEditio
 		try {
 			oldName = args[0];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__OLD_NAME_IS_MISSING);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__OLD_NAME_IS_MISSING);
 			return false;
 		}
 		String newName = "";
 		try {
 			newName = args[1];
 		} catch (IndexOutOfBoundsException e) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__NEW_NAME_IS_MISSING, oldName);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__NEW_NAME_IS_MISSING, oldName);
 			return false;
 		}
 
 		Optional<IChat> optChat = get().getChat(oldName);
 		if (!optChat.isPresent()) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_DOES_NOT_EXIST, oldName, get().getName());
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_DOES_NOT_EXIST, oldName, get().getName());
 			return false;
 		}
 
 		IChat chat = optChat.get();
 
 		if (newName.equals(IGameConfigurationHelper.ALL)) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_NAME_FORBIDDEN, oldName, IGameConfigurationHelper.ALL);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_NAME_FORBIDDEN, oldName, IGameConfigurationHelper.ALL);
 			return false;
 		}
 
 		if (get().getChat(newName).isPresent()) {
-			sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_NAME_ALREADY_USED, oldName, newName);
+			sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_NAME_ALREADY_USED, oldName, newName);
 			return false;
 		}
 		chat.setName(newName);
-		sendMessageToSender(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_RENAMED, chat.getColor().getInColor(oldName), chat.getColoredName());
+		sendSynchro(sender, EChatConfigModifyMessageCode.CHAT_MODIFY_NAME__CHAT_RENAMED, chat.getColor().getInColor(oldName), chat.getColoredName());
 		return true;
 	}
 
@@ -64,7 +64,7 @@ public class ModifyName<T extends IChatConfiguration> extends AbstractChatEditio
 		case 1:
 			return filter(getChatNames(get().getChats(), false).stream(), args[0]);
 		case 2:
-			return Arrays.asList(getMessageFromDictionary(sender, ECommonMessageCode.COMMON_RENAME_TAB_COMPLETE));
+			return Arrays.asList(getMessage(sender, ECommonMessageCode.COMMON_RENAME_TAB_COMPLETE));
 		default:
 			return emptyList();
 		}
