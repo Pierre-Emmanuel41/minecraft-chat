@@ -1,6 +1,5 @@
 package fr.pederobien.minecraftchat.commands.chatconfig;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -40,8 +39,11 @@ public class SynchronizedChatConfig<T extends IChatConfiguration> extends Abstra
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if (args.length == 1)
-			return filter(Arrays.asList("true", "false").stream(), args);
-		return emptyList();
+		switch (args.length) {
+		case 1:
+			return filter(asList("true", "false").stream(), args);
+		default:
+			return emptyList();
+		}
 	}
 }

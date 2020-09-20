@@ -1,6 +1,5 @@
 package fr.pederobien.minecraftchat.commands.chatconfig.modify;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,9 +61,9 @@ public class ModifyName<T extends IChatConfiguration> extends AbstractChatEditio
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
 		case 1:
-			return filter(getChatNames(get().getChats(), false).stream(), args[0]);
+			return filter(getChatNames(get().getChats(), false).stream(), args);
 		case 2:
-			return Arrays.asList(getMessage(sender, ECommonMessageCode.COMMON_RENAME_TAB_COMPLETE));
+			return asList(getMessage(sender, ECommonMessageCode.COMMON_RENAME_TAB_COMPLETE));
 		default:
 			return emptyList();
 		}

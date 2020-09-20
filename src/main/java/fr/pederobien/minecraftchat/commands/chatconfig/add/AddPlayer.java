@@ -1,7 +1,6 @@
 package fr.pederobien.minecraftchat.commands.chatconfig.add;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,8 +51,7 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 			sendSynchro(sender, ECommonMessageCode.COMMON_PLAYER_DOES_NOT_EXIST, e.getPlayerName());
 			return false;
 		} catch (PlayerAlreadyRegisteredInChatException e) {
-			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT, e.getPlayer().getName(),
-					e.getChat().getColoredName());
+			sendSynchro(sender, EChatConfigAddMessageCode.CHAT_ADD_PLAYER__PLAYER_ALREADY_REGISTERED_IN_CHAT, e.getPlayer().getName(), e.getChat().getColoredName());
 			return false;
 		}
 
@@ -77,9 +75,9 @@ public class AddPlayer<T extends IChatConfiguration> extends AbstractChatEdition
 		case 0:
 			return emptyList();
 		case 1:
-			return filter(get().getChats().stream().map(chat -> chat.getName()), args[0]);
+			return filter(get().getChats().stream().map(chat -> chat.getName()), args);
 		default:
-			return filter(getPlayers(Arrays.asList(extract(args, 1))).map(player -> player.getName()), args[args.length - 1]);
+			return filter(getPlayers(asList(extract(args, 1))).map(player -> player.getName()), args);
 		}
 	}
 }

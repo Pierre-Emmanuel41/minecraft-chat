@@ -1,7 +1,6 @@
 package fr.pederobien.minecraftchat.commands.chatconfig.add;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -96,11 +95,11 @@ public class AddChat<T extends IChatConfiguration> extends AbstractChatEdition<T
 		case 0:
 			return emptyList();
 		case 1:
-			return Arrays.asList(getMessage(sender, ECommonMessageCode.COMMON_NEW_TAB_COMPLETE));
+			return asList(getMessage(sender, ECommonMessageCode.COMMON_NEW_TAB_COMPLETE));
 		case 2:
-			return filter(getFreeColorNames(false).stream(), args[1]);
+			return filter(getFreeColorNames(false).stream(), args);
 		default:
-			return filter(getPlayers(Arrays.asList(extract(args, 2))).map(player -> player.getName()), args);
+			return filter(getPlayers(asList(extract(args, 2))).map(player -> player.getName()), args);
 		}
 	}
 }

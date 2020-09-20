@@ -64,9 +64,9 @@ public class ModifyColor<T extends IChatConfiguration> extends AbstractChatEditi
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		switch (args.length) {
 		case 1:
-			return filter(getChatNames(get().getChats(), false).stream(), args[0]);
+			return filter(getChatNames(get().getChats(), false).stream(), args);
 		case 2:
-			return filter(check(args[0], e -> get().getChat(args[0]).isPresent(), getFreeColorNames(false)).stream(), args[1]);
+			return filter(check(args[0], e -> get().getChat(args[0]).isPresent(), getFreeColorNames(false)).stream(), args);
 		default:
 			return emptyList();
 		}

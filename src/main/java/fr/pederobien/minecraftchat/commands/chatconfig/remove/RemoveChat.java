@@ -1,7 +1,6 @@
 package fr.pederobien.minecraftchat.commands.chatconfig.remove;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -57,14 +56,14 @@ public class RemoveChat<T extends IChatConfiguration> extends AbstractChatEditio
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		Stream<String> teams = getFreeChats(Arrays.asList(args)).map(chat -> chat.getName());
+		Stream<String> teams = getFreeChats(asList(args)).map(chat -> chat.getName());
 
-		// Adding all to delete all registered teams
+		// Adding all to delete all registered chats
 		if (args.length == 1)
-			return filter(Stream.concat(teams, Stream.of(IGameConfigurationHelper.ALL)), args[0]);
+			return filter(Stream.concat(teams, Stream.of(IGameConfigurationHelper.ALL)), args);
 
-		// If the first argument is all -> any team is proposed
-		// Else propose not already mentioned teams
-		return filter(args[0].equals(IGameConfigurationHelper.ALL) ? emptyStream() : teams, args[args.length - 1]);
+		// If the first argument is all -> any chat is proposed
+		// Else propose not already mentioned chats
+		return filter(args[0].equals(IGameConfigurationHelper.ALL) ? emptyStream() : teams, args);
 	}
 }
