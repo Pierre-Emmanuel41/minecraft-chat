@@ -3,6 +3,8 @@ package fr.pederobien.minecraftchat.interfaces;
 import java.util.List;
 import java.util.Optional;
 
+import org.bukkit.entity.Player;
+
 import fr.pederobien.minecraftchat.exception.ChatNameForbiddenException;
 import fr.pederobien.minecraftchat.exception.ChatNotRegisteredException;
 import fr.pederobien.minecraftchat.exception.ChatWithSameColorAlreadyExistsException;
@@ -52,6 +54,15 @@ public interface IChatConfiguration extends INominable, IObsGameConfiguration, I
 	 * @return An optional that contains the chat associated to the given name if registered, an empty optional otherwise.
 	 */
 	Optional<IChat> getChat(String name);
+
+	/**
+	 * Get the list of chat in which the given player is registered.
+	 * 
+	 * @param player The player used to get its chats.
+	 * 
+	 * @return The list of chat in which the given player is registered.
+	 */
+	List<IChat> getChats(Player player);
 
 	/**
 	 * @return The list of registered chats. This list is unmodifiable.

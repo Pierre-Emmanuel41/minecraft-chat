@@ -84,6 +84,15 @@ public class ChatConfiguration extends AbstractNominable implements IChatConfigu
 	}
 
 	@Override
+	public List<IChat> getChats(Player player) {
+		List<IChat> playerChats = new ArrayList<IChat>();
+		for (IChat chat : chats.values())
+			if (chat.getPlayers().contains(player))
+				playerChats.add(chat);
+		return playerChats;
+	}
+
+	@Override
 	public List<IChat> getChats() {
 		return Collections.unmodifiableList(new ArrayList<IChat>(chats.values()));
 	}
