@@ -13,16 +13,27 @@ import fr.pederobien.dictionary.interfaces.IDictionaryParser;
 import fr.pederobien.minecraftchat.commands.chat.ChatCommand;
 import fr.pederobien.minecraftchat.commands.chatconfig.ChatConfigCommand;
 import fr.pederobien.minecraftchat.interfaces.IChat;
+import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
 
 public class ChatPlugin extends JavaPlugin {
 	public static final String NAME = "minecraft-chat";
+	private static IChatConfiguration configuration;
+
+	/**
+	 * @return The current chat configuration for this plugin.
+	 */
+	public static IChatConfiguration getCurrentConfiguration() {
+		return configuration;
+	}
 
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
+
 		ChatConfigCommand command = new ChatConfigCommand(this);
+		configuration = command.getParent().get();
 		new ChatCommand(this, command);
 
 		getServer().getPluginManager().registerEvents(new Listener() {
