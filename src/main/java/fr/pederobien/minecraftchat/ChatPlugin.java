@@ -19,28 +19,27 @@ import fr.pederobien.minecraftgameplateform.utils.Plateform;
 
 public class ChatPlugin extends JavaPlugin {
 	public static final String NAME = "minecraft-chat";
-	private static IChatConfiguration configuration;
+	private static ChatConfigCommand chatConfigCommand;
 
 	/**
 	 * @return The current chat configuration for this plugin.
 	 */
 	public static IChatConfiguration getCurrentConfiguration() {
-		return configuration;
+		return chatConfigCommand.getParent().get();
 	}
 
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
 
-		ChatConfigCommand command = new ChatConfigCommand(this);
-		configuration = command.getParent().get();
-		new ChatCommand(this, command);
+		chatConfigCommand = new ChatConfigCommand(this);
+		new ChatCommand(this, chatConfigCommand);
 
 		getServer().getPluginManager().registerEvents(new Listener() {
 			@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 			public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-				if (command.getParent().get() != null) {
-					for (IChat chat : command.getParent().get().getChats())
+				if (chatConfigCommand.getParent().get() != null) {
+					for (IChat chat : chatConfigCommand.getParent().get().getChats())
 						if (chat.getPlayers().contains(event.getPlayer())) {
 							event.setFormat("<" + chat.getColor().getInColor("%s") + "> %2$s");
 							return;
