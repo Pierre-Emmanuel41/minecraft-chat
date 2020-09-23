@@ -14,6 +14,7 @@ import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatExcept
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
+import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;
 import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
@@ -61,15 +62,16 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
-		if (!isSynchronized()) {
-			Iterator<Player> iterator = quitPlayers.iterator();
-			while (iterator.hasNext()) {
-				Player player = iterator.next();
-				if (player.getName().equals(event.getPlayer().getName())) {
-					remove(player);
-					iterator.remove();
-					add(event.getPlayer());
-				}
+		if (isSynchronized())
+			return;
+
+		Iterator<Player> iterator = quitPlayers.iterator();
+		while (iterator.hasNext()) {
+			Player player = iterator.next();
+			if (player.getName().equals(event.getPlayer().getName())) {
+				remove(player);
+				iterator.remove();
+				add(event.getPlayer());
 			}
 		}
 	}
@@ -127,7 +129,15 @@ public class Chat extends AbstractNominable implements IChat {
 		if (!players.contains(sender))
 			throw new PlayerNotRegisteredInChatException(this, sender);
 		for (Player player : players)
-			MessageManager.sendMessage(player, color.getInColor("[" + (player.equals(sender) ? "me" : sender.getName()) + " -> " + getName() + "] ") + message);
+			MessageManager.sendMessage(player, getPrefix(sender, player) + message);
+	}
+
+	@Override
+	public void sendMessage(Player sender, IMinecraftMessageCode code, Object... args) {
+		if (!players.contains(sender))
+			throw new PlayerNotRegisteredInChatException(this, sender);
+		for (Player player : players)
+			MessageManager.sendMessage(player, getPrefix(sender, player) + getMessage(player, code, args));
 	}
 
 	@Override
@@ -146,5 +156,9 @@ public class Chat extends AbstractNominable implements IChat {
 
 	private boolean isSynchronized() {
 		return configuration.isSynchronized();
+	}
+
+	private String getPrefix(Player sender, Player player) {
+		return color.getInColor("[" + (player.equals(sender) ? "me" : sender.getName()) + " -> " + getName() + "] ");
 	}
 }

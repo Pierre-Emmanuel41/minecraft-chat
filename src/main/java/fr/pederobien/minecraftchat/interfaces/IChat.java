@@ -6,12 +6,14 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftchat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraftchat.exception.PlayerNotRegisteredInChatException;
+import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;
+import fr.pederobien.minecraftgameplateform.interfaces.editions.IPlateformCodeSender;
 import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
 import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsPlayerQuitOrJoinEventListener;
 import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsTeam;
 import fr.pederobien.minecraftmanagers.EColor;
 
-public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventListener {
+public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventListener, IPlateformCodeSender {
 
 	/**
 	 * @return The name of this chat using {@link EColor#getInColor(String)} with parameters String equals {@link #getName()}.
@@ -66,4 +68,15 @@ public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventLi
 	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
 	 */
 	void sendMessage(Player sender, String message);
+
+	/**
+	 * For each player in this team, send the message associated to the given code.
+	 * 
+	 * @param sender The player who send the message to the team.
+	 * @param code   Used as key to get the right message in the right dictionary.
+	 * @param args   Some arguments (optional) used for dynamic messages.
+	 * 
+	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
+	 */
+	void sendMessage(Player sender, IMinecraftMessageCode code, Object... args);
 }
