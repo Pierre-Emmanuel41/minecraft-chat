@@ -5,8 +5,8 @@ import java.nio.file.Path;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.interfaces.IDictionaryParser;
@@ -14,45 +14,38 @@ import fr.pederobien.minecraftchat.commands.chat.ChatCommand;
 import fr.pederobien.minecraftchat.commands.chatconfig.ChatConfigCommand;
 import fr.pederobien.minecraftchat.interfaces.IChat;
 import fr.pederobien.minecraftchat.interfaces.IChatConfiguration;
+import fr.pederobien.minecraftgameplateform.impl.element.EventListener;
+import fr.pederobien.minecraftgameplateform.interfaces.commands.IParentCommand;
 import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
 import fr.pederobien.minecraftgameplateform.utils.Plateform;
 
 public class ChatPlugin extends JavaPlugin {
-	public static final String NAME = "minecraft-chat";
-	private static ChatConfigCommand chatConfigCommand;
+	private static Plugin plugin;
+	private static IParentCommand<IChatConfiguration> chatConfigCommand;
+
+	/**
+	 * @return The plugin associated to this chat plugin.
+	 */
+	public static Plugin get() {
+		return plugin;
+	}
 
 	/**
 	 * @return The current chat configuration for this plugin.
 	 */
-	public static IChatConfiguration getCurrentConfiguration() {
+	public static IChatConfiguration getCurrentChatConfiguration() {
 		return chatConfigCommand.getParent().get();
 	}
 
 	@Override
 	public void onEnable() {
 		Plateform.getPluginHelper().register(this);
+		plugin = this;
 
 		chatConfigCommand = new ChatConfigCommand(this);
-		new ChatCommand(this, chatConfigCommand);
+		new ChatCommand(this, (ChatConfigCommand) chatConfigCommand);
 
-		getServer().getPluginManager().registerEvents(new Listener() {
-			@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-			public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-				if (chatConfigCommand.getParent().get() != null) {
-					for (IChat chat : chatConfigCommand.getParent().get().getChats())
-						if (chat.getPlayers().contains(event.getPlayer())) {
-							event.setFormat("<" + chat.getColor().getInColor("%s") + "> %2$s");
-							return;
-						}
-				}
-
-				if (Plateform.getGameConfigurationContext() != null) {
-					for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
-						if (team.getPlayers().contains(event.getPlayer()))
-							event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
-				}
-			}
-		}, this);
+		new PlayerChatEventListener().register(this);
 		registerDictionaries();
 	}
 
@@ -70,7 +63,7 @@ public class ChatPlugin extends JavaPlugin {
 	}
 
 	private void registerDictionary(String parent, String... dictionaryNames) {
-		Path jarPath = Plateform.ROOT.getParent().resolve(NAME.concat(".jar"));
+		Path jarPath = Plateform.ROOT.getParent().resolve(getName().concat(".jar"));
 		String dictionariesFolder = "resources/dictionaries/".concat(parent).concat("/");
 		for (String name : dictionaryNames)
 			registerDictionary(Plateform.getDefaultDictionaryParser(dictionariesFolder.concat(name)), jarPath);
@@ -81,6 +74,26 @@ public class ChatPlugin extends JavaPlugin {
 			Plateform.getNotificationCenter().getDictionaryContext().register(parser, jarPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private class PlayerChatEventListener extends EventListener {
+
+		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+		public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+			if (chatConfigCommand.getParent().get() != null) {
+				for (IChat chat : chatConfigCommand.getParent().get().getChats())
+					if (chat.getPlayers().contains(event.getPlayer())) {
+						event.setFormat("<" + chat.getColor().getInColor("%s") + "> %2$s");
+						return;
+					}
+			}
+
+			if (Plateform.getGameConfigurationContext() != null) {
+				for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
+					if (team.getPlayers().contains(event.getPlayer()))
+						event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
+			}
 		}
 	}
 }
