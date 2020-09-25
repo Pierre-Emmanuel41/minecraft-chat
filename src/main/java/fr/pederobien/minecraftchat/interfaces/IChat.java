@@ -49,6 +49,11 @@ public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventLi
 	List<Player> getPlayers();
 
 	/**
+	 * Remove all registered players.
+	 */
+	void clear();
+
+	/**
 	 * @return The color of this chat.
 	 */
 	EColor getColor();

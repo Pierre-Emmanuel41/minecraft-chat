@@ -114,6 +114,11 @@ public class Chat extends AbstractNominable implements IChat {
 	}
 
 	@Override
+	public void clear() {
+		players.clear();
+	}
+
+	@Override
 	public EColor getColor() {
 		return color;
 	}

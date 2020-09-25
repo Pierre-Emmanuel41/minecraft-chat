@@ -27,7 +27,7 @@ public class RemovePlayer<T extends IChatConfiguration> extends AbstractChatEdit
 
 		if (args[0].equals(IGameConfigurationHelper.ALL)) {
 			for (IChat chat : get().getChats())
-				chat.getPlayers().clear();
+				chat.clear();
 			sendSynchro(sender, EChatConfigRemoveMessageCode.CHAT_REMOVE_PLAYER__ALL_PLAYERS_REMOVED);
 			return true;
 		}
