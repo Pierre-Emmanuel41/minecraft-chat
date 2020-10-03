@@ -49,17 +49,13 @@ public class ChatPlugin extends JavaPlugin {
 		registerDictionaries();
 	}
 
-	@Override
-	public void onDisable() {
-		super.onDisable();
-	}
-
 	private void registerDictionaries() {
+		String[] dictionaries = new String[] { "Chat.xml" };
 		// Registering French dictionaries
-		registerDictionary("French", "Chat.xml");
+		registerDictionary("French", dictionaries);
 
 		// Registering English dictionaries
-		registerDictionary("English", "Chat.xml");
+		registerDictionary("English", dictionaries);
 	}
 
 	private void registerDictionary(String parent, String... dictionaryNames) {
