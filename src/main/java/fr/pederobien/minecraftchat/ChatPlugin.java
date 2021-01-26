@@ -85,7 +85,7 @@ public class ChatPlugin extends JavaPlugin {
 					}
 			}
 
-			if (Plateform.getGameConfigurationContext() != null) {
+			if (Plateform.getGameConfigurationContext().getGameConfiguration() != null) {
 				for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
 					if (team.getPlayers().contains(event.getPlayer()))
 						event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
