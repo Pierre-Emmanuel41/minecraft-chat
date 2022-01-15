@@ -9,17 +9,12 @@ public class PlayerNotRegisteredInChatException extends ChatException {
 	private Player player;
 
 	public PlayerNotRegisteredInChatException(IChat chat, Player player) {
-		super(chat);
+		super(String.format("The player %s is not registered in chat %s", player.getName(), chat.getName()), chat);
 		this.player = player;
 	}
 
-	@Override
-	protected String getInternalMessage() {
-		return "The player " + getPlayer() + " is not registered in chat " + getChat().getName();
-	}
-
 	/**
-	 * @return The player trying to send a message in a chat in which it is not registered.
+	 * @return The sender that is not registered in the chat involved in this event.
 	 */
 	public Player getPlayer() {
 		return player;

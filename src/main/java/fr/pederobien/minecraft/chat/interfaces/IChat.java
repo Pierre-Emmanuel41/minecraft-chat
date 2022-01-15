@@ -1,19 +1,14 @@
 package fr.pederobien.minecraft.chat.interfaces;
 
-import java.util.List;
+import org.bukkit.command.CommandSender;
 
-import org.bukkit.entity.Player;
-
-import fr.pederobien.minecraft.chat.exception.PlayerAlreadyRegisteredInChatException;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
-import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;
-import fr.pederobien.minecraftgameplateform.interfaces.editions.IPlateformCodeSender;
-import fr.pederobien.minecraftgameplateform.interfaces.element.INominable;
-import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsPlayerQuitOrJoinEventListener;
-import fr.pederobien.minecraftgameplateform.interfaces.observer.IObsTeam;
-import fr.pederobien.minecraftmanagers.EColor;
+import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
+import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.managers.EColor;
+import fr.pederobien.minecraft.platform.interfaces.INominable;
 
-public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventListener, IPlateformCodeSender {
+public interface IChat extends INominable {
 
 	/**
 	 * @return The name of this chat using {@link EColor#getInColor(String)} with parameters String equals {@link #getName()}.
@@ -21,58 +16,40 @@ public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventLi
 	String getColoredName();
 
 	/**
-	 * Set the name of this chat.
+	 * Get the name of this team, in the team color and specify which color to use after?
 	 * 
-	 * @param name The new name of the chat.
-	 */
-	void setName(String name);
-
-	/**
-	 * Appends the given player to this room.
+	 * @param next The color after to used after.
 	 * 
-	 * @param player The player to append.
-	 * 
-	 * @throws PlayerAlreadyRegisteredInChatException If the given player is already registered in this chat.
+	 * @return The name of this team using {@link EColor#getInColor(String, EColor)} with parameters String equals {@link #getName()}.
 	 */
-	void add(Player player);
+	String getColoredName(EColor next);
 
 	/**
-	 * Removes the given player from this room.
-	 * 
-	 * @param player The player to remove.
-	 */
-	void remove(Player player);
-
-	/**
-	 * @return The list of registered players in this room. This list is unmodifiable.
-	 */
-	List<Player> getPlayers();
-
-	/**
-	 * Remove all registered players.
-	 */
-	void clear();
-
-	/**
-	 * @return The color of this chat.
+	 * @return The chat color
 	 */
 	EColor getColor();
 
 	/**
-	 * Set the color of this chat.
+	 * Set the chat color.
 	 * 
-	 * @param color The new color of the chat.
+	 * @param color The new chat color.
 	 */
 	void setColor(EColor color);
 
 	/**
+	 * @return The list of players associated to this chat.
+	 */
+	IPlayerList getPlayers();
+
+	/**
 	 * Send the given message to each player registered in this room.
 	 * 
-	 * @param sender The player who send the message.
+	 * @param sender  The player who send the message.
+	 * @param message The message to send to the chat.
 	 * 
 	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
 	 */
-	void sendMessage(Player sender, String message);
+	void sendMessage(CommandSender sender, String message);
 
 	/**
 	 * For each player in this team, send the message associated to the given code.
@@ -83,5 +60,5 @@ public interface IChat extends INominable, IObsTeam, IObsPlayerQuitOrJoinEventLi
 	 * 
 	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
 	 */
-	void sendMessage(Player sender, IMinecraftMessageCode code, Object... args);
+	void sendMessage(CommandSender sender, IMinecraftCode code, Object... args);
 }

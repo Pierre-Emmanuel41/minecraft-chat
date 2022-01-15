@@ -1,17 +1,20 @@
-main: fr.pederobien.minecraftchat.ChatPlugin
+main: fr.pederobien.minecraft.chat.ChatPlugin
 name: minecraft-chat
-version: 1.0-SNAPSHOT
+version: 1.0_MC_1.13.2-SNAPSHOT
 api-version: 1.13
-depend: [minecraft-game-plateform]
+depend: [minecraft-platform]
 
 description:
 commands:
-  chatconfig:
+  chatConfig:
     description: Command to create, delete update chat rooms
     permission: ChatPlugin.permission
-  chat:
+  chatMsg:
     description: Command to send a message in a chat room.
     permission: chat.permission
+  chatOpMsg:
+    description: Command to send a message to several chats
+    permission: ChatPluging.permission
 
 permissions:
   chat.permission:

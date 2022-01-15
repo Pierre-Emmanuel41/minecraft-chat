@@ -1,27 +1,27 @@
 package fr.pederobien.minecraft.chat;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.pederobien.dictionary.interfaces.IDictionaryParser;
-import fr.pederobien.minecraft.chat.commands.chat.ChatCommand;
-import fr.pederobien.minecraft.chat.commands.chatconfig.ChatConfigCommand;
-import fr.pederobien.minecraft.chat.interfaces.IChat;
-import fr.pederobien.minecraft.chat.interfaces.IChatConfiguration;
-import fr.pederobien.minecraftgameplateform.impl.element.EventListener;
-import fr.pederobien.minecraftgameplateform.interfaces.commands.IParentCommand;
-import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
-import fr.pederobien.minecraftgameplateform.utils.Plateform;
+import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
+import fr.pederobien.minecraft.chat.commands.ChatMsgNode;
+import fr.pederobien.minecraft.chat.commands.ChatOpMsgNode;
+import fr.pederobien.minecraft.chat.commands.superchats.SuperChatsCommandTree;
+import fr.pederobien.minecraft.chat.impl.PlayerChatEventListener;
+import fr.pederobien.minecraft.chat.impl.SuperChatList;
+import fr.pederobien.minecraft.chat.interfaces.ISuperChatList;
+import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
+import fr.pederobien.utils.AsyncConsole;
 
 public class ChatPlugin extends JavaPlugin {
+	private static final String DICTIONARY_FOLDER = "resources/dictionaries/";
+
 	private static Plugin instance;
-	private static IParentCommand<IChatConfiguration> chatConfigCommand;
+	private static ISuperChatList list;
+	private static ChatMsgNode chatMsgNode;
+	private static ChatOpMsgNode chatOpMsgNode;
+	private static SuperChatsCommandTree superChatsTree;
 
 	/**
 	 * @return The plugin associated to this chat plugin.
@@ -31,65 +31,75 @@ public class ChatPlugin extends JavaPlugin {
 	}
 
 	/**
-	 * @return The current chat configuration for this plugin.
+	 * @return The list of list of chats associated to this plugin.
 	 */
-	public static IChatConfiguration getCurrentChatConfiguration() {
-		return chatConfigCommand.getParent().get();
+	public static ISuperChatList getList() {
+		return list;
+	}
+
+	/**
+	 * @return The node to run the "./chat" command.
+	 */
+	public static ChatMsgNode getChatMsgNode() {
+		return chatMsgNode;
+	}
+
+	/**
+	 * @return The node to run the "./chat" command.
+	 */
+	public static ChatOpMsgNode getChatOpMsgNode() {
+		return chatOpMsgNode;
+	}
+
+	/**
+	 * Get the tree to modify the characteristics of a list that contains a list of chats.
+	 * 
+	 * @return The super chats tree associated to this plugin.
+	 */
+	public static SuperChatsCommandTree getSuperChatsTree() {
+		return superChatsTree;
 	}
 
 	@Override
 	public void onEnable() {
-		Plateform.getPluginHelper().register(this);
 		instance = this;
-
-		chatConfigCommand = new ChatConfigCommand(this);
-		new ChatCommand(this, (ChatConfigCommand) chatConfigCommand);
+		list = new SuperChatList("Global");
+		chatMsgNode = new ChatMsgNode(list);
+		chatOpMsgNode = new ChatOpMsgNode(list);
+		superChatsTree = new SuperChatsCommandTree(list);
 
 		new PlayerChatEventListener().register(this);
+
 		registerDictionaries();
+		registerTabExecutors();
 	}
 
 	private void registerDictionaries() {
-		String[] dictionaries = new String[] { "Chat.xml" };
-		// Registering French dictionaries
-		registerDictionary("French", dictionaries);
+		JarXmlDictionaryParser dictionaryParser = new JarXmlDictionaryParser(getFile().toPath());
 
-		// Registering English dictionaries
-		registerDictionary("English", dictionaries);
-	}
-
-	private void registerDictionary(String parent, String... dictionaryNames) {
-		Path jarPath = Plateform.ROOT.getParent().resolve(getName().concat(".jar"));
-		String dictionariesFolder = "resources/dictionaries/".concat(parent).concat("/");
-		for (String name : dictionaryNames)
-			registerDictionary(Plateform.getDefaultDictionaryParser(dictionariesFolder.concat(name)), jarPath);
-	}
-
-	private void registerDictionary(IDictionaryParser parser, Path jarPath) {
-		try {
-			Plateform.getNotificationCenter().getDictionaryContext().register(parser, jarPath);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private class PlayerChatEventListener extends EventListener {
-
-		@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-		public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-			if (chatConfigCommand.getParent().get() != null) {
-				for (IChat chat : chatConfigCommand.getParent().get().getChats())
-					if (chat.getPlayers().contains(event.getPlayer())) {
-						event.setFormat("<" + chat.getColor().getInColor("%s") + "> %2$s");
-						return;
-					}
+		MinecraftDictionaryContext context = MinecraftDictionaryContext.instance();
+		String[] dictionaries = new String[] { "English.xml", "French.xml" };
+		for (String dictionary : dictionaries)
+			try {
+				context.register(dictionaryParser.parse(DICTIONARY_FOLDER.concat(dictionary)));
+			} catch (Exception e) {
+				AsyncConsole.print(e);
+				for (StackTraceElement element : e.getStackTrace())
+					AsyncConsole.print(element);
 			}
+	}
 
-			if (Plateform.getGameConfigurationContext().getGameConfiguration() != null) {
-				for (ITeam team : Plateform.getGameConfigurationContext().getTeams())
-					if (team.getPlayers().contains(event.getPlayer()))
-						event.setFormat("<" + team.getColor().getInColor("%s") + "> %2$s");
-			}
-		}
+	private void registerTabExecutors() {
+		PluginCommand chatMsg = getCommand(chatMsgNode.getLabel());
+		chatMsg.setTabCompleter(chatMsgNode);
+		chatMsg.setExecutor(chatMsgNode);
+
+		PluginCommand chatOpMsg = getCommand(chatOpMsgNode.getLabel());
+		chatOpMsg.setTabCompleter(chatOpMsgNode);
+		chatOpMsg.setExecutor(chatOpMsgNode);
+
+		PluginCommand chatConfig = getCommand(superChatsTree.getRoot().getLabel());
+		chatConfig.setTabCompleter(superChatsTree.getRoot());
+		chatConfig.setExecutor(superChatsTree.getRoot());
 	}
 }

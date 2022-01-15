@@ -1,94 +1,50 @@
 package fr.pederobien.minecraft.chat.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.StringJoiner;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
-import fr.pederobien.minecraft.chat.exception.PlayerAlreadyRegisteredInChatException;
+import fr.pederobien.minecraft.chat.event.ChatNameChangePostEvent;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
-import fr.pederobien.minecraft.chat.interfaces.IChatConfiguration;
-import fr.pederobien.minecraftdictionary.interfaces.IMinecraftMessageCode;
-import fr.pederobien.minecraftgameplateform.impl.element.AbstractNominable;
-import fr.pederobien.minecraftgameplateform.interfaces.element.ITeam;
-import fr.pederobien.minecraftgameplateform.utils.Plateform;
-import fr.pederobien.minecraftmanagers.EColor;
-import fr.pederobien.minecraftmanagers.MessageManager;
+import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
+import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
+import fr.pederobien.minecraft.game.impl.PlayerList;
+import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.managers.EColor;
+import fr.pederobien.minecraft.managers.MessageManager;
+import fr.pederobien.utils.event.EventManager;
 
-public class Chat extends AbstractNominable implements IChat {
-	private List<Player> players, quitPlayers;
+public class Chat implements IChat, ICodeSender {
+	private String name;
 	private EColor color;
-	private IChatConfiguration configuration;
+	private IPlayerList players;
 
-	public Chat(String name, IChatConfiguration configuration) {
-		super(name);
-		this.configuration = configuration;
-		players = new ArrayList<Player>();
-		quitPlayers = new ArrayList<Player>();
+	/**
+	 * Creates a chat associated to the given name.
+	 * 
+	 * @param name The chat name.
+	 */
+	public Chat(String name) {
+		this.name = name;
+		players = new PlayerList(name);
 		color = EColor.RESET;
-		Plateform.getPlayerQuitOrJoinEventListener().addObserver(this);
 	}
 
 	@Override
-	public void onNameChanged(ITeam team, String oldName, String newName) {
-		super.setName(newName);
-	}
-
-	@Override
-	public void onColorChanged(ITeam team, EColor oldColor, EColor newColor) {
-		color = newColor;
-	}
-
-	@Override
-	public void onPlayerAdded(ITeam team, Player player) {
-		internalAdd(player);
-	}
-
-	@Override
-	public void onPlayerRemoved(ITeam team, Player player) {
-		players.remove(player);
-	}
-
-	@Override
-	public void onClone(ITeam team) {
-
-	}
-
-	@Override
-	public void onPlayerJoinEvent(PlayerJoinEvent event) {
-		if (isSynchronized())
-			return;
-
-		Iterator<Player> iterator = quitPlayers.iterator();
-		while (iterator.hasNext()) {
-			Player player = iterator.next();
-			if (player.getName().equals(event.getPlayer().getName())) {
-				remove(player);
-				iterator.remove();
-				add(event.getPlayer());
-			}
-		}
-	}
-
-	@Override
-	public void onPlayerQuitEvent(PlayerQuitEvent event) {
-		if (!isSynchronized()) {
-			for (Player player : players)
-				if (player.getName().equals(event.getPlayer().getName()))
-					quitPlayers.add(event.getPlayer());
-		}
+	public String getName() {
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		if (!isSynchronized())
-			super.setName(name);
+		if (this.name.equals(name))
+			return;
+
+		String oldName = this.name;
+		this.name = name;
+		EventManager.callEvent(new ChatNameChangePostEvent(this, oldName));
 	}
 
 	@Override
@@ -97,25 +53,8 @@ public class Chat extends AbstractNominable implements IChat {
 	}
 
 	@Override
-	public void add(Player player) {
-		if (!isSynchronized())
-			internalAdd(player);
-	}
-
-	@Override
-	public void remove(Player player) {
-		if (!isSynchronized())
-			players.remove(player);
-	}
-
-	@Override
-	public List<Player> getPlayers() {
-		return Collections.unmodifiableList(players);
-	}
-
-	@Override
-	public void clear() {
-		players.clear();
+	public String getColoredName(EColor next) {
+		return getColor().getInColor(getName(), next);
 	}
 
 	@Override
@@ -125,22 +64,24 @@ public class Chat extends AbstractNominable implements IChat {
 
 	@Override
 	public void setColor(EColor color) {
-		if (!isSynchronized())
-			this.color = color;
+		this.color = color;
 	}
 
 	@Override
-	public void sendMessage(Player sender, String message) {
-		if (!players.contains(sender))
-			throw new PlayerNotRegisteredInChatException(this, sender);
-		for (Player player : players)
+	public IPlayerList getPlayers() {
+		return players;
+	}
+
+	@Override
+	public void sendMessage(CommandSender sender, String message) {
+		checkPlayer(sender);
+		for (Player player : players.toList())
 			MessageManager.sendMessage(player, getPrefix(sender, player) + message);
 	}
 
 	@Override
-	public void sendMessage(Player sender, IMinecraftMessageCode code, Object... args) {
-		if (!players.contains(sender))
-			throw new PlayerNotRegisteredInChatException(this, sender);
+	public void sendMessage(CommandSender sender, IMinecraftCode code, Object... args) {
+		checkPlayer(sender);
 		for (Player player : players)
 			MessageManager.sendMessage(player, getPrefix(sender, player) + getMessage(player, code, args));
 	}
@@ -153,17 +94,20 @@ public class Chat extends AbstractNominable implements IChat {
 		return getColor().getInColor(getName() + " " + players.toString());
 	}
 
-	private void internalAdd(Player player) {
-		if (players.contains(player))
-			throw new PlayerAlreadyRegisteredInChatException(this, player);
-		players.add(player);
+	private void checkPlayer(CommandSender sender) {
+		if (!(sender instanceof Player))
+			return;
+
+		if (!players.toList().contains(sender))
+			throw new PlayerNotRegisteredInChatException(this, (Player) sender);
 	}
 
-	private boolean isSynchronized() {
-		return configuration.isSynchronized();
-	}
-
-	private String getPrefix(Player sender, Player player) {
-		return color.getInColor("[" + (player.equals(sender) ? "me" : sender.getName()) + " -> " + getName() + "] ");
+	private String getPrefix(CommandSender sender, CommandSender player) {
+		String senderName = null;
+		if (!(sender instanceof Player))
+			senderName = getMessage(sender, EChatCode.CHAT__OPERATOR);
+		else
+			senderName = player.equals(sender) ? getMessage(sender, EChatCode.CHAT__ME) : sender.getName();
+		return color.getInColor(String.format("[%s -> %s] ", senderName, getName()));
 	}
 }

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+	<name>Game</name>
+	<version>1.0</version>
+	<locales>
+		<locale>fr</locale>
+		<locale>fr-FR</locale>
+		<locale>fr-CA</locale>
+	</locales>
+	<messages>
+		<message>
+			<code>CHAT__OPERATOR</code>
+			<value>Operateur</value>
+		</message>
+		<message>
+			<code>CHAT__ME</code>
+			<value>Moi</value>
+		</message>
+		<message>
+			<code>CHAT_MSG__EXPLANATION</code>
+			<value>Pour envoyer un message dans un chat</value>
+		</message>
+		<message>
+			<code>CHAT_MSG__CHAT_NOT_AVAILABLE</code>
+			<value>Impossible d'envoyer un message à %s, ce chat n'est pas accessible</value>
+		</message>
+		<message>
+			<code>CHAT_MSG__PLAYER_NOT_REGISTERED</code>
+			<value>Impossible d'envoyer un message à %s, vous ne faites pas partie de ce chat</value>
+		</message>
+		<message>
+			<code>CHAT_OP_MSG__EXPLANATION</code>
+			<value>Pour envoyer un message à tous les chats d'une liste de chats</value>
+		</message>
+		<message>
+			<code>CHAT_OP_MSG__LIST_NOT_FOUND</code>
+			<value>Impossible d'envoyer un message à %s, cette liste de chats n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__ROOT__EXPLANATION</code>
+			<value>Pour créer, modifier les caractéristiques d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__EXPLANATION</code>
+			<value>Pour créer un nouveau chat</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__NAME_IS_MISSING</code>
+			<value>Impossible de créer un nouveau chat, le nom est manquant</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__NAME_ALREADY_USED</code>
+			<value>Impossible de créer le chat %s, ce nom est déjà utilisé</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__COLOR_IS_MISSING</code>
+			<value>Impossible de créer le chat %s, la couleur est manquante</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__COLOR_NOT_FOUND</code>
+			<value>Impossible de créer le chat %s, la couleur n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__COLOR_ALREADY_USED</code>
+			<value>Impossible de créer le chat %s, cette couleur est déjà utilisée</value>
+		</message>
+		<message>
+			<code>CHAT__NEW__CHAT_CREATED</code>
+			<value>Le chat %s a été créé</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY__EXPLANATION</code>
+			<value>Pour modifier les caractéristiques d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_NAME__EXPLANATION</code>
+			<value>Pour modifier le nom d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_NAME__NAME_IS_MISSING</code>
+			<value>Impossible de modifier le nom de %s, le nom est manquant</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_NAME__NAME_ALREADY_USED</code>
+			<value>Impossible de renommer %s en %s, ce chat existe déjà</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_NAME__CHAT_NAME_UPDATED</code>
+			<value>Le chat %s a été renommé %s</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_COLOR__EXPLANATION</code>
+			<value>Pour modifier la couleur d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_COLOR__COLOR_IS_MISSING</code>
+			<value>Impossible de modifier la couleur de %s, la couleur est manquante</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_COLOR__COLOR_NOT_FOUND</code>
+			<value>Impossible de modifier la couleur de %s, la couleur %s n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_COLOR__COLOR_IS_ALREADY_USED</code>
+			<value>Impossible de modifier la couleur de %s, la couleur %s est déjà utilisée</value>
+		</message>
+		<message>
+			<code>CHAT__MODIFY_COLOR__CHAT_COLOR_UPDATED</code>
+			<value>La couleur du chat %s est %s</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__EXPLANATION</code>
+			<value>Pour ajouter des joueurs à un chat</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__CHAT_NOT_FOUND</code>
+			<value>Impossible d'ajouter un joueur à %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Impossible d'ajouter %s à %s, ce joueur n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__PLAYER_ALREADY_REGISTERED</code>
+			<value>Impossible d'ajouter %s à %s, ce joueur est déjà enregistré</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__NO_PLAYER_ADDED</code>
+			<value>Aucun joueur n'a été ajouté à %s</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__ONE_PLAYER_ADDED</code>
+			<value>Le joueur %s a été ajouté à %s</value>
+		</message>
+		<message>
+			<code>CHAT__ADD_PLAYER__SEVERAL_PLAYERS_ADDED</code>
+			<value>Les joueurs %s ont été ajoutés à %s</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__EXPLANATION</code>
+			<value>Pour enlever un joueur d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__ALL_PLAYERS_REMOVED</code>
+			<value>Tous les joueurs de %s ont été enlevés</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Impossible d'enlever %s de %s, ce joueur n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__PLAYER_NOT_REGISTERED</code>
+			<value>Impossible d'enlever %s de %s, ce joueur n'est pas enregistré dans ce chat</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__NO_PLAYER_REMOVED</code>
+			<value>Aucun joueur n'a été enlevé de %s</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__ONE_PLAYER_REMOVED</code>
+			<value>Le joueur %s a été enlevé de %s</value>
+		</message>
+		<message>
+			<code>CHAT__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED</code>
+			<value>Les joueurs %s ont été enlevés de %s</value>
+		</message>
+		<message>
+			<code>CHATS__ROOT__EXPLANATION</code>
+			<value>Pour modifier la liste des chats</value>
+		</message>
+		<message>
+			<code>CHATS__NEW__EXPLANATION</code>
+			<value>Pour créer une nouvelle liste de chats</value>
+		</message>
+		<message>
+			<code>CHATS__NEW__NAME_IS_MISSING</code>
+			<value>Impossible de créer une nouvelle liste de chats, le nom est manquant</value>
+		</message>
+		<message>
+			<code>CHATS__NEW__NAME_ALREADY_USED</code>
+			<value>Impossible de créer la liste de chats %s, ce nom est déjà utilisé</value>
+		</message>
+		<message>
+			<code>CHATS__NEW__CHATS_CREATED</code>
+			<value>La liste des chats %s a été créée</value>
+		</message>
+		<message>
+			<code>CHATS__ADD__EXPLANATION</code>
+			<value>Pour ajouter un chat à une list ou des joueurs à un chat</value>
+		</message>
+		<message>
+			<code>CHATS__ADD_CHAT__EXPLANATION</code>
+			<value>Pour ajouter des chats à une liste</value>
+		</message>
+		<message>
+			<code>CHATS__ADD_CHAT__CHAT_ADDED</code>
+			<value>Le chat %s a été ajouté à %s</value>
+		</message>
+		<message>
+			<code>CHATS__ADD_PLAYER__CHAT_NOT_FOUND</code>
+			<value>Impossible d'ajouter un joueur à %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE__EXPLANATION</code>
+			<value>Pour enlever des chats d'une liste de chats ou des joueurs d'un chat</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__EXPLANATION</code>
+			<value>Pour enlever des chats d'une liste de chats</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__ALL_CHATS_REMOVED</code>
+			<value>Tous les chats ont été enlevés de %s</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__CHAT_NOT_FOUND</code>
+			<value>Impossible d'enlever %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__NO_CHAT_REMOVED</code>
+			<value>Aucun chat n'a été enlevé de %s</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__ONE_CHAT_REMOVED</code>
+			<value>Le chat %s a été enlevé de %s</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_CHAT__SEVERAL_CHATS_REMOVED</code>
+			<value>Les chats %s ont été enlevé de %s</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__EXPLANATION</code>
+			<value>Pour enlever un joueur de plusieurs chats</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__NAME_IS_MISSING</code>
+			<value>Impossible d'enlever un joueur de plusieurs chats, le nom du joueur est manquant</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__PLAYER_NOT_FOUND</code>
+			<value>Impossible d'enlever %s de plusieurs chats, ce joueur n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__CHAT_NOT_FOUND</code>
+			<value>Impossible d'enlever %s de %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__PLAYER_NOT_REMOVED</code>
+			<value>Le joueur %s n'a été enlevé d'aucun chat</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__PLAYER_REMOVED_FROM_ONE_CHAT</code>
+			<value>Le joueur %s a été enlevé du chat %s</value>
+		</message>
+		<message>
+			<code>CHATS__REMOVE_PLAYER__PLAYER_REMOVED_FROM_SEVERAL_CHATS</code>
+			<value>Le joueur %s a été enlevé des chats %s</value>
+		</message>
+		<message>
+			<code>CHATS__MODIFY__EXPLANATION</code>
+			<value>Pour modifier les caractéristiques d'un chat</value>
+		</message>
+		<message>
+			<code>CHATS__MODIFY__CHAT_NOT_FOUND</code>
+			<value>Impossible de modifier %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__LIST__EXPLANATION</code>
+			<value>Pour afficher une liste de chats</value>
+		</message>
+		<message>
+			<code>CHATS__LIST__NO_CHAT_REGISTERED</code>
+			<value>%s n'a pas de chat</value>
+		</message>
+		<message>
+			<code>CHATS__LIST__ONE_CHAT_REGISTERED</code>
+			<value>Chat de %s:%n%s</value>
+		</message>
+		<message>
+			<code>CHATS__LIST__SEVERAL_CHATS_REGISTERED</code>
+			<value>Chats de %s:%n%s</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__EXPLANATION</code>
+			<value>Pour déplacer un joueur d'un chat à un autre</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__PLAYER_NAME_IS_MISSING</code>
+			<value>Impossible de déplacer un joueur dans un autre chat, le nom du joueur est manquant</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__PLAYER_NOT_FOUND</code>
+			<value>Impossible de déplacer %s dans un autre chat, ce joueur n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__CHAT_NAME_IS_MISSING</code>
+			<value>Impossible de déplacer %s dans un autre chat, le nom du chat est manquant</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__CHAT_NOT_FOUND</code>
+			<value>Impossible de déplacer %s dans %s, ce chat n'existe pas</value>
+		</message>
+		<message>
+			<code>CHATS__MOVE__PLAYER_MOVED_FROM_TO</code>
+			<value>Le joueur %s a été déplacé de %s à %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__ROOT__EXPLANATION</code>
+			<value>Pour ajouter/enlever une liste de chats à la super liste de chats</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__ADD__EXPLANATION</code>
+			<value>Pour ajouter une liste de chats à la super liste de chats</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__ADD__LIST_ADDED</code>
+			<value>la liste %s a été ajoutée à %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__EXPLANATION</code>
+			<value>Pour enlever une liste de chats de la super liste de chats</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__NAME_IS_MISSING</code>
+			<value>Impossible d'enlever une liste de chats, le nom est manquant</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__ALL_CHATS_REMOVED</code>
+			<value>Toutes les listes de chats on été enlevées de %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__LIST_NOT_FOUND</code>
+			<value>Impossible d'enlever %s, cette liste n'existe pas</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__NO_LIST_REMOVED</code>
+			<value>Aucune liste n'a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__ONE_LIST_REMOVED</code>
+			<value>La liste %s a été enlevée de %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__REMOVE__SEVERAL_LISTS_REMOVED</code>
+			<value>Les listes %s ont été enlevées de %s</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__MODIFY__EXPLANATION</code>
+			<value>Pour modifier une liste de chats</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__MODIFY__LIST_NOT_FOUND</code>
+			<value>Impossible de modifier %s, cette liste n'existe pas</value>
+		</message>
+	</messages>
+</dictionary>
