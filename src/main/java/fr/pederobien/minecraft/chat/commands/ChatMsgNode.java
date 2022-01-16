@@ -29,12 +29,13 @@ public class ChatMsgNode extends SuperChatListNode {
 			return emptyList();
 
 		switch (args.length) {
+		case 0:
+			return emptyList();
 		case 1:
 			return filter(getList().getChats((Player) sender).stream().map(chat -> chat.getName()), args);
 		default:
-			return emptyList();
+			return asList(getMessage(sender, EChatCode.CHAT__MESSAGE_COMPLETION));
 		}
-
 	}
 
 	@Override
@@ -50,13 +51,17 @@ public class ChatMsgNode extends SuperChatListNode {
 		}
 
 		Optional<IChat> optChat = getList().getChat(name, (Player) sender);
-		if (optChat == null) {
+		if (!optChat.isPresent()) {
 			send(eventBuilder(sender, EChatCode.CHAT_MSG__CHAT_NOT_AVAILABLE, name));
 			return false;
 		}
 
+		String message = concat(extract(args, 1), " ");
+		if (message.equals(""))
+			return true;
+
 		try {
-			optChat.get().sendMessage((Player) sender, concat(extract(args, 1), " "));
+			optChat.get().sendMessage((Player) sender, false, message);
 		} catch (PlayerNotRegisteredInChatException e) {
 			send(eventBuilder(sender, EChatCode.CHAT_MSG__PLAYER_NOT_REGISTERED, optChat.get().getName()));
 			return false;

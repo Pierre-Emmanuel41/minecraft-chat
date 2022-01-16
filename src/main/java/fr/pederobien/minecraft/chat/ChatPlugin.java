@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.chat.commands.ChatMsgNode;
-import fr.pederobien.minecraft.chat.commands.ChatOpMsgNode;
+import fr.pederobien.minecraft.chat.commands.opmsg.OpMsgCommandTree;
 import fr.pederobien.minecraft.chat.commands.superchats.SuperChatsCommandTree;
 import fr.pederobien.minecraft.chat.impl.PlayerChatEventListener;
 import fr.pederobien.minecraft.chat.impl.SuperChatList;
@@ -20,7 +20,7 @@ public class ChatPlugin extends JavaPlugin {
 	private static Plugin instance;
 	private static ISuperChatList list;
 	private static ChatMsgNode chatMsgNode;
-	private static ChatOpMsgNode chatOpMsgNode;
+	private static OpMsgCommandTree opMsgTree;
 	private static SuperChatsCommandTree superChatsTree;
 
 	/**
@@ -45,10 +45,10 @@ public class ChatPlugin extends JavaPlugin {
 	}
 
 	/**
-	 * @return The node to run the "./chat" command.
+	 * @return The node to run the "./opMsg" command.
 	 */
-	public static ChatOpMsgNode getChatOpMsgNode() {
-		return chatOpMsgNode;
+	public static OpMsgCommandTree getOpMsgTree() {
+		return opMsgTree;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class ChatPlugin extends JavaPlugin {
 		instance = this;
 		list = new SuperChatList("Global");
 		chatMsgNode = new ChatMsgNode(list);
-		chatOpMsgNode = new ChatOpMsgNode(list);
+		opMsgTree = new OpMsgCommandTree(list);
 		superChatsTree = new SuperChatsCommandTree(list);
 
 		new PlayerChatEventListener().register(this);
@@ -94,9 +94,9 @@ public class ChatPlugin extends JavaPlugin {
 		chatMsg.setTabCompleter(chatMsgNode);
 		chatMsg.setExecutor(chatMsgNode);
 
-		PluginCommand chatOpMsg = getCommand(chatOpMsgNode.getLabel());
-		chatOpMsg.setTabCompleter(chatOpMsgNode);
-		chatOpMsg.setExecutor(chatOpMsgNode);
+		PluginCommand chatOpMsg = getCommand(opMsgTree.getRoot().getLabel());
+		chatOpMsg.setTabCompleter(opMsgTree.getRoot());
+		chatOpMsg.setExecutor(opMsgTree.getRoot());
 
 		PluginCommand chatConfig = getCommand(superChatsTree.getRoot().getLabel());
 		chatConfig.setTabCompleter(superChatsTree.getRoot());

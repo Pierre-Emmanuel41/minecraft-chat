@@ -44,21 +44,23 @@ public interface IChat extends INominable {
 	/**
 	 * Send the given message to each player registered in this room.
 	 * 
-	 * @param sender  The player who send the message.
-	 * @param message The message to send to the chat.
+	 * @param sender     The player who send the message.
+	 * @param isOperator True if the sender should be considered as an operator, false otherwise.
+	 * @param message    The message to send to the chat.
 	 * 
 	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
 	 */
-	void sendMessage(CommandSender sender, String message);
+	void sendMessage(CommandSender sender, boolean isOperator, String message);
 
 	/**
 	 * For each player in this team, send the message associated to the given code.
 	 * 
-	 * @param sender The player who send the message to the team.
-	 * @param code   Used as key to get the right message in the right dictionary.
-	 * @param args   Some arguments (optional) used for dynamic messages.
+	 * @param sender     The player who send the message to the team.
+	 * @param isOperator True if the sender should be considered as an operator, false otherwise.
+	 * @param code       Used as key to get the right message in the right dictionary.
+	 * @param args       Some arguments (optional) used for dynamic messages.
 	 * 
 	 * @throws PlayerNotRegisteredInChatException If the sender is not registered in this chat.
 	 */
-	void sendMessage(CommandSender sender, IMinecraftCode code, Object... args);
+	void sendMessage(CommandSender sender, boolean isOperator, IMinecraftCode code, Object... args);
 }

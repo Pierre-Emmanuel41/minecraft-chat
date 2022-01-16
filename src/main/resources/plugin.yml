@@ -12,7 +12,7 @@ commands:
   chatMsg:
     description: Command to send a message in a chat room.
     permission: chat.permission
-  chatOpMsg:
+  opMsg:
     description: Command to send a message to several chats
     permission: ChatPluging.permission
 

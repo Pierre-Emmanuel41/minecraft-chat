@@ -1,9 +1,16 @@
 package fr.pederobien.minecraft.chat.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.StringJoiner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.pederobien.minecraft.chat.event.ChatNameChangePostEvent;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
@@ -11,6 +18,7 @@ import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.game.impl.PlayerList;
+import fr.pederobien.minecraft.game.impl.PlayerQuitOrJoinEventHandler;
 import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
@@ -19,7 +27,9 @@ import fr.pederobien.utils.event.EventManager;
 public class Chat implements IChat, ICodeSender {
 	private String name;
 	private EColor color;
+	private Lock lock;
 	private IPlayerList players;
+	private List<Player> quitPlayers;
 
 	/**
 	 * Creates a chat associated to the given name.
@@ -28,8 +38,14 @@ public class Chat implements IChat, ICodeSender {
 	 */
 	public Chat(String name) {
 		this.name = name;
+		this.color = EColor.RESET;
+
+		lock = new ReentrantLock(true);
 		players = new PlayerList(name);
-		color = EColor.RESET;
+		quitPlayers = new ArrayList<Player>();
+
+		PlayerQuitOrJoinEventHandler.instance().registerQuitEventHandler(this, event -> onPlayerQuitEvent(event));
+		PlayerQuitOrJoinEventHandler.instance().registerJoinEventHandler(this, event -> onPlayerJoinEvent(event));
 	}
 
 	@Override
@@ -73,17 +89,17 @@ public class Chat implements IChat, ICodeSender {
 	}
 
 	@Override
-	public void sendMessage(CommandSender sender, String message) {
-		checkPlayer(sender);
+	public void sendMessage(CommandSender sender, boolean isOperator, String message) {
+		checkPlayer(sender, isOperator);
 		for (Player player : players.toList())
-			MessageManager.sendMessage(player, getPrefix(sender, player) + message);
+			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + message);
 	}
 
 	@Override
-	public void sendMessage(CommandSender sender, IMinecraftCode code, Object... args) {
-		checkPlayer(sender);
+	public void sendMessage(CommandSender sender, boolean isOperator, IMinecraftCode code, Object... args) {
+		checkPlayer(sender, isOperator);
 		for (Player player : players)
-			MessageManager.sendMessage(player, getPrefix(sender, player) + getMessage(player, code, args));
+			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + getMessage(player, code, args));
 	}
 
 	@Override
@@ -94,20 +110,49 @@ public class Chat implements IChat, ICodeSender {
 		return getColor().getInColor(getName() + " " + players.toString());
 	}
 
-	private void checkPlayer(CommandSender sender) {
-		if (!(sender instanceof Player))
-			return;
+	private void checkPlayer(CommandSender sender, boolean isOperator) {
+		if (sender instanceof Player) {
+			if (isOperator && !((Player) sender).isOp())
+				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
 
-		if (!players.toList().contains(sender))
-			throw new PlayerNotRegisteredInChatException(this, (Player) sender);
+			if (!isOperator && !players.toList().contains(sender))
+				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
+		}
 	}
 
-	private String getPrefix(CommandSender sender, CommandSender player) {
+	private String getPrefix(CommandSender sender, CommandSender player, boolean isOperator) {
 		String senderName = null;
-		if (!(sender instanceof Player))
+		if (isOperator)
 			senderName = getMessage(sender, EChatCode.CHAT__OPERATOR);
 		else
 			senderName = player.equals(sender) ? getMessage(sender, EChatCode.CHAT__ME) : sender.getName();
 		return color.getInColor(String.format("[%s -> %s] ", senderName, getName()));
+	}
+
+	private void onPlayerQuitEvent(PlayerQuitEvent event) {
+		lock.lock();
+		try {
+			Iterator<Player> iterator = players.iterator();
+			while (iterator.hasNext()) {
+				Player player = iterator.next();
+				if (player.getName().equals(event.getPlayer().getName())) {
+					quitPlayers.add(player);
+					iterator.remove();
+				}
+			}
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	private void onPlayerJoinEvent(PlayerJoinEvent event) {
+		Iterator<Player> iterator = quitPlayers.iterator();
+		while (iterator.hasNext()) {
+			Player player = iterator.next();
+			if (player.getName().equals(event.getPlayer().getName())) {
+				iterator.remove();
+				getPlayers().add(event.getPlayer());
+			}
+		}
 	}
 }

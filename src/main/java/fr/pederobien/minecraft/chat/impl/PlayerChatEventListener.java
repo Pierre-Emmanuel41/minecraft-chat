@@ -43,6 +43,6 @@ public class PlayerChatEventListener extends EventListener implements IEventList
 		for (ITeamConfigurable configurable : teams.values())
 			for (ITeam team : configurable.getTeams())
 				if (team.getPlayers().toList().contains(event.getPlayer()))
-					event.setFormat(String.format("<%s> ", team.getColor().getInColor(event.getPlayer().getName())).concat("%s"));
+					event.setFormat(String.format("<%s> ", team.getColor().getInColor(event.getPlayer().getName())).concat("%2$s"));
 	}
 }
