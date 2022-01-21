@@ -1,15 +1,9 @@
 package fr.pederobien.minecraft.chat.impl;
 
-import org.bukkit.entity.Player;
-
 import fr.pederobien.minecraft.chat.ChatPlugin;
-import fr.pederobien.minecraft.chat.interfaces.IChat;
-import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.game.impl.Feature;
 import fr.pederobien.minecraft.game.interfaces.IGame;
-import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
-import fr.pederobien.minecraft.game.interfaces.ITeamList;
 
 public class ChatFeature extends Feature {
 
@@ -32,24 +26,7 @@ public class ChatFeature extends Feature {
 			if (!(getGame() instanceof ITeamConfigurable))
 				return;
 
-			ITeamList teams = ((ITeamConfigurable) getGame()).getTeams();
-			IChatList list = new ChatList(getGame().getName());
-
-			IChat operators = new Chat("operators");
-			list.add(operators);
-
-			for (ITeam team : teams) {
-				IChat chat = new Chat(team.getName());
-				chat.setColor(team.getColor());
-				for (Player player : team.getPlayers()) {
-					chat.getPlayers().add(player);
-					if (player.isOp())
-						operators.getPlayers().add(player);
-				}
-				list.add(chat);
-			}
-
-			ChatPlugin.getList().add(list);
+			ChatPlugin.getList().add(new SynchronizedChatList(((ITeamConfigurable) getGame()).getTeams()));
 		}
 	}
 

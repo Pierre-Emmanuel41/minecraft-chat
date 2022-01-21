@@ -55,10 +55,10 @@ public class Chat implements IChat, ICodeSender {
 
 	@Override
 	public void setName(String name) {
-		if (this.name.equals(name))
+		if (getName().equals(name))
 			return;
 
-		String oldName = this.name;
+		String oldName = getName();
 		this.name = name;
 		EventManager.callEvent(new ChatNameChangePostEvent(this, oldName));
 	}
@@ -91,14 +91,14 @@ public class Chat implements IChat, ICodeSender {
 	@Override
 	public void sendMessage(CommandSender sender, boolean isOperator, String message) {
 		checkPlayer(sender, isOperator);
-		for (Player player : players.toList())
+		for (Player player : getPlayers().toList())
 			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + message);
 	}
 
 	@Override
 	public void sendMessage(CommandSender sender, boolean isOperator, IMinecraftCode code, Object... args) {
 		checkPlayer(sender, isOperator);
-		for (Player player : players)
+		for (Player player : getPlayers())
 			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + getMessage(player, code, args));
 	}
 
@@ -115,7 +115,7 @@ public class Chat implements IChat, ICodeSender {
 			if (isOperator && !((Player) sender).isOp())
 				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
 
-			if (!isOperator && !players.toList().contains(sender))
+			if (!isOperator && !getPlayers().toList().contains(sender))
 				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
 		}
 	}
@@ -132,7 +132,7 @@ public class Chat implements IChat, ICodeSender {
 	private void onPlayerQuitEvent(PlayerQuitEvent event) {
 		lock.lock();
 		try {
-			Iterator<Player> iterator = players.iterator();
+			Iterator<Player> iterator = getPlayers().iterator();
 			while (iterator.hasNext()) {
 				Player player = iterator.next();
 				if (player.getName().equals(event.getPlayer().getName())) {
