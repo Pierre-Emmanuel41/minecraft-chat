@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraft.chat.exception.PlayerNotOperatorException;
 import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
@@ -68,8 +69,13 @@ public class ChatAddPlayerNode extends ChatNode {
 
 		String playerNames = concat(args);
 
-		for (Player player : players)
-			getChat().getPlayers().add(player);
+		try {
+			for (Player player : players)
+				getChat().getPlayers().add(player);
+		} catch (PlayerNotOperatorException e) {
+			send(eventBuilder(sender, EChatCode.CHAT__ADD_PLAYER__PLAYER_NOT_OPERATOR, e.getPlayer().getName(), getChat().getName()));
+			return false;
+		}
 
 		switch (args.length) {
 		case 0:

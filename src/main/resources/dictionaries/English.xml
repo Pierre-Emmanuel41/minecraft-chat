@@ -168,6 +168,10 @@
 			<value>Cannot add %s to %s, this player is already registered</value>
 		</message>
 		<message>
+			<code>CHAT__ADD_PLAYER__PLAYER_NOT_OPERATOR</code>
+			<value>Cannot add %s to %s, this player is not an operator</value>
+		</message>
+		<message>
 			<code>CHAT__ADD_PLAYER__NO_PLAYER_ADDED</code>
 			<value>No player has been added to %s</value>
 		</message>

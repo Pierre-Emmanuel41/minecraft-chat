@@ -165,6 +165,10 @@
 			<value>Impossible d'ajouter %s à %s, ce joueur est déjà enregistré</value>
 		</message>
 		<message>
+			<code>CHAT__ADD_PLAYER__PLAYER_NOT_OPERATOR</code>
+			<value>Impossible d'ajouter %s à %s, ce joueur n'est pas un opérateur</value>
+		</message>
+		<message>
 			<code>CHAT__ADD_PLAYER__NO_PLAYER_ADDED</code>
 			<value>Aucun joueur n'a été ajouté à %s</value>
 		</message>

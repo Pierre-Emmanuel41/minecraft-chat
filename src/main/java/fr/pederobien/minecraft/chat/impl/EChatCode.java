@@ -124,6 +124,9 @@ public enum EChatCode implements IMinecraftCode {
 	// Code when the player name refers to a not registered player
 	CHAT__ADD_PLAYER__PLAYER_ALREADY_REGISTERED,
 
+	// Code when the player to add is not an operator
+	CHAT__ADD_PLAYER__PLAYER_NOT_OPERATOR,
+
 	// Code when no player has been added to a chat
 	CHAT__ADD_PLAYER__NO_PLAYER_ADDED,
 
