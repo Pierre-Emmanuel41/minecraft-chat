@@ -65,7 +65,7 @@ public interface IChat extends INominable {
 
 A chat is generally associated to a chats list :
 
-```
+```java
 public interface IChatList extends Iterable<IChat> {
 
 	/**
