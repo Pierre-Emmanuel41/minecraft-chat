@@ -186,8 +186,13 @@ public class ChatList implements IChatList, IEventListener {
 		if (optNewChat.isPresent())
 			throw new ChatAlreadyRegisteredException(this, optNewChat.get());
 
-		remove(event.getOldName());
-		add(event.getChat());
+		lock.lock();
+		try {
+			chats.remove(event.getOldName());
+			chats.put(event.getChat().getName(), event.getChat());
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	/**
