@@ -28,8 +28,8 @@ public class ChatNameChangePostEvent extends ChatEvent {
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner(", ", "{", "}");
-		joiner.add("chat=" + getChat().getName());
 		joiner.add("oldName=" + getOldName());
+		joiner.add("newName=" + getChat().getName());
 		return String.format("%s_%s", getName(), joiner);
 	}
 }
