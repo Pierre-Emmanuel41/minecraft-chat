@@ -247,7 +247,7 @@ public interface ISuperChatList extends Iterable<IChatList> {
 }
 ```
 
-Moreover, a [ChatFeature](https://github.com/Pierre-Emmanuel41/minecraft-chat/blob/1.0_MC_1.13.2-SNAPSHOT/src/main/java/fr/pederobien/minecraft/chat/impl/ChatFeature.java) has been implemented. When a game starts, this feature, when enabled, creates automatically a chats list corresponding to the teams list. It also creates a chat for operators only. When the game is stopped, all chats are removed including the operators chat.
+Moreover, a [ChatFeature](https://github.com/Pierre-Emmanuel41/minecraft-chat/blob/1.0_MC_1.16.5-SNAPSHOT/src/main/java/fr/pederobien/minecraft/chat/impl/ChatFeature.java) has been implemented. When a game starts, this feature, when enabled, creates automatically a chats list corresponding to the teams list. It also creates a chat for operators only. When the game is stopped, all chats are removed including the operators chat.
 
 ### 2) Minecraft features
 
