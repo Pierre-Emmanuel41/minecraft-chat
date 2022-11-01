@@ -130,8 +130,11 @@ public enum EChatCode implements IMinecraftCode {
 	// Code when one player has been removed from a chat
 	CHAT__REMOVE_PLAYER__SEVERAL_PLAYERS_REMOVED,
 
-	// Code for the "chats" command ---------------------------------------------
-	CHATS__ROOT__EXPLANATION,
+	// Code for the "chatConfig" command ---------------------------------------------
+	CHAT_CONFIG__EXPLANATION,
+
+	// Code when the chat configuration does not exist
+	CHAT_CONFIG__CONFIG_NOT_FOUND,
 
 	// Code for the "chats new" command -----------------------------------------
 	CHATS__NEW__EXPLANATION,

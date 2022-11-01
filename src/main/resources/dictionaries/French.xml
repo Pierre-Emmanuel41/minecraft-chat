@@ -41,6 +41,14 @@
 			<value>Impossible d'envoyer un message à %s, le chat n'existe pas</value>
 		</message>
 		<message>
+			<code>CHAT_CONFIG__EXPLANATION</code>
+			<value>Pour ajouter/supprimer un chat d'une list de chats, ou pour modifier les charactéristiques d'un chat</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__CONFIG_NOT_FOUND</code>
+			<value>Impossible de modifier la list de chats %s, la liste n'existe pas</value>
+		</message>
+		<message>
 			<code>CHAT__ROOT__EXPLANATION</code>
 			<value>Pour créer, modifier les caractéristiques d'un chat</value>
 		</message>

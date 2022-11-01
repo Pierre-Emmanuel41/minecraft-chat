@@ -44,6 +44,14 @@
 			<value>Cannot send a message to %s, the chat does not exist</value>
 		</message>
 		<message>
+			<code>CHAT_CONFIG__EXPLANATION</code>
+			<value>To add/remove a chat from a chats list, or to modify the characteristics of a chat</value>
+		</message>
+		<message>
+			<code>CHAT_CONFIG__CONFIG_NOT_FOUND</code>
+			<value>Cannot modify the chats list %s, the list does not exist</value>
+		</message>
+		<message>
 			<code>CHAT__ROOT__EXPLANATION</code>
 			<value>To create, modify the characteristics of a chat</value>
 		</message>

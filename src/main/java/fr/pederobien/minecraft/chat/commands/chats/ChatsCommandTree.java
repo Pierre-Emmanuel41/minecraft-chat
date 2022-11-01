@@ -18,7 +18,7 @@ public class ChatsCommandTree {
 	private ChatsMoveNode moveNode;
 
 	public ChatsCommandTree() {
-		root = new MinecraftCodeRootNode("chats", EChatCode.CHATS__ROOT__EXPLANATION, () -> getChats() != null);
+		root = new MinecraftCodeRootNode("chats", EChatCode.CHAT_CONFIG__EXPLANATION, () -> getChats() != null);
 
 		chatTree = new ChatCommandTree();
 		newNode = new ChatsNewNode(this);
