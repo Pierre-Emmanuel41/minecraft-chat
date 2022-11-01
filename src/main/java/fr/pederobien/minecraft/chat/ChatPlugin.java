@@ -8,7 +8,6 @@ import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.chat.commands.ChatMsgNode;
 import fr.pederobien.minecraft.chat.commands.opmsg.OpMsgCommandTree;
 import fr.pederobien.minecraft.chat.commands.superchats.SuperChatsCommandTree;
-import fr.pederobien.minecraft.chat.impl.PlayerChatEventListener;
 import fr.pederobien.minecraft.chat.impl.SuperChatList;
 import fr.pederobien.minecraft.chat.interfaces.ISuperChatList;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
@@ -67,8 +66,6 @@ public class ChatPlugin extends JavaPlugin {
 		chatMsgNode = new ChatMsgNode(list);
 		opMsgTree = new OpMsgCommandTree(list);
 		superChatsTree = new SuperChatsCommandTree(list);
-
-		new PlayerChatEventListener().register(this);
 
 		registerDictionaries();
 		registerTabExecutors();

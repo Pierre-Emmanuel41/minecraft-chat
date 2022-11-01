@@ -11,20 +11,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import fr.pederobien.minecraft.chat.event.ChatNameChangePostEvent;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
+import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.game.impl.PlayerList;
 import fr.pederobien.minecraft.game.impl.PlayerQuitOrJoinEventHandler;
 import fr.pederobien.minecraft.game.interfaces.IPlayerList;
+import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
+import fr.pederobien.minecraft.platform.Platform;
 import fr.pederobien.utils.event.EventManager;
+import fr.pederobien.utils.event.LogEvent;
 
-public class Chat implements IChat, ICodeSender {
-	private String name;
+public class GlobalChat implements IChat, ICodeSender {
 	private EColor color;
 	private Lock lock;
 	private IPlayerList players;
@@ -35,31 +37,26 @@ public class Chat implements IChat, ICodeSender {
 	 * 
 	 * @param name The chat name.
 	 */
-	public Chat(String name) {
-		this.name = name;
+	public GlobalChat() {
 		this.color = EColor.RESET;
 
 		lock = new ReentrantLock(true);
-		players = new PlayerList(name);
+		players = new PlayerList(getName());
 		quitPlayers = new HashMap<String, Player>();
 
+		PlayerGroup.ALL.toStream().forEach(player -> getPlayers().add(player));
 		PlayerQuitOrJoinEventHandler.instance().registerQuitEventHandler(this, event -> onPlayerQuitEvent(event));
 		PlayerQuitOrJoinEventHandler.instance().registerJoinEventHandler(this, event -> onPlayerJoinEvent(event));
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return "Global";
 	}
 
 	@Override
 	public void setName(String name) {
-		if (getName().equals(name))
-			return;
-
-		String oldName = getName();
-		this.name = name;
-		EventManager.callEvent(new ChatNameChangePostEvent(this, oldName));
+		throw new IllegalStateException("The global chat cannot be renamed");
 	}
 
 	@Override
@@ -79,7 +76,7 @@ public class Chat implements IChat, ICodeSender {
 
 	@Override
 	public void setColor(EColor color) {
-		this.color = color;
+		throw new IllegalStateException("The color of the global chat cannot be changed");
 	}
 
 	@Override
@@ -89,6 +86,7 @@ public class Chat implements IChat, ICodeSender {
 
 	@Override
 	public void sendMessage(CommandSender sender, String message) {
+		EventManager.callEvent(new LogEvent("Sending message \"%s\" to global chat (%s players)", message, getPlayers().toList().size()));
 		checkPlayer(sender);
 		for (Player player : getPlayers().toList())
 			MessageManager.sendMessage(player, String.format("%s %s", getPrefix(sender, player), message));
@@ -131,6 +129,12 @@ public class Chat implements IChat, ICodeSender {
 	 */
 	private String getPrefix(CommandSender sender, CommandSender player) {
 		String senderName = player.equals(sender) ? getMessage(sender, EChatCode.CHAT__ME) : sender.getName();
+		if (sender instanceof Player) {
+			Player playerSender = (Player) sender;
+			Platform platform = Platform.get(playerSender);
+			if (platform != null)
+				senderName = ((ITeamConfigurable) platform.getGame()).getTeams().getTeam(playerSender).get().getColor().getInColor(senderName);
+		}
 		return color.getInColor(String.format("[%s -> %s] ", senderName, getName()));
 	}
 
@@ -150,11 +154,8 @@ public class Chat implements IChat, ICodeSender {
 	private void onPlayerJoinEvent(PlayerJoinEvent event) {
 		lock.lock();
 		try {
-			if (quitPlayers.get(event.getPlayer().getName()) == null)
-				return;
-
-			quitPlayers.remove(event.getPlayer().getName());
 			getPlayers().add(event.getPlayer());
+			quitPlayers.remove(event.getPlayer().getName());
 		} finally {
 			lock.unlock();
 		}
