@@ -1,7 +1,6 @@
 package fr.pederobien.minecraft.chat.impl;
 
 import fr.pederobien.minecraft.chat.event.SuperChatListListRemovePostEvent;
-import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
@@ -12,7 +11,6 @@ import fr.pederobien.utils.event.IEventListener;
 
 public class SynchronizedChatList extends ChatList implements IEventListener {
 	private ITeamList teams;
-	private IChat operators;
 
 	/**
 	 * Creates a chats list synchronized with the given teams list.
@@ -23,10 +21,8 @@ public class SynchronizedChatList extends ChatList implements IEventListener {
 		super(teams.getName());
 		this.teams = teams;
 
-		add(operators = new OperatorsChat());
-
 		for (ITeam team : teams)
-			add(new SynchronizedChat(team, operators));
+			add(new SynchronizedChat(team));
 	}
 
 	@Override
@@ -39,7 +35,7 @@ public class SynchronizedChatList extends ChatList implements IEventListener {
 		if (!event.getList().equals(teams))
 			return;
 
-		add(new SynchronizedChat(event.getTeam(), operators));
+		add(new SynchronizedChat(event.getTeam()));
 	}
 
 	@EventHandler
@@ -55,6 +51,7 @@ public class SynchronizedChatList extends ChatList implements IEventListener {
 		if (!event.getList().equals(this))
 			return;
 
+		clear();
 		EventManager.unregisterListener(this);
 	}
 }
