@@ -9,6 +9,11 @@ import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.EventListener;
 
 public class ChatFeature extends Feature implements IChatConfig {
+	/**
+	 * The name of a chat feature.
+	 */
+	public static final String NAME = "chat";
+
 	private IChat globalChat;
 	private IChat operatorsChat;
 	private IChatList chats;
@@ -22,7 +27,7 @@ public class ChatFeature extends Feature implements IChatConfig {
 	 * @param game The game associated to this feature.
 	 */
 	public ChatFeature(IGame game) {
-		super("chat", game);
+		super(NAME, game);
 		globalChat = new GlobalChat();
 		operatorsChat = new OperatorsChat();
 		chats = new ChatList(game.getName());

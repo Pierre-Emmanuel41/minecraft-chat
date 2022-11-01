@@ -16,64 +16,32 @@
 			<value>Me</value>
 		</message>
 		<message>
-			<code>CHAT__NONE</code>
-			<value>None</value>
-		</message>
-		<message>
 			<code>CHAT__MESSAGE_COMPLETION</code>
 			<value>&lt;message&gt;</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__EXPLANATION</code>
+			<code>CHAT__EXPLANATION</code>
 			<value>To send a message in a chat</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__CHAT_NOT_AVAILABLE</code>
-			<value>Cannot send a message to %s, this chat is not available</value>
+			<code>CHAT__NO_CHAT_AVAILABLE</code>
+			<value>Cannot send a message to a chat, there is no chats</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__PLAYER_NOT_REGISTERED</code>
-			<value>Cannot send a message to %s, you are not registered in this chat</value>
+			<code>CHAT__CHAT_NAME_IS_MISSING</code>
+			<value>Cannot send a message to a chat, the chat name is missing</value>
 		</message>
 		<message>
-			<code>OP_MSG__EXPLANATION</code>
-			<value>To send a message to several chats</value>
+			<code>CHAT__NO_MESSAGE_TO_SEND</code>
+			<value>Cannot send a message to a chat, the message is empty</value>
 		</message>
 		<message>
-			<code>OP_MSG__TO_CHAT__EXPLANATION</code>
-			<value>To send a message to a chat</value>
+			<code>CHAT__PLAYER_NOT_REGISTERED</code>
+			<value>Cannot send a message to %s, you are not registered in the chat</value>
 		</message>
 		<message>
-			<code>OP_MSG__TO_CHAT__LIST_NAME_IS_MISSING</code>
-			<value>Cannot send a message to a chat, the list name is missing</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__LIST_NOT_FOUND</code>
-			<value>Cannot send a message to a chat from %s, this list does not exist</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__CHAT_NAME_IS_MISSING</code>
-			<value>Cannot send a message to a chat from %s, the chat name is missing</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__CHAT_NOT_FOUND</code>
-			<value>Cannot send a message to %s, this chat does not exist</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__EXPLANATION</code>
-			<value>To send a message to each chat from a chats list</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__NAME_IS_MISSING</code>
-			<value>Cannot send a message to a list, the list name is missing</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__LIST_NOT_FOUND</code>
-			<value>Cannot send a message to %s, this list does not exist</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_ALL__EXPLANATION</code>
-			<value>To send a message to each chat from each chats list</value>
+			<code>CHAT__CHAT_NOT_FOUND</code>
+			<value>Cannot send a message to %s, the chat does not exist</value>
 		</message>
 		<message>
 			<code>CHAT__ROOT__EXPLANATION</code>

@@ -10,50 +10,26 @@ public enum EChatCode implements IMinecraftCode {
 	// Code for the "Me" translation
 	CHAT__ME,
 
-	// Code for the "none" translation
-	CHAT_NONE,
-
 	// Code for the message completion
 	CHAT__MESSAGE_COMPLETION,
 
-	// Code for the "chatMsg" command -------------------------------------------
-	CHAT_MSG__EXPLANATION,
+	// Code for the "chat" command ----------------------------------------------
+	CHAT__EXPLANATION,
 
-	// Code when a chat is not available for a player
-	CHAT_MSG__CHAT_NOT_AVAILABLE,
+	// Code when there is not chat configuration associated to a player
+	CHAT__NO_CHAT_AVAILABLE,
+
+	// Code when the chat name is missing
+	CHAT__CHAT_NAME_IS_MISSING,
+
+	// Code when the message to send is null or empty
+	CHAT__NO_MESSAGE_TO_SEND,
 
 	// Code when the player is not registered in a chat
-	CHAT_MSG__PLAYER_NOT_REGISTERED,
+	CHAT__PLAYER_NOT_REGISTERED,
 
-	// Code for the "chatOpMsg" command -----------------------------------------
-	OP_MSG__EXPLANATION,
-
-	// Code for the "opMsg toChat" command --------------------------------------
-	OP_MSG__TO_CHAT__EXPLANATION,
-
-	// Code when the name of the chats list is missing
-	OP_MSG__TO_CHAT__LIST_NAME_IS_MISSING,
-
-	// Code when the list of chats does not exist
-	OP_MSG__TO_CHAT__LIST_NOT_FOUND,
-
-	// Code when the name of the chats list is missing
-	OP_MSG__TO_CHAT__CHAT_NAME_IS_MISSING,
-
-	// Code when the chat does not exist
-	OP_MSG__TO_CHAT__CHAT_NOT_FOUND,
-
-	// Code for the "opMsg toList" command --------------------------------------
-	OP_MSG__TO_LIST__EXPLANATION,
-
-	// Code when the list name is missing
-	OP_MSG__TO_LIST__NAME_IS_MISSING,
-
-	// Code when the list does not exist
-	OP_MSG__TO_LIST__LIST_NOT_FOUND,
-
-	// Code for the "opMsg toAll" command ---------------------------------------
-	OP_MSG__TO_ALL__EXPLANATION,
+	// Code when a chat is not available for a player
+	CHAT__CHAT_NOT_FOUND,
 
 	// Code for the "chat" command ----------------------------------------------
 	CHAT__ROOT__EXPLANATION,

@@ -13,64 +13,32 @@
 			<value>Moi</value>
 		</message>
 		<message>
-			<code>CHAT__NONE</code>
-			<value>Aucun</value>
-		</message>
-		<message>
 			<code>CHAT__MESSAGE_COMPLETION</code>
 			<value>&lt;message&gt;</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__EXPLANATION</code>
+			<code>CHAT__EXPLANATION</code>
 			<value>Pour envoyer un message dans un chat</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__CHAT_NOT_AVAILABLE</code>
-			<value>Impossible d'envoyer un message à %s, ce chat n'est pas accessible</value>
+			<code>CHAT__NO_CHAT_AVAILABLE</code>
+			<value>Impossible d'envoyer un message dans un chat, il n'y a pas de chats</value>
 		</message>
 		<message>
-			<code>CHAT_MSG__PLAYER_NOT_REGISTERED</code>
-			<value>Impossible d'envoyer un message à %s, vous ne faites pas partie de ce chat</value>
+			<code>CHAT__CHAT_NAME_IS_MISSING</code>
+			<value>Impossible d'envoyer un message dans un chat, le nom du chat est manquant</value>
 		</message>
 		<message>
-			<code>OP_MSG__EXPLANATION</code>
-			<value>Pour envoyer un message à plusieurs chats</value>
+			<code>CHAT__NO_MESSAGE_TO_SEND</code>
+			<value>Impossible d'envoyer un message dans un chat, le message est vide</value>
 		</message>
 		<message>
-			<code>OP_MSG__TO_CHAT__EXPLANATION</code>
-			<value>Pour envoyer un message à un chat</value>
+			<code>CHAT__PLAYER_NOT_REGISTERED</code>
+			<value>Impossible d'envoyer un message à %s, vous n'êtes pas enregistré dans ce chat</value>
 		</message>
 		<message>
-			<code>OP_MSG__TO_CHAT__LIST_NAME_IS_MISSING</code>
-			<value>Impossible d'envoyer un message à un chat, le nom de la liste est manquant</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__LIST_NOT_FOUND</code>
-			<value>Impossible d'envoyer un message à un chat de %s, cette liste n'existe pas</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__CHAT_NAME_IS_MISSING</code>
-			<value>Impossible d'envoyer un message à un chat de %s, le nom du chat est manquant</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_CHAT__CHAT_NOT_FOUND</code>
-			<value>Impossible d'envoyer un message à %s, ce chat n'existe pas</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__EXPLANATION</code>
-			<value>Pour envoyer un message à chaque chat d'une liste de chats</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__NAME_IS_MISSING</code>
-			<value>Impossible d'envoyer un message à une liste, le nom de la liste est manquant</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_LIST__LIST_NOT_FOUND</code>
-			<value>Impossible d'envoyer un message à %s, cette liste n'existe pas</value>
-		</message>
-		<message>
-			<code>OP_MSG__TO_ALL__EXPLANATION</code>
-			<value>Pour envoyer un message à chaque chat de chaque liste de chats</value>
+			<code>CHAT__CHAT_NOT_FOUND</code>
+			<value>Impossible d'envoyer un message à %s, le chat n'existe pas</value>
 		</message>
 		<message>
 			<code>CHAT__ROOT__EXPLANATION</code>

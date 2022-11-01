@@ -1,12 +1,10 @@
 package fr.pederobien.minecraft.chat.impl;
 
-import fr.pederobien.minecraft.chat.event.SuperChatListListRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.utils.event.EventHandler;
-import fr.pederobien.utils.event.EventManager;
 import fr.pederobien.utils.event.IEventListener;
 
 public class SynchronizedChatList extends ChatList implements IEventListener {
@@ -44,14 +42,5 @@ public class SynchronizedChatList extends ChatList implements IEventListener {
 			return;
 
 		remove(event.getTeam().getName());
-	}
-
-	@EventHandler
-	private void onChatListRemove(SuperChatListListRemovePostEvent event) {
-		if (!event.getList().equals(this))
-			return;
-
-		clear();
-		EventManager.unregisterListener(this);
 	}
 }

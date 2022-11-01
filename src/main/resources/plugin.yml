@@ -9,12 +9,9 @@ commands:
   chatConfig:
     description: Command to create, delete update chat rooms
     permission: ChatPlugin.permission
-  chatMsg:
+  chat:
     description: Command to send a message in a chat room.
     permission: chat.permission
-  opMsg:
-    description: Command to send a message to several chats
-    permission: ChatPluging.permission
 
 permissions:
   chat.permission:
