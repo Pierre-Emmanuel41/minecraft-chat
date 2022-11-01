@@ -6,8 +6,8 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.impl.ChatList;
-import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 
 public class ChatsNewNode extends ChatsNode {

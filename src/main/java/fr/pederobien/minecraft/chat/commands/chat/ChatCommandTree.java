@@ -1,6 +1,6 @@
 package fr.pederobien.minecraft.chat.commands.chat;
 
-import fr.pederobien.minecraft.chat.impl.EChatCode;
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeRootNode;
 import fr.pederobien.minecraft.commandtree.interfaces.IMinecraftCodeRootNode;

@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;

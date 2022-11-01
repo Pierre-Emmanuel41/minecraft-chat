@@ -9,8 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.exception.PlayerNotOperatorException;
-import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.managers.PlayerManager;

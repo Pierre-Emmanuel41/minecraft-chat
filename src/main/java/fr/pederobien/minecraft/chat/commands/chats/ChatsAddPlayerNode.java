@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.commands.chat.ChatCommandTree;
-import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.chat.interfaces.IChatList;
 

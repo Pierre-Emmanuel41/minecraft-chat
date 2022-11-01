@@ -1,4 +1,4 @@
-package fr.pederobien.minecraft.chat.impl;
+package fr.pederobien.minecraft.chat.commands;
 
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;

@@ -6,8 +6,8 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.impl.Chat;
-import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.game.impl.EGameCode;
 import fr.pederobien.minecraft.managers.EColor;

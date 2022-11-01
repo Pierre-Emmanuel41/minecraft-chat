@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.commands.SuperChatListNode;
-import fr.pederobien.minecraft.chat.impl.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.chat.interfaces.ISuperChatList;
 

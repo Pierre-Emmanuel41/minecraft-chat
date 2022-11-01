@@ -3,7 +3,7 @@ package fr.pederobien.minecraft.chat.commands.chats;
 import java.util.StringJoiner;
 import java.util.function.Supplier;
 
-import fr.pederobien.minecraft.chat.impl.EChatCode;
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNodeWrapper;

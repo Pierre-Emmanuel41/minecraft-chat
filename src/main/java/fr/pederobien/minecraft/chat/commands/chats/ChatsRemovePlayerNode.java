@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.base.Predicate;
 
-import fr.pederobien.minecraft.chat.impl.EChatCode;
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.managers.EColor;

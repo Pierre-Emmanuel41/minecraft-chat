@@ -2,7 +2,7 @@ package fr.pederobien.minecraft.chat.commands.chat;
 
 import java.util.function.Supplier;
 
-import fr.pederobien.minecraft.chat.impl.EChatCode;
+import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 
 public class ChatModifyNode extends ChatNode {

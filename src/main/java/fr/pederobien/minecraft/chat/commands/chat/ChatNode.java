@@ -19,7 +19,7 @@ public class ChatNode extends MinecraftCodeNode {
 	 * @param isAvailable True if this node is available, false otherwise.
 	 */
 	protected ChatNode(Supplier<IChat> chat, String label, IMinecraftCode explanation, Function<IChat, Boolean> isAvailable) {
-		super(label, explanation, () -> isAvailable.apply(chat.get()));
+		super(label, explanation, () -> isAvailable.apply(chat == null ? null : chat.get()));
 		this.chat = chat;
 	}
 
@@ -27,6 +27,6 @@ public class ChatNode extends MinecraftCodeNode {
 	 * @return The chat associated to this node.
 	 */
 	public IChat getChat() {
-		return chat.get();
+		return chat == null ? null : chat.get();
 	}
 }
