@@ -15,7 +15,7 @@ import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.utils.AsyncConsole;
 
 public class ChatPlugin extends JavaPlugin {
-	private static final String DICTIONARY_FOLDER = "resources/dictionaries/";
+	private static final String DICTIONARY_FOLDER = "resources/dictionaries/chat/";
 
 	private static Plugin instance;
 	private static ISuperChatList list;
