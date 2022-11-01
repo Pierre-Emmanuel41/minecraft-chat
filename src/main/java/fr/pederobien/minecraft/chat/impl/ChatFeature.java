@@ -1,12 +1,17 @@
 package fr.pederobien.minecraft.chat.impl;
 
-import fr.pederobien.minecraft.chat.ChatPlugin;
+import fr.pederobien.minecraft.chat.interfaces.IChat;
+import fr.pederobien.minecraft.chat.interfaces.IChatConfig;
+import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.game.impl.Feature;
 import fr.pederobien.minecraft.game.interfaces.IGame;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.EventListener;
 
-public class ChatFeature extends Feature {
+public class ChatFeature extends Feature implements IChatConfig {
+	private IChat globalChat;
+	private IChat operatorsChat;
+	private IChatList chats;
 	private EventListener chatEventListener;
 
 	/**
@@ -18,6 +23,9 @@ public class ChatFeature extends Feature {
 	 */
 	public ChatFeature(IGame game) {
 		super("chat", game);
+		globalChat = new GlobalChat();
+		operatorsChat = new OperatorsChat();
+		chats = new ChatList(game.getName());
 		chatEventListener = new ChatEventListener(this);
 	}
 
@@ -29,9 +37,9 @@ public class ChatFeature extends Feature {
 			if (!(getGame() instanceof ITeamConfigurable))
 				return;
 
+			chats = new SynchronizedChatList(((ITeamConfigurable) getGame()).getTeams());
 			chatEventListener.register(getGame().getPlugin());
 			chatEventListener.setActivated(true);
-			ChatPlugin.getList().add(new SynchronizedChatList(((ITeamConfigurable) getGame()).getTeams()));
 		}
 	}
 
@@ -40,7 +48,6 @@ public class ChatFeature extends Feature {
 		super.stop();
 
 		chatEventListener.setActivated(false);
-		ChatPlugin.getList().remove(getGame().getName());
 	}
 
 	@Override
@@ -50,5 +57,20 @@ public class ChatFeature extends Feature {
 			start();
 		else if (!isEnable)
 			stop();
+	}
+
+	@Override
+	public IChat getGlobalChat() {
+		return globalChat;
+	}
+
+	@Override
+	public IChat getOperatorChat() {
+		return operatorsChat;
+	}
+
+	@Override
+	public IChatList getChats() {
+		return chats;
 	}
 }

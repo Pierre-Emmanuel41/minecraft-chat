@@ -1,10 +1,5 @@
 package fr.pederobien.minecraft.chat.impl;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,14 +7,13 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import fr.pederobien.minecraft.chat.exception.PlayerNotOperatorException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
+import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.game.impl.PlayerList;
 import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.managers.PlayerManager;
-import fr.pederobien.utils.event.EventManager;
-import fr.pederobien.utils.event.IEventListener;
 
-public class OperatorsChat extends Chat implements IEventListener {
-	private OperatorPlayers players;
+public class OperatorsChat extends Chat {
+	private IPlayerList players;
 
 	/**
 	 * Creates a chat for operators only. When an operator runs the command "./op &lt;playerName&gt;" with a valid player name, then
@@ -28,10 +22,9 @@ public class OperatorsChat extends Chat implements IEventListener {
 	 * removed from this chat.
 	 */
 	public OperatorsChat() {
-		super("operators");
+		super("Operators");
 
 		players = new OperatorPlayers(this);
-		EventManager.registerListener(this);
 	}
 
 	@Override
@@ -50,14 +43,13 @@ public class OperatorsChat extends Chat implements IEventListener {
 			return;
 
 		if (command[0].equals("op"))
-			players.getSource().add(player);
+			getPlayers().add(player);
 
 		if (command[0].equals("deop"))
 			getPlayers().remove(player);
 	}
 
-	private class OperatorPlayers implements IPlayerList {
-		private IPlayerList players;
+	private class OperatorPlayers extends PlayerList implements IPlayerList {
 		private IChat chat;
 
 		/**
@@ -65,60 +57,17 @@ public class OperatorsChat extends Chat implements IEventListener {
 		 * 
 		 * @param chat The chat associated to this players list.
 		 */
-		private OperatorPlayers(OperatorsChat chat) {
+		private OperatorPlayers(IChat chat) {
+			super(chat.getName());
 			this.chat = chat;
-			players = new PlayerList(chat.getName());
-		}
-
-		@Override
-		public Iterator<Player> iterator() {
-			return players.iterator();
-		}
-
-		@Override
-		public String getName() {
-			return players.getName();
+			PlayerGroup.OPERATORS.toStream().forEach(player -> add(player));
 		}
 
 		@Override
 		public void add(Player player) {
 			if (!player.isOp())
 				throw new PlayerNotOperatorException(chat, player);
-			players.add(player);
-		}
-
-		@Override
-		public Player remove(String name) {
-			return players.remove(name);
-		}
-
-		@Override
-		public boolean remove(Player player) {
-			return players.remove(player);
-		}
-
-		@Override
-		public void clear() {
-			players.clear();
-		}
-
-		@Override
-		public Optional<Player> getPlayer(String name) {
-			return players.getPlayer(name);
-		}
-
-		@Override
-		public Stream<Player> stream() {
-			return players.stream();
-		}
-
-		@Override
-		public List<Player> toList() {
-			return players.toList();
-		}
-
-		private IPlayerList getSource() {
-			return players;
+			super.add(player);
 		}
 	}
 }
