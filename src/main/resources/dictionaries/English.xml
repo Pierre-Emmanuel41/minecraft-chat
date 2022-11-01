@@ -12,10 +12,6 @@
 	</locales>
 	<messages>
 		<message>
-			<code>CHAT__OPERATOR</code>
-			<value>Operator</value>
-		</message>
-		<message>
 			<code>CHAT__ME</code>
 			<value>Me</value>
 		</message>

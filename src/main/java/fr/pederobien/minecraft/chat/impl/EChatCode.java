@@ -7,9 +7,6 @@ import fr.pederobien.minecraft.dictionary.interfaces.IPlayerGroup;
 public enum EChatCode implements IMinecraftCode {
 	// Common codes -------------------------------------------------------------
 
-	// Code for the "Operator" translation
-	CHAT__OPERATOR,
-
 	// Code for the "Me" translation
 	CHAT__ME,
 

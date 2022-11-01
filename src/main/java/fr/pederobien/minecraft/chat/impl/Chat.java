@@ -89,17 +89,17 @@ public class Chat implements IChat, ICodeSender {
 	}
 
 	@Override
-	public void sendMessage(CommandSender sender, boolean isOperator, String message) {
-		checkPlayer(sender, isOperator);
+	public void sendMessage(CommandSender sender, String message) {
+		checkPlayer(sender);
 		for (Player player : getPlayers().toList())
-			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + message);
+			MessageManager.sendMessage(player, getPrefix(sender, player) + message);
 	}
 
 	@Override
-	public void sendMessage(CommandSender sender, boolean isOperator, IMinecraftCode code, Object... args) {
-		checkPlayer(sender, isOperator);
+	public void sendMessage(CommandSender sender, IMinecraftCode code, Object... args) {
+		checkPlayer(sender);
 		for (Player player : getPlayers())
-			MessageManager.sendMessage(player, getPrefix(sender, player, isOperator) + getMessage(player, code, args));
+			MessageManager.sendMessage(player, getPrefix(sender, player) + getMessage(player, code, args));
 	}
 
 	@Override
@@ -110,22 +110,28 @@ public class Chat implements IChat, ICodeSender {
 		return getColor().getInColor(getName() + " " + players.toString());
 	}
 
-	private void checkPlayer(CommandSender sender, boolean isOperator) {
-		if (sender instanceof Player) {
-			if (isOperator && !((Player) sender).isOp())
-				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
+	private void checkPlayer(CommandSender sender) {
+		if (!(sender instanceof Player))
+			return;
 
-			if (!isOperator && !getPlayers().toList().contains(sender))
-				throw new PlayerNotRegisteredInChatException(this, (Player) sender);
-		}
+		Player player = (Player) sender;
+		if (player.isOp())
+			return;
+
+		if (!getPlayers().getPlayer(sender.getName()).isPresent())
+			throw new PlayerNotRegisteredInChatException(this, player);
 	}
 
-	private String getPrefix(CommandSender sender, CommandSender player, boolean isOperator) {
-		String senderName = null;
-		if (isOperator)
-			senderName = getMessage(sender, EChatCode.CHAT__OPERATOR);
-		else
-			senderName = player.equals(sender) ? getMessage(sender, EChatCode.CHAT__ME) : sender.getName();
+	/**
+	 * Get the prefix to use in order to send a message to the given player.
+	 * 
+	 * @param sender The object that sends a message to this chat.
+	 * @param player The player to which a message is sent.
+	 * 
+	 * @return The prefix to use.
+	 */
+	private String getPrefix(CommandSender sender, CommandSender player) {
+		String senderName = player.equals(sender) ? getMessage(sender, EChatCode.CHAT__ME) : sender.getName();
 		return color.getInColor(String.format("[%s -> %s] ", senderName, getName()));
 	}
 

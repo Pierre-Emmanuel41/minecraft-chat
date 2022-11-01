@@ -35,7 +35,7 @@ public class OpMsgToAllNode extends SuperChatListNode {
 
 		for (IChatList list : getList())
 			for (IChat chat : list)
-				chat.sendMessage(sender, true, message);
+				chat.sendMessage(sender, message);
 		return true;
 	}
 }

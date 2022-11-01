@@ -61,7 +61,7 @@ public class ChatMsgNode extends SuperChatListNode {
 			return true;
 
 		try {
-			optChat.get().sendMessage((Player) sender, false, message);
+			optChat.get().sendMessage((Player) sender, message);
 		} catch (PlayerNotRegisteredInChatException e) {
 			send(eventBuilder(sender, EChatCode.CHAT_MSG__PLAYER_NOT_REGISTERED, optChat.get().getName()));
 			return false;

@@ -77,7 +77,7 @@ public class OpMsgToChatNode extends SuperChatListNode {
 		if (message.equals(""))
 			return true;
 
-		optChat.get().sendMessage(sender, true, message);
+		optChat.get().sendMessage(sender, message);
 		return true;
 	}
 }

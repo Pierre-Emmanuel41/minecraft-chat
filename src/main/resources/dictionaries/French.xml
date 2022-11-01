@@ -9,10 +9,6 @@
 	</locales>
 	<messages>
 		<message>
-			<code>CHAT__OPERATOR</code>
-			<value>Operateur</value>
-		</message>
-		<message>
 			<code>CHAT__ME</code>
 			<value>Moi</value>
 		</message>
