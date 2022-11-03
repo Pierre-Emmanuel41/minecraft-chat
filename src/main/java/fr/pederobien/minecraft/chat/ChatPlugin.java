@@ -5,7 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
-import fr.pederobien.minecraft.chat.commands.ChatNode;
+import fr.pederobien.minecraft.chat.commands.ChatCommand;
 import fr.pederobien.minecraft.chat.commands.chatConfig.ChatConfigCommandTree;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.utils.AsyncConsole;
@@ -14,7 +14,7 @@ public class ChatPlugin extends JavaPlugin {
 	private static final String DICTIONARY_FOLDER = "resources/dictionaries/chat/";
 
 	private static Plugin instance;
-	private static ChatNode chatNode;
+	private static ChatCommand chatCommand;
 	private static ChatConfigCommandTree chatConfigCommandTree;
 
 	/**
@@ -27,8 +27,8 @@ public class ChatPlugin extends JavaPlugin {
 	/**
 	 * @return The node that send a message to a specific chat.
 	 */
-	public static ChatNode getChatNode() {
-		return chatNode;
+	public static ChatCommand getChatNode() {
+		return chatCommand;
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class ChatPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
-		chatNode = new ChatNode();
+		chatCommand = new ChatCommand();
 		chatConfigCommandTree = new ChatConfigCommandTree(null);
 
 		registerDictionaries();
@@ -64,9 +64,9 @@ public class ChatPlugin extends JavaPlugin {
 	}
 
 	private void registerTabExecutors() {
-		PluginCommand chat = getCommand(chatNode.getLabel());
-		chat.setTabCompleter(chatNode);
-		chat.setExecutor(chatNode);
+		PluginCommand chat = getCommand(chatCommand.getLabel());
+		chat.setTabCompleter(chatCommand);
+		chat.setExecutor(chatCommand);
 
 		PluginCommand chatConfig = getCommand(chatConfigCommandTree.getRoot().getLabel());
 		chatConfig.setTabCompleter(chatConfigCommandTree.getRoot());

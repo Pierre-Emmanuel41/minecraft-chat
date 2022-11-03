@@ -17,12 +17,12 @@ import fr.pederobien.minecraft.game.interfaces.IFeature;
 import fr.pederobien.minecraft.game.interfaces.IFeatureConfigurable;
 import fr.pederobien.minecraft.platform.Platform;
 
-public class ChatNode extends MinecraftCodeNode {
+public class ChatCommand extends MinecraftCodeNode {
 
 	/**
 	 * Creates a node to send a message in a chat.
 	 */
-	public ChatNode() {
+	public ChatCommand() {
 		super("chat", EChatCode.CHAT__EXPLANATION);
 	}
 
