@@ -13,10 +13,9 @@ import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.event.ChatNameChangePostEvent;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
+import fr.pederobien.minecraft.chat.interfaces.IChatPlayerList;
 import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
-import fr.pederobien.minecraft.game.impl.PlayerList;
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
 import fr.pederobien.utils.event.EventManager;
@@ -25,7 +24,7 @@ public class SimpleChat implements IChat, ICodeSender {
 	private String name;
 	private EColor color;
 	private Lock lock;
-	private IPlayerList players;
+	private IChatPlayerList players;
 	private Map<String, Player> quitPlayers;
 
 	/**
@@ -38,7 +37,7 @@ public class SimpleChat implements IChat, ICodeSender {
 		this.color = EColor.RESET;
 
 		lock = new ReentrantLock(true);
-		players = new PlayerList(name);
+		players = new ChatPlayerList(this, name);
 		quitPlayers = new HashMap<String, Player>();
 	}
 
@@ -78,7 +77,7 @@ public class SimpleChat implements IChat, ICodeSender {
 	}
 
 	@Override
-	public IPlayerList getPlayers() {
+	public IChatPlayerList getPlayers() {
 		return players;
 	}
 

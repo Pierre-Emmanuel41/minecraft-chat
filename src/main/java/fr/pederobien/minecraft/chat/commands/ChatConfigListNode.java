@@ -1,9 +1,8 @@
-package fr.pederobien.minecraft.chat.commands.chats;
+package fr.pederobien.minecraft.chat.commands;
 
 import java.util.StringJoiner;
 import java.util.function.Supplier;
 
-import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
 import fr.pederobien.minecraft.chat.interfaces.IChatList;
 import fr.pederobien.minecraft.commandtree.impl.MinecraftCodeNodeWrapper;
@@ -11,9 +10,9 @@ import fr.pederobien.minecraft.commandtree.interfaces.ICodeSender;
 import fr.pederobien.minecraft.game.commands.ListNode;
 import fr.pederobien.minecraft.game.commands.ListNode.ListNodeBuilder;
 
-public class ChatsListNode extends MinecraftCodeNodeWrapper {
+public class ChatConfigListNode extends MinecraftCodeNodeWrapper {
 
-	private ChatsListNode(ListNode<IChat> node) {
+	private ChatConfigListNode(ListNode<IChat> node) {
 		super(node);
 	}
 
@@ -22,7 +21,7 @@ public class ChatsListNode extends MinecraftCodeNodeWrapper {
 	 * 
 	 * @param chats The list of chats to display.
 	 */
-	public static ChatsListNode newInstance(Supplier<IChatList> chats) {
+	public static ChatConfigListNode newInstance(Supplier<IChatList> chats) {
 		return new ChatChatListNodeBuilder(chats).build();
 	}
 
@@ -35,22 +34,22 @@ public class ChatsListNode extends MinecraftCodeNodeWrapper {
 		 * @param chats The list of chats to display.
 		 */
 		public ChatChatListNodeBuilder(Supplier<IChatList> chats) {
-			builder = ListNode.builder(() -> chats.get().toList());
-			builder.onNoElement(sender -> sendSuccessful(sender, EChatCode.CHATS__LIST__NO_CHAT_REGISTERED, chats.get().getName()));
-			builder.onOneElement((sender, chat) -> sendSuccessful(sender, EChatCode.CHATS__LIST__ONE_CHAT_REGISTERED, chats.get().getName(), chat));
+			builder = ListNode.builder(() -> chats == null ? null : chats.get().toList());
+			builder.onNoElement(sender -> sendSuccessful(sender, EChatCode.CHAT_CONFIG__LIST__NO_CHAT, chats.get().getName()));
+			builder.onOneElement((sender, chat) -> sendSuccessful(sender, EChatCode.CHAT_CONFIG__LIST__ONE_CHAT, chats.get().getName(), chat));
 			builder.onSeveralElements((sender, chatsList) -> {
 				StringJoiner joiner = new StringJoiner("\n");
 				for (IChat chat : chatsList)
 					joiner.add("" + chat);
-				sendSuccessful(sender, EChatCode.CHATS__LIST__SEVERAL_CHATS_REGISTERED, chats.get().getName(), joiner.toString());
+				sendSuccessful(sender, EChatCode.CHAT_CONFIG__LIST__SEVERAL_CHATS, chats.get().getName(), joiner.toString());
 			});
 		}
 
 		/**
 		 * @return Creates a new node to display each chat from the current chats list.
 		 */
-		public ChatsListNode build() {
-			return new ChatsListNode(builder.build(EChatCode.CHATS__LIST__EXPLANATION));
+		public ChatConfigListNode build() {
+			return new ChatConfigListNode(builder.build(EChatCode.CHAT_CONFIG__LIST__EXPLANATION));
 		}
 	}
 }

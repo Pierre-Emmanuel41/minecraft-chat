@@ -10,10 +10,9 @@ import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.exception.PlayerNotOperatorException;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.chat.interfaces.IChat;
+import fr.pederobien.minecraft.chat.interfaces.IChatPlayerList;
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
-import fr.pederobien.minecraft.game.impl.PlayerList;
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.game.interfaces.ITeamConfigurable;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.MessageManager;
@@ -21,7 +20,12 @@ import fr.pederobien.minecraft.managers.PlayerManager;
 import fr.pederobien.minecraft.platform.Platform;
 
 public class OperatorsChat extends Chat {
-	private IPlayerList players;
+	/**
+	 * The name of this chat.
+	 */
+	public static final String NAME = "Operators";
+
+	private IChatPlayerList players;
 
 	/**
 	 * Creates a chat for operators only. When an operator runs the command "./op &lt;playerName&gt;" with a valid player name, then
@@ -30,14 +34,14 @@ public class OperatorsChat extends Chat {
 	 * removed from this chat.
 	 */
 	public OperatorsChat() {
-		super("Operators");
+		super(NAME);
 
-		players = new OperatorPlayers(this);
+		players = new OperatorList(this);
 		super.setColor(EColor.GRAY);
 	}
 
 	@Override
-	public IPlayerList getPlayers() {
+	public IChatPlayerList getPlayers() {
 		return players;
 	}
 
@@ -113,7 +117,7 @@ public class OperatorsChat extends Chat {
 			getPlayers().remove(player);
 	}
 
-	private class OperatorPlayers extends PlayerList implements IPlayerList {
+	private class OperatorList extends ChatPlayerList implements IChatPlayerList {
 		private IChat chat;
 
 		/**
@@ -121,8 +125,8 @@ public class OperatorsChat extends Chat {
 		 * 
 		 * @param chat The chat associated to this players list.
 		 */
-		private OperatorPlayers(IChat chat) {
-			super(chat.getName());
+		private OperatorList(IChat chat) {
+			super(chat, chat.getName());
 			this.chat = chat;
 			PlayerGroup.OPERATORS.toStream().forEach(player -> add(player));
 		}
@@ -132,6 +136,11 @@ public class OperatorsChat extends Chat {
 			if (!player.isOp())
 				throw new PlayerNotOperatorException(chat, player);
 			super.add(player);
+		}
+
+		@Override
+		public void clear() {
+
 		}
 	}
 }

@@ -64,7 +64,7 @@ public interface IChatList extends Iterable<IChat> {
 	 * 
 	 * @return An optional that contains the chat associated to the given name if registered, an empty optional otherwise.
 	 */
-	Optional<IChat> getChat(String name);
+	Optional<IChat> get(String name);
 
 	/**
 	 * Get the chat associated to the given color.
@@ -73,7 +73,7 @@ public interface IChatList extends Iterable<IChat> {
 	 * 
 	 * @return An optional that contains the chat associated to the given color if registered, an empty optional otherwise.
 	 */
-	Optional<IChat> getChat(EColor color);
+	Optional<IChat> get(EColor color);
 
 	/**
 	 * Get the list of chat in which the given player is registered.

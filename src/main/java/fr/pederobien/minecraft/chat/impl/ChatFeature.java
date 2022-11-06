@@ -43,6 +43,8 @@ public class ChatFeature extends Feature implements IChatConfig {
 				return;
 
 			chats = new SynchronizedChatList(((ITeamConfigurable) getGame()).getTeams());
+			chats.add(globalChat);
+			chats.add(operatorsChat);
 			chatEventListener.register(getGame().getPlugin());
 			chatEventListener.setActivated(true);
 		}
@@ -52,6 +54,7 @@ public class ChatFeature extends Feature implements IChatConfig {
 	public void stop() {
 		super.stop();
 
+		chats.clear();
 		chatEventListener.setActivated(false);
 	}
 

@@ -7,6 +7,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.pederobien.minecraft.chat.commands.EChatCode;
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
+import fr.pederobien.minecraft.chat.interfaces.IChat;
+import fr.pederobien.minecraft.chat.interfaces.IChatPlayerList;
 import fr.pederobien.minecraft.dictionary.impl.PlayerGroup;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
 import fr.pederobien.minecraft.game.impl.PlayerQuitOrJoinEventHandler;
@@ -16,6 +18,12 @@ import fr.pederobien.minecraft.managers.MessageManager;
 import fr.pederobien.minecraft.platform.Platform;
 
 public class GlobalChat extends SimpleChat {
+	/**
+	 * The name of this chat.
+	 */
+	public static final String NAME = "Global";
+
+	private IChatPlayerList players;
 
 	/**
 	 * Creates a chat associated to the given name.
@@ -23,11 +31,17 @@ public class GlobalChat extends SimpleChat {
 	 * @param name The chat name.
 	 */
 	public GlobalChat() {
-		super("Global");
+		super(NAME);
 
-		PlayerGroup.ALL.toStream().forEach(player -> getPlayers().add(player));
+		players = new GlobalList(this);
+
 		PlayerQuitOrJoinEventHandler.instance().registerQuitEventHandler(this, event -> onPlayerQuitEvent(event));
 		PlayerQuitOrJoinEventHandler.instance().registerJoinEventHandler(this, event -> onPlayerJoinEvent(event));
+	}
+
+	@Override
+	public IChatPlayerList getPlayers() {
+		return players;
 	}
 
 	@Override
@@ -105,6 +119,34 @@ public class GlobalChat extends SimpleChat {
 			getQuitPlayers().remove(event.getPlayer().getName());
 		} finally {
 			getLock().unlock();
+		}
+	}
+
+	private class GlobalList extends ChatPlayerList implements IChatPlayerList {
+
+		/**
+		 * Creates a list of players that only accepts operator players.
+		 * 
+		 * @param chat The chat associated to this players list.
+		 */
+		private GlobalList(IChat chat) {
+			super(chat, chat.getName());
+			PlayerGroup.ALL.toStream().forEach(player -> super.add(player));
+		}
+
+		@Override
+		public void add(Player player) {
+			return;
+		}
+
+		@Override
+		public Player remove(String name) {
+			return null;
+		}
+
+		@Override
+		public void clear() {
+
 		}
 	}
 }

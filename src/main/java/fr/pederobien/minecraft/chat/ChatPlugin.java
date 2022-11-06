@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.pederobien.dictionary.impl.JarXmlDictionaryParser;
 import fr.pederobien.minecraft.chat.commands.ChatCommand;
-import fr.pederobien.minecraft.chat.commands.chatConfig.ChatConfigCommandTree;
+import fr.pederobien.minecraft.chat.commands.ChatConfigCommandTree;
 import fr.pederobien.minecraft.dictionary.impl.MinecraftDictionaryContext;
 import fr.pederobien.utils.AsyncConsole;
 

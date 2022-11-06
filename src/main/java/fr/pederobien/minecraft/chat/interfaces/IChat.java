@@ -4,7 +4,6 @@ import org.bukkit.command.CommandSender;
 
 import fr.pederobien.minecraft.chat.exception.PlayerNotRegisteredInChatException;
 import fr.pederobien.minecraft.dictionary.interfaces.IMinecraftCode;
-import fr.pederobien.minecraft.game.interfaces.IPlayerList;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.platform.interfaces.INominable;
 
@@ -39,7 +38,7 @@ public interface IChat extends INominable {
 	/**
 	 * @return The list of players associated to this chat.
 	 */
-	IPlayerList getPlayers();
+	IChatPlayerList getPlayers();
 
 	/**
 	 * Send the given message to each player registered in this room.

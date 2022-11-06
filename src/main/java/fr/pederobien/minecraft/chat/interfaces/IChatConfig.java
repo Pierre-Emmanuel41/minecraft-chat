@@ -1,6 +1,8 @@
 package fr.pederobien.minecraft.chat.interfaces;
 
-public interface IChatConfig {
+import fr.pederobien.minecraft.game.interfaces.IFeature;
+
+public interface IChatConfig extends IFeature {
 
 	/**
 	 * @return The chat that contains all the players currently connected in game.

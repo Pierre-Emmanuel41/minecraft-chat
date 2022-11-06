@@ -1,8 +1,8 @@
 package fr.pederobien.minecraft.chat.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,23 +33,15 @@ public class ChatCommand extends MinecraftCodeNode {
 
 		Player player = (Player) sender;
 		IChatConfig config = getChatConfig(player);
-		if (config == null)
+		if (config == null || !config.isEnable())
 			return emptyList();
 
 		switch (args.length) {
 		case 1:
-			List<String> chats = new ArrayList<String>();
-			chats.add(config.getGlobalChat().getName());
-			if (player.isOp())
-				chats.add(config.getOperatorChat().getName());
-
-			for (IChat chat : config.getChats())
-				if (chat.getPlayers().getPlayer(player.getName()).isPresent())
-					chats.add(chat.getName());
-
-			return filter(chats.stream(), args);
+			return filter(config.getChats().getChats(player).stream().map(chat -> chat.getName()), args);
 		default:
-			return asList(getMessage(sender, EChatCode.CHAT__MESSAGE_COMPLETION));
+			Predicate<String> isNameValid = name -> config.getChats().get(name).isPresent();
+			return check(args[0], isNameValid, asList(getMessage(sender, EChatCode.CHAT__MESSAGE_COMPLETION)));
 		}
 	}
 
@@ -62,6 +54,11 @@ public class ChatCommand extends MinecraftCodeNode {
 		IChatConfig config = getChatConfig(player);
 		if (config == null) {
 			send(eventBuilder(sender, EChatCode.CHAT__NO_CHAT_AVAILABLE).build());
+			return false;
+		}
+
+		if (!config.isEnable()) {
+			send(eventBuilder(sender, EChatCode.CHAT__CHAT_DISABLED).build());
 			return false;
 		}
 
@@ -100,7 +97,7 @@ public class ChatCommand extends MinecraftCodeNode {
 			}
 		}
 
-		Optional<IChat> optChat = config.getChats().getChat(name);
+		Optional<IChat> optChat = config.getChats().get(name);
 		if (!optChat.isPresent()) {
 			send(eventBuilder(sender, EChatCode.CHAT__CHAT_NOT_FOUND, name));
 			return false;

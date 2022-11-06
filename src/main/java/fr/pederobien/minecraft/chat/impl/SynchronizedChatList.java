@@ -1,13 +1,15 @@
 package fr.pederobien.minecraft.chat.impl;
 
+import fr.pederobien.minecraft.chat.event.ChatNameChangePostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamAddPostEvent;
 import fr.pederobien.minecraft.game.event.TeamListTeamRemovePostEvent;
 import fr.pederobien.minecraft.game.interfaces.ITeam;
 import fr.pederobien.minecraft.game.interfaces.ITeamList;
 import fr.pederobien.utils.event.EventHandler;
+import fr.pederobien.utils.event.EventManager;
 import fr.pederobien.utils.event.IEventListener;
 
-public class SynchronizedChatList extends ChatList implements IEventListener {
+public class SynchronizedChatList extends SimpleChatList implements IEventListener {
 	private ITeamList teams;
 
 	/**
@@ -21,11 +23,13 @@ public class SynchronizedChatList extends ChatList implements IEventListener {
 
 		for (ITeam team : teams)
 			add(new SynchronizedChat(team));
+
+		EventManager.registerListener(this);
 	}
 
-	@Override
-	public String getName() {
-		return teams.getName();
+	@EventHandler
+	private void onChatNameChange(ChatNameChangePostEvent event) {
+		onChatNameChange(event.getChat(), event.getOldName());
 	}
 
 	@EventHandler
