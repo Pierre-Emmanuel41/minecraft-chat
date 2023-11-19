@@ -40,12 +40,12 @@ public class ChatPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		registerDictionaries();
+		registerTabExecutors();
+
 		instance = this;
 		chatCommand = new ChatCommand();
 		chatConfigCommandTree = new ChatConfigCommandTree(null);
-
-		registerDictionaries();
-		registerTabExecutors();
 	}
 
 	private void registerDictionaries() {
